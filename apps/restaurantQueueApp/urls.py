@@ -10,12 +10,14 @@ This can change as needed, such as if we need to combine some of the
 urlpatterns = [
     url(r'^$', views.index),
     #Users
-    url(r'^users/new$', views.registerAndLogin),
+    url(r'^users$', views.registerAndLogin),
     url(r'^users/create$', views.createUser),
     url(r'^users/(?P<userId>\d+)$', views.viewUser),
     url(r'^users/(?P<userId>\d+)/edit$', views.editUser),
     url(r'^users/(?P<userId>\d+)/update$', views.updateUser),
-    url(r'^users/(?P<userId>\d+)/destroy$', view.deleteUser),
+    url(r'^users/(?P<userId>\d+)/destroy$', views.deleteUser),
+    url(r'^users/login$', views.login),
+    url(r'^user/logout$', views.logout)
     #Tables
     url(r'^tables$', views.displayTables),
     url(r'^tables/new$', views.newTable),
