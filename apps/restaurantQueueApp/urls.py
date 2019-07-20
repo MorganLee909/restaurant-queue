@@ -18,6 +18,13 @@ urlpatterns = [
     url(r'^users/(?P<userId>\d+)/destroy$', views.deleteUser),
     url(r'^users/login$', views.login),
     url(r'^user/logout$', views.logout),
+    #Restaurants
+    url(r'^restaurants/new$', views.newRestaurant),
+    url(r'^restaurants/create$', views.createRestaurant),
+    url(r'^restaurants/(?P<restuarantId>\d+)$', views.showRestaurant),
+    url(r'^restaurants/(?P<restuarantId>\d+)/edit$', views.editRestaurant),
+    url(r'^restaurants/(?P<restuarantId>\d+)/update$', views.updaterestaurant),
+    url(r'^restaurants/(?P<restuarantId>\d+)/destroy$', views.destroyRestaurant)
     #Tables
     url(r'^tables$', views.displayTables),
     url(r'^tables/new$', views.newTable),
