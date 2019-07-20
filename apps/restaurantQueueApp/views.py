@@ -1,4 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+'''
+Here is the outline for all of the functions needed from all of the routes
+It is possible that we will need to add or remove some as we progress
+    through the development
+Again, I added restaurants as a table because it seems to me that this is
+    the best way to do this.  We will talk about it.
+'''
 
 def index(request):
     return redirect("/user/new")
@@ -50,6 +58,40 @@ def login(request):
 def logout(request):
     #Remove user from session
     #Return to index
+    pass
+
+def newRestaurant(request):
+    #Render the page to show form to create new restaurant
+    pass
+
+def createRestaurant(request):
+    #POST
+    #Validate all date
+    #Create and add new restaurant to database
+    #redirect to restaurant dashboard
+    pass
+
+def showRestaurant(request, restaurantId):
+    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    #Render page to display restaurant information
+    pass
+
+def editRestaurant(request, restaurantId):
+    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    #Render page with form to edit restaurant information
+    pass
+
+def updateRestaurant(request, restaurantId):
+    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    #Validate all data
+    #Update the data
+    #Redirect to restaurant dashboard
+    pass
+
+def destroyRestaurant(request, restaurantId):
+    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    #Delete from database
+    #Redirect to index(?)
     pass
 
 def displayTables(request):
