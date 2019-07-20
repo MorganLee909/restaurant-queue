@@ -51,6 +51,34 @@ class DataManager(models.Manager):
             if size < 1:
                 errors["sizeTooSmall"] = "Size of table must be 1 or greater"
 
+    def validateRestaurant(self, restaurantData):
+        errors = {}
+
+        #Name
+        if len(restaurantData["name"]) < 3:
+            errors["nameLength"] = "Name of restaurant must contain at least 3 characters"
+        elif len(restaurantData["name"]) > 254:
+            errors["nameLength"] = "Name is too long"
+
+        #Email
+        if len(restaurantData["email"]) > 99:
+            errors["emailLength"] = "All emails must be less than 100 characters"
+
+        #Password
+        if len(restaurantData["password"]) < 8:
+            errors["passwordlength"] = "Password must contain at least 8 characters"
+        elif len(restaurantData["password"]) > 49:
+            errors["passwordlength"] = "Password too long"
+
+        if not any(char.isdigit() for char in restaurantData["password"]):
+            errors["passwordNums"] = "Password must contain at least one number and one extra character"
+
+        specChars = "!@#$%^&*()_-=+/><;:'][}{"
+        if not any(char in specChars for char in restaurantData["password"]):
+            errors["passwordNums"] = "Password must contain at least one number and one extra character"
+
+        return errors
+
 class User(models.Model):
     firstName = models.CharField(max_length = 50)
     lastName = models.CharField(max_length = 50)
