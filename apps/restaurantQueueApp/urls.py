@@ -17,15 +17,15 @@ urlpatterns = [
     url(r'^users/(?P<userId>\d+)/update$', views.updateUser),
     url(r'^users/(?P<userId>\d+)/destroy$', views.deleteUser),
     url(r'^users/login$', views.login),
-    url(r'^user/logout$', views.logout)
+    url(r'^user/logout$', views.logout),
     #Tables
     url(r'^tables$', views.displayTables),
     url(r'^tables/new$', views.newTable),
     url(r'^tables/create$', views.createTable),
     url(r'^tables/(?P<tableId>\d+)/edit$', views.editTable),
-    url(r'^tables/(?P<tableId>\d+)/update$', views.updateUser),
+    url(r'^tables/(?P<tableId>\d+)/update$', views.updateTable),
     url(r'^tables/(?P<tableId>\d+)/destroy$', views.deleteTable),
     #Other routes
-    url(r'^dashboard/user$', view.userDashboard),
-    url(r'^dashboard/restaurant$', view.restaurantDashboard)
+    url(r'^dashboard/user$', views.userDashboard),
+    url(r'^dashboard/restaurant$', views.restaurantDashboard)
 ]

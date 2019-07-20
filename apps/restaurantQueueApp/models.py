@@ -1,6 +1,6 @@
 from django.db import models
 
-class UserManager(models.Manager):
+class DataManager(models.Manager):
     def validateUser(self, userData):
         errors = {}
 
@@ -15,6 +15,8 @@ class UserManager(models.Manager):
             errors["lastNameLength"] = "Last name must contain at least 3 characters"
         elif len(userData["firstName"]) > 49:
             errors["lastNameLength"] = "Last name must contain less than 50 characters"
+
+        #Email
 
         #Password
         if len(userData["password"]) < 8:
@@ -54,9 +56,20 @@ class User(models.Model):
     password = models.CharField(max_length = 50)
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
+    objects = DataManager()
+
+
+class Restaurant(models.Model):
+    name = models.CharField(max_length = 255)
+    email = models.CharField(max_length = 100)
+    password = models.CharField(max_length = 50)
+    createdAt = models.DateTimeField(auto_now_add = True)
+    updatedAt = models.DateTimeField(auto_now = True)
+    objects = DataManager()
 
 class Table(models.Model):
     name = models.CharField(max_length = 50)
     size = models.IntegerField()
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
+    objects = DataManager()
