@@ -17,6 +17,8 @@ class DataManager(models.Manager):
             errors["lastNameLength"] = "Last name must contain less than 50 characters"
 
         #Email
+        if len(userData["email"]) > 99:
+            errors["emailLength"] = "All emails must be less than 100 characters"
 
         #Password
         if len(userData["password"]) < 8:
