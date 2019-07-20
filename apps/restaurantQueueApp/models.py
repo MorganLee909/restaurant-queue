@@ -100,6 +100,7 @@ class Restaurant(models.Model):
 class Table(models.Model):
     name = models.CharField(max_length = 50)
     size = models.IntegerField()
+    restaurant = models.ForeignKey(Restaurant, related_name = "tables")
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()

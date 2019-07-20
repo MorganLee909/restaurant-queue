@@ -5,6 +5,10 @@ from . import views
 Basic outline for the routes (this is RESTful routing, mostly)
 This can change as needed, such as if we need to combine some of the
     routes into a single one
+
+Added restaurants so that we can control them as users and have many
+    of them right from the start.  It occured to me that this might
+    be the best way to handle this.  We can talk about it.
 '''
 
 urlpatterns = [
@@ -23,8 +27,8 @@ urlpatterns = [
     url(r'^restaurants/create$', views.createRestaurant),
     url(r'^restaurants/(?P<restuarantId>\d+)$', views.showRestaurant),
     url(r'^restaurants/(?P<restuarantId>\d+)/edit$', views.editRestaurant),
-    url(r'^restaurants/(?P<restuarantId>\d+)/update$', views.updaterestaurant),
-    url(r'^restaurants/(?P<restuarantId>\d+)/destroy$', views.destroyRestaurant)
+    url(r'^restaurants/(?P<restuarantId>\d+)/update$', views.updateRestaurant),
+    url(r'^restaurants/(?P<restuarantId>\d+)/destroy$', views.destroyRestaurant),
     #Tables
     url(r'^tables$', views.displayTables),
     url(r'^tables/new$', views.newTable),
