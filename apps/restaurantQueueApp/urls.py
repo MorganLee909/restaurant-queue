@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^users/(?P<userId>\d+)/update$', views.updateUser),
     url(r'^users/(?P<userId>\d+)/destroy$', views.deleteUser),
     url(r'^users/login$', views.login),
-    url(r'^user/logout$', views.logout),
+    url(r'^users/logout$', views.logout),
     #Restaurants
     url(r'^restaurants/new$', views.newRestaurant),
     url(r'^restaurants/create$', views.createRestaurant),

@@ -88,7 +88,6 @@ class User(models.Model):
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()
 
-
 class Restaurant(models.Model):
     name = models.CharField(max_length = 255)
     email = models.CharField(max_length = 100)
