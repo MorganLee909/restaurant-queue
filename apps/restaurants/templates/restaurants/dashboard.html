@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{restaurant.name}} Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class = "header">
+        <p> Hello {{restaurant.name}}!</p>
+        <a href="/logout">Log out</a>
+    </div>
+  
+</body>
+</html>

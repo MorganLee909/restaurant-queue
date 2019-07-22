@@ -74,6 +74,4 @@ def deleteTable(request, tableId):
     pass
 
 def restaurantDashboard(request):
-    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    #Renders the main page for the restaurant
-    pass
+    return render(request, "restaurants/dashboard.html")
