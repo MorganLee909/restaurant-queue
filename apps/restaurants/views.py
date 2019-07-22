@@ -214,4 +214,4 @@ def restaurantDashboard(request):
         "restaurant" : Restaurant.objects.get(id = request.session["restaurant"])
     }
 
-    return render(request, "restaurants/dashboard.html", context)
+    return render(request, "restaurants/dashboard.html", context)  ## add in context when complete
