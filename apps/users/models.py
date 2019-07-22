@@ -1,4 +1,5 @@
 from django.db import models
+import bcrypt
 
 class DataManager(models.Manager):
     def validateUser(self, userData):
@@ -32,6 +33,22 @@ class DataManager(models.Manager):
         specChars = "!@#$%^&*()_-=+/><;:'][}{"
         if not any(char in specChars for char in userData["password"]):
             errors["passwordNums"] = "Password must contain at least one number and one extra character"
+
+        return errors
+
+
+
+
+    def validateLogin(self, postData):
+        errors = {}
+        try: 
+            user = User.objects.get(email = postData['email'])
+        except:
+            errors['email'] = f'No email matching {postData["email"]}.'
+            return errors
+
+        if not bcrypt.checkpw(postData["password"].encode(), user.password.encode()):
+            errors["password"] = "Password does not match email"
 
         return errors
 
