@@ -7,6 +7,9 @@ def registerAndLogin(request):
     #Display register/login page
     return render(request, "users/index.html")
 
+def newUser(request):
+    return render(request, 'users/user.html')
+
 def createUser(request):
     #POST
     #Validate user data
