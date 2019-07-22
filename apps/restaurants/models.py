@@ -29,6 +29,11 @@ class RestaurantManager(models.Manager):
 
         return errors
 
+    def validateLogin(self, restaurantData):
+        errors = {}
+
+        return errors
+
     def validateTable(self, tableData):
         errors = {}
 
@@ -45,7 +50,7 @@ class RestaurantManager(models.Manager):
             if size < 1:
                 errors["sizeTooSmall"] = "Size of table must be 1 or greater"
 
-        return errors  
+        return errors
 
 class Restaurant(models.Model):
     name = models.CharField(max_length = 255)

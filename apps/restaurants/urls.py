@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     #Restaurants
+    url(r'^$', views.loginPage),
+    url(r'^login$', views.restaurantLogin),
     url(r'^new$', views.newRestaurant),
     url(r'^create$', views.createRestaurant),
     url(r'^(?P<restuarantId>\d+)$', views.showRestaurant),
