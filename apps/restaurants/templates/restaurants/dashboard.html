@@ -11,9 +11,99 @@
 </head>
 <body>
     <div class = "header">
-        <p> Hello {{restaurant.name}}!</p>
+            
+        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
         <a href="/logout">Log out</a>
     </div>
+
+    <div class = "container">
+        <div class = "queue">
+            <h2>Party Queue</h2>
+                <!-- Code goes here to grab 'user in Users' or 'party in Parties' -->
+                <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->
+                
+                <!-- This is an example layout to be formatted after database calling -->
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>In Queue: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>In Queue: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>In Queue: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+                <!-- This is an example layout to be formatted after database calling -->
+        </div>
+
+        <div class = "tableDisplays">
+            <div class = "tableInfo">
+
+            </div>
+            <div class = "tableQueue">
+                <h2>Table Queue</h2>
+                <div class ="tableSplit">
+                    <h3>Party: 1+</h3>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+
+
+
+                </div>
+                <div class ="tableSplit">
+                    <h3>Party: 2</h3>
+
+
+
+                </div>
+                <div class ="tableSplit">
+                    <h3>Party: 3 - 4</h3>
+
+
+
+                </div>
+
+                <div class ="tableSplitEnd">
+                    <h3>Party: 5+</h3>
+
+
+
+                </div>
+
+    
+            </div>
+        </div>
+        
+    </div>
+
+
   
 </body>
 </html>
