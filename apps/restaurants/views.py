@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurant, Table
 #Possibly need to import from users
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
-    pass
+    return render(request, "restaurants/index.html")
 
 def createRestaurant(request):
     #POST

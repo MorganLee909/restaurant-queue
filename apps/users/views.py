@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+import bcrypt
+from django.contrib import messages
+from .models import User
 
 def registerAndLogin(request):
     #Display register/login page
     return render(request, "users/index.html")
+
+def newUser(request):
+    return render(request, "users/user.html")
 
 def createUser(request):
     #POST
@@ -10,6 +16,7 @@ def createUser(request):
     #Create new user
     #Redirect to user dashboard
     pass
+   
 
 def viewUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
@@ -43,6 +50,7 @@ def login(request):
     #log user in (don't forget session)
     #Redirect to dashboard
     pass
+
 
 def logout(request):
     #Remove user from session

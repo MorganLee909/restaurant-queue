@@ -1,0 +1,47 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+    text-align: center;
+    box-align: center;
+    
+
+}
+
+.container{
+    height: 800px;
+    width: 970px;
+    background: url('../images/subline_background.jpg');
+}
+
+.login{
+    height: 300px;
+    width: 300px;
+    border: 2px solid black;
+    margin-top: 200px;
+    margin: auto;
+
+}
+
+.login h4{
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.emailBox{
+    margin-left: 31px;
+}
+
+.button{
+    margin-top: 50px;
+    width: 70px;
+    border: 1px solid black;
+}
+
+.logo{
+    height: 200px;
+    width: 200px;
+}
+
+
