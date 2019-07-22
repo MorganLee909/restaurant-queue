@@ -1,4 +1,5 @@
 from django.db import models
+import bcrypt
 
 class RestaurantManager(models.Manager):
     def validateRestaurant(self, restaurantData):
@@ -31,6 +32,14 @@ class RestaurantManager(models.Manager):
 
     def validateLogin(self, restaurantData):
         errors = {}
+        try: 
+            restaurant = Restaurant.objects.get(email = restaurantData['email'])
+        except:
+            errors['email'] = f'No email matching {restaurantData["email"]}.'
+            return errors
+
+        if not bcrypt.checkpw(restaurantData["password"].encode(), restaurant.password.encode()):
+            errors["password"] = "Password does not match email"
 
         return errors
 

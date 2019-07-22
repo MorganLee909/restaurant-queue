@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+import bcrypt
 from .models import Restaurant, Table
 #Possibly need to import from users
 
@@ -43,7 +44,7 @@ def restaurantLogin(request):
                 messages.error(request, value)
 
         #Log in restaurant
-        restaurant = Restaurant.objects.get()
+        restaurant = Restaurant.objects.get(email = request.POST["email"])
         request.session["restaurant"] = restaurant.id
 
     #Redirect to dashboard
