@@ -1,0 +1,60 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+    text-align: center;
+    box-align: center;
+    
+
+}
+
+.container{
+    height: 821px;
+    width: auto;
+    background: url('../images/subline_background.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+
+.login{
+    height: 300px;
+    width: 300px;
+    /* border: 2px solid black; */
+    margin: auto;
+
+}
+
+
+.email{
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.emailBox{
+    margin-left: 31px;
+    border: 1px solid grey;
+}
+
+.password{
+    margin-top: 37px;
+    display: inline-block;
+}
+
+.passwordBox{
+    border: 1px solid gray;
+}
+
+.button{
+    margin-top: 50px;
+    width: 70px;
+    border: 1px solid black;
+}
+
+.logo{
+    height: 150px;
+    width: 150px;
+    margin-top: 10px;
+    margin-bottom: 38px;
+}
+
+
