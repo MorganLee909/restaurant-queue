@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Restaurant, Table
 #Possibly need to import from users
@@ -125,16 +125,18 @@ def displayTables(request):
         "restaurant" : Restaurant.objects.get(id = request.session["restaurant"])
     }
     
-    
-    pass
+    return render(request, "restaurants/showTables")
     
 def newTable(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    #Display form to create a new table
-    #Redirect to create route
-    pass
+    if "restaurant" not in request.session:
+        messages.error(request, "Must be logged in to view this page")
+        return redirect("/restaurant")
 
-def createTable(request):
+    #Display form to create a new table
+    return render(request, "restaurants/newTable.html")
+
+def createTables(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     #POST
     #Validate data
@@ -142,25 +144,72 @@ def createTable(request):
     #redirect to restaurant dashboard
     pass
 
-def editTable(request, tableId):
+def editTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    #Render page to show/edit specific table
-    pass
+    if "restaurant" not in request.session:
+        messages.error(request, "Must be logged in to view this page")
+        return redirect("/restaurant")\
 
-def updateTable(request, tableId):
+    #Render page to show/edit specific table
+    return render(request, "restaurants/editTables.html")
+
+def updateTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    #Validate new table data
-    #Update the table
+    try:
+        restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+    except:
+        messages.error(request, "Must be logged in to do that")
+        return redirect("/restaurants")
+
+    table = Table.objects.get(id = tableId)
+    if table.restaurant.id != restaurant.id:
+        messages.error(request, "You do not have authorization to do that")
+        return redirect("/restaurants/dashboard")
+
+    #POST
+    if request.method == "POST":
+
+        #Validate new table data
+        errors = Table.objects.validateTable(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+    
+        #Update the table
+        table.name = request.POST["name"] or table.name
+        table.size = request.POST["size"] or table.size
+
     #Redirect back to restaurant dashboard
-    pass
+    return redirect("/restaurants/dashboard")
 
 def deleteTable(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    try:
+        restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+    except:
+        messages.error(request, "Must be logged in to do that")
+        return redirect("/restaurants")
+
+    table = Table.objects.get(id = tableId)
+    if table.restaurant.id != restaurant.id:
+        messages.error(request, "You do not have authorization to do that")
+        return redirect("/restaurants/dashboard")
+
     #Remove table from database
+    table.delete()
+
     #Redirect to restaurant dashboard
-    pass
+    return redirect("/restaurants/dashboard")
 
 def restaurantDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if "restaurant" not in request.session:
+        messages.error(request, "Must be logged in to view this page")
+        return redirect("/restaurant")
+
     #Renders the main page for the restaurant
-    pass
+    context = {
+        "restaurant" : Restaurant.objects.get(id = request.session["restaurant"])
+    }
+
+    return render(request, "restaurants/dashboard.html", context)
