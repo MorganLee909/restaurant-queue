@@ -26,10 +26,10 @@
                 <h1>Login</h1>
                 <form action="users/login" method="POST">
                     {% csrf_token %}
-                    <h4>Email:</h4>
+                    <h4 class="email">Email:</h4>
                     <input class="emailBox" type="text" name="email"> 
                     <br>
-                    <h4>Password:</h4>
+                    <h4 class="password">Password:</h4>
                     <input class="passwordBox" type="password" name="password">
                     <br>
                     <input class="button" type="submit" value="Log In">

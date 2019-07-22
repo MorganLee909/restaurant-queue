@@ -1,40 +1,25 @@
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
-import bcrypt
-from django.contrib import messages
-from .models import User
-=======
 from django.contrib import messages
 from .models import *
 import bcrypt
->>>>>>> models-routes
 
 def registerAndLogin(request):
     #Display register/login page
     return render(request, "users/index.html")
 
 def newUser(request):
-<<<<<<< HEAD
-    return render(request, "users/user.html")
-=======
     return render(request, 'users/user.html')
->>>>>>> models-routes
 
 def createUser(request):
     #POST
     #Validate user data
     #Create new user
     #Redirect to user dashboard
-<<<<<<< HEAD
-    pass
-   
-=======
     errors = User.objects.validateUser(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
         return redirect('/')
->>>>>>> models-routes
 
     else:
         newUser = User.objects.create(
@@ -46,8 +31,8 @@ def createUser(request):
         newUser.save()
         user = User.objects.get(email = request.POST['email'])
         request.session['user'] = user.id
-        request.session['first_name'] = user.first_name
-        return redirect('/dashboard/user') 
+        request.session['firstName'] = user.firstName
+        return redirect('/users/dashboard') 
 
 def editUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?

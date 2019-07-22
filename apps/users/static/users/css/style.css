@@ -10,27 +10,38 @@
 }
 
 .container{
-    height: 800px;
-    width: 970px;
-    background: url('../images/subline_background.jpg');
+    height: 821px;
+    width: auto;
+    background: url('../images/subline_background.jpg') no-repeat;
+    background-size: 100% 100%;
 }
 
 .login{
     height: 300px;
     width: 300px;
-    border: 2px solid black;
-    margin-top: 200px;
+    /* border: 2px solid black; */
     margin: auto;
 
 }
 
-.login h4{
+
+.email{
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .emailBox{
     margin-left: 31px;
+    border: 1px solid grey;
+}
+
+.password{
+    margin-top: 37px;
+    display: inline-block;
+}
+
+.passwordBox{
+    border: 1px solid gray;
 }
 
 .button{
@@ -40,8 +51,10 @@
 }
 
 .logo{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
+    margin-top: 10px;
+    margin-bottom: 38px;
 }
 
 
