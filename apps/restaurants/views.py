@@ -16,7 +16,7 @@ def createRestaurant(request):
         errors = Restaurant.objects.validateRestaurant(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
-                messages.error(key, value)
+                messages.error(request, value)
 
         #Create and add new restaurant to database
         newRestaurant = Restaurant(
@@ -27,6 +27,7 @@ def createRestaurant(request):
         newRestaurant.save()
 
     #redirect to restaurant dashboard
+    request.session["restaurants"] = newRestaurant.id
     return redirect("/restaurants/dashboard")
 
 def loginPage(request):
@@ -35,7 +36,7 @@ def loginPage(request):
 
 def restaurantLogin(request):
     #POST
-    if request.method = "POST":
+    if request.method == "POST":
 
         #Validate restaurant
         errors = Restaurant.objects.validateLogin(request.POST)
@@ -53,7 +54,7 @@ def restaurantLogin(request):
 def showRestaurant(request, restaurantId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     restaurant = Restaurant.objects.get(id = restaurantId)
-    if request.session["restaurant"] != restaurant.id
+    if request.session["restaurant"] != restaurant.id:
         messages.error(request, "You do not have authorization to view that page")
         return redirect("/restaurants")
 
@@ -67,7 +68,7 @@ def showRestaurant(request, restaurantId):
 def editRestaurant(request, restaurantId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     restaurant = Restaurant.objects.get(id = restaurantId)
-    if request.session["restaurant"] != restaurant.id
+    if request.session["restaurant"] != restaurant.id:
         messages.error(request, "You do not have authorization to view that page")
         return redirect("/restaurants")
 
@@ -81,7 +82,7 @@ def editRestaurant(request, restaurantId):
 def updateRestaurant(request, restaurantId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     restaurant = Restaurant.objects.get(id = restaurantId)
-    if request.session["restaurant"] != restaurant.id
+    if request.session["restaurant"] != restaurant.id:
         messages.error(request, "You do not have authorization to view that page")
         return redirect("/restaurants")
 
@@ -105,7 +106,7 @@ def updateRestaurant(request, restaurantId):
 def destroyRestaurant(request, restaurantId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     restaurant = Restaurant.objects.get(id = restaurantId)
-    if request.session["restaurant"] != restaurant.id
+    if request.session["restaurant"] != restaurant.id:
         messages.error(request, "You do not have authorization to view that page")
         return redirect("/restaurants")
 
@@ -206,7 +207,7 @@ def restaurantDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     if "restaurant" not in request.session:
         messages.error(request, "Must be logged in to view this page")
-        return redirect("/restaurant")
+        return redirect("/restaurants")
 
     #Renders the main page for the restaurant
     context = {
