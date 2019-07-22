@@ -19,7 +19,7 @@ def createUser(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/')
+        return redirect('/users/new')
 
     else:
         newUser = User.objects.create(
@@ -31,7 +31,7 @@ def createUser(request):
         newUser.save()
         user = User.objects.get(email = request.POST['email'])
         request.session['user'] = user.id
-        request.session['first_name'] = user.first_name
+        request.session['firstName'] = user.firstName
         return redirect('/dashboard/user') 
 
 def editUser(request, userId):
@@ -110,4 +110,10 @@ def logout(request):
 def userDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     #Renders the main page for the user
-    pass
+    if 'user' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id = request.session['user'])
+    context = {
+        'user' : user
+    }
+    return render(request, 'users/dashboard.html', context)
