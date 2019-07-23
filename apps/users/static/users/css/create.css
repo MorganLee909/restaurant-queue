@@ -9,9 +9,11 @@
 
 }
 .container{
-    background-image: linear-gradient(to bottom, #004680, #256791, #54889f, #87a6ae, #bcc4c4);
+    /* background-image: linear-gradient(to bottom, #004680, #256791, #54889f, #87a6ae, #bcc4c4); */
+    background: url('../images/createUser.jpg') no-repeat;
     height: 821px;
     width: auto;
+    background-size: cover;
 }
 
 h4{
@@ -43,4 +45,11 @@ h4{
 
 .button{
     margin-top: 30px;
+}
+
+.registration{
+    background-color: white;
+    width: 300px;
+    margin-left: 550px;
+    border: 2px solid black;
 }
