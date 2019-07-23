@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
-from .models import Restaurant, Table
-#Possibly need to import from users
+import datetime
+from .models import Restaurant, Table, LineMember
+from apps.users.models import User
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
@@ -130,23 +131,34 @@ def displayTables(request):
     }
     
     return render(request, "restaurants/showTables")
-    
-def newTable(request):
-    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    if "restaurant" not in request.session:
-        messages.error(request, "Must be logged in to view this page")
-        return redirect("/restaurant")
-
-    #Display form to create a new table
-    return render(request, "restaurants/newTable.html")
 
 def createTables(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if "restaurant" not in request.session:
+        messages.error(request, "You must be logged in to do that")
+        return redirect(f"/restaurants")
     #POST
-    #Validate data
-    #Create new table
+    if request.method == "POST":
+
+        #Validate data
+        errors = Table.objects.validateTable(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect(f"restaurants/{request.session['restaurant']}/edit")
+
+        #Create new table
+        newTable = Table(
+            name = request.POST["tableName"],
+            size = int(request.POST["tableSize"]),
+            restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+        )
+
+        newTable.save()
+        messages.success(request, f"Table of {newTable.size} successfully added")
+
     #redirect to restaurant dashboard
-    pass
+    return redirect(f"/restaurants/{request.session['restaurant']}/edit")
 
 def editTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
@@ -212,8 +224,38 @@ def restaurantDashboard(request):
         return redirect("/restaurants")
 
     #Renders the main page for the restaurant
+    restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+    parties = LineMember.objects.filter(restaurant = restaurant)
+
+    waitTimes = []
+    for party in parties:
+        difference = party.joined - datetime.datetime.now()
+        waitTime = difference.total_seconds()
+
     context = {
-        "restaurant" : Restaurant.objects.get(id = request.session["restaurant"])
+        "restaurant" : restaurant,
+        "tables" : Table.objects.filter(restaurant = restaurant),
+        "parties" : parties,
+        "waitTimes" : waitTimes
     }
 
-    return render(request, "restaurants/dashboard.html", context)  ## add in context when complete
+    return render(request, "restaurants/dashboard.html", context)
+
+def addParty(request):
+    if request.method == "POST":
+        
+        errors = LineMember.objects.validateLineMember(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+                return redirect("/restaurants/dashboard")
+
+        newParty = LineMember(
+            member = User.objects.get(email = request.POST["partyEmail"]),
+            restaurant = Restaurant.objects.get(id = request.session["restaurant"]),
+            partySize = int(request.POST["partySize"])
+        )
+
+        newParty.save()
+
+    return redirect("/restaurants/dashboard")

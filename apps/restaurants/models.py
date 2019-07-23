@@ -14,6 +14,8 @@ class RestaurantManager(models.Manager):
         #Email
         if len(restaurantData["email"]) > 99:
             errors["emailLength"] = "All emails must be less than 100 characters"
+        if Restaurant.objects.filter(email = restaurantData['email']):
+            errors['emailInUse'] = 'Email address already in use.'
 
         #Password
         if len(restaurantData["password"]) < 8:
@@ -50,17 +52,38 @@ class RestaurantManager(models.Manager):
         errors = {}
 
         #Name
-        if len(tableData["name"]) > 49:
+        if len(tableData["tableName"]) > 49:
             errors["nameLength"] = "Name must be less than 50 characters"
         
         #Size
         try:
-            size = int(tableData["size"])
+            size = int(tableData["tableSize"])
         except ValueError:
             errors["sizeNotInt"] = "Must enter an integer for size"
         
             if size < 1:
                 errors["sizeTooSmall"] = "Size of table must be 1 or greater"
+
+        return errors
+
+    def validateLineMember(self, lineMemberData):
+        errors = {}
+
+        #Email
+        print("%" * 100)
+        print(lineMemberData["partyEmail"])
+
+        try:
+            user = User.objects.get(email = lineMemberData["partyEmail"])
+        except:
+            errors["noUser"] = f"User does not exist for {lineMemberData['partyEmail']}"
+            return errors
+
+        #Party size
+        try:
+            int(lineMemberData["partySize"])
+        except ValueError:
+            errors["notNumber"] = "Must enter an integer"
 
         return errors
 
@@ -84,3 +107,4 @@ class LineMember(models.Model):
     restaurant = models.ManyToManyField(Restaurant, related_name = "line")
     joined = models.DateTimeField(auto_now_add = True)
     partySize = models.IntegerField()
+    objects = RestaurantManager()
