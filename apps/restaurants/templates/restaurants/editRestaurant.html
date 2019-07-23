@@ -19,27 +19,35 @@
     <div class = "container">
         <div class = "editBox">
             <h2>Edit Restaurant Information</h2>
-                <form>
+                <form action="/restaurants/{{restaurant.id}}/edit" method="POST">
+                    {% csrf_token %}
                     <p>
-                    <label>Restaurant Name:</label><input type="text" name="name">
-                    <label>Restaurant Email:</label><input type="text" name="name">
+                    <label>Restaurant Name:</label>
+                    <input type="text" name="name">
                     </p>
+                    <p>
+                    <label>Restaurant Email:</label>
+                    <input type="text" name="name">
+                    </p>
+                    <input type="submit" value="Update Restaurant Info">
                 </form>
-
-
-
         </div>
+
         <div class = "editBox">
-            <form>
-                    <h2>Add Table To Restaurant Floor</h2>
-    
-    
-            </form>
-
-
-
+            <h2>Add Table To Restaurant Floor</h2>
+                <form action="/restaurants/tables/new" method="POST">
+                {% csrf_token %}
+                <p>
+                    <label>Table Name:</label>
+                    <input type="text" name="tableName">
+                </p>  
+                <p>
+                    <label>Table Size:</label>
+                    <input type="text" name="tableSize">
+                </p>  
+                <input type="submit" value="Add Table To Floor">
+                </form>
         </div>
-
     </div>
 </body>
 </html>

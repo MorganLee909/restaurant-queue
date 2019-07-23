@@ -34,22 +34,34 @@ span {
     font-weight: bold;
 }
 .container {
-    width: 100%;
+    width: 80%;
     display: inline-block;
+    align-content: center;
 }
 
-form{ 
+.editBox {
+    width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    border: 2px solid rgb(0,27,45);
+}
+
+form { 
     display: table;
+    border: 1 px solid rgb(0,27,45);
 }
 
-p {
+.editBox form p {
     display: table-row;
 }
 
-label {
+.editBox label {
     display: table-cell;
+    margin: 10px auto;
+    
 }
 
-input {
+.editBox input {
     display: table-cell;
+    margin: 10px auto;
 }
