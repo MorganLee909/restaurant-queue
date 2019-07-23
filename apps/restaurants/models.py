@@ -14,6 +14,8 @@ class RestaurantManager(models.Manager):
         #Email
         if len(restaurantData["email"]) > 99:
             errors["emailLength"] = "All emails must be less than 100 characters"
+        if User.objects.filter(email = postData['email']):
+            errors['emailInUse'] = 'Email address already in use.'
 
         #Password
         if len(restaurantData["password"]) < 8:
