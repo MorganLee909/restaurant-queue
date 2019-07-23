@@ -76,3 +76,8 @@ class Table(models.Model):
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()
+
+class LineMember(models.Model):
+    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
+    joined = models.DateTimeField(auto_now_add = True)
+    partySize = models.IntegerField()
