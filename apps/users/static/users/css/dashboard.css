@@ -4,7 +4,13 @@
     font-family: 'Saira', sans-serif;
     color: rgb(0,27,45);
     text-align: center;
-    box-align: center;
-    
 
+}
+
+.userInfo{
+    border: 2px solid black;
+    width: 320px;
+    height: 300px;
+    margin: auto;
+    display: inline-block;
 }

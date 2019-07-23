@@ -1,0 +1,55 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+    text-align: center;    
+
+}
+
+.container{
+    background: url('../images/editUserbackground.jpg') no-repeat;
+    height: 900px;
+    width: auto;
+    background-size: cover;
+
+    
+}
+.edit{
+    height: 350px;
+    width: 300px;
+    margin: auto;
+    border: 2px solid black;
+    background-color: whitesmoke;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+
+
+h3{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.first{
+    margin-right: 60px;
+}
+
+.last{
+    margin-right: 61px;
+}
+
+.email{
+    margin-right: 109px;
+}
+
+.password{
+    margin-right: 72px;
+}
+
+.button{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+

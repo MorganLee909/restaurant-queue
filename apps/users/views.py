@@ -43,7 +43,7 @@ def editUser(request, userId):
     context = {
         'user' : User.objects.get(id = userId)
     }
-    return render(request, 'users/showUser.html', context)
+    return render(request, 'users/editUser.html', context)
 
 def updateUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
@@ -53,22 +53,23 @@ def updateUser(request, userId):
     #Redirect to view user
     if request.session['user'] != int(userId):
         return redirect('/users/dashboard')
+    if request.method == "POST":
 
-    errors = User.objects.validateUser(request.POST)
+        errors = User.objects.validateUser(request.POST)
 
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect(f'/users/{ userId }/update')
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect(f'/users/{ userId }/update')
 
-    else:
-        user = User.objects.get(id = userId)
-        user.firstName = request.POST['firstName']
-        user.lastName = request.POST['lastName']
-        user.email = request.POST['email']
-        user.password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-        user.save()
-        
+        else:
+            user = User.objects.get(id = userId)
+            user.firstName = request.POST['firstName'] or user.firstName
+            user.lastName = request.POST['lastName'] or user.lastName
+            user.email = request.POST['email'] or user.email
+            user.password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()) or user.password
+            user.save()
+            
     return redirect('/users/dashboard')
 
 def deleteUser(request, userId):

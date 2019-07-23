@@ -3,9 +3,7 @@
     margin: 0px;
     font-family: 'Saira', sans-serif;
     color: rgb(0,27,45);
-    text-align: center;
-    box-align: center;
-    
+    text-align: center;    
 
 }
 .container{
@@ -50,6 +48,6 @@ h4{
 .registration{
     background-color: white;
     width: 300px;
-    margin-left: 550px;
+    margin: auto;
     border: 2px solid black;
 }
