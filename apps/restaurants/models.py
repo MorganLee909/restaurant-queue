@@ -28,6 +28,9 @@ class RestaurantManager(models.Manager):
         if not any(char in specChars for char in restaurantData["password"]):
             errors["passwordNums"] = "Password must contain at least one number and one extra character"
 
+        if restaurantData['password'] != restaurantData['passwordConfirm']:
+            errors['notPassword'] = 'Password does not match.'
+
         return errors
 
     def validateLogin(self, restaurantData):
@@ -76,3 +79,8 @@ class Table(models.Model):
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()
+
+class LineMember(models.Model):
+    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
+    joined = models.DateTimeField(auto_now_add = True)
+    partySize = models.IntegerField()

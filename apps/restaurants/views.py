@@ -17,6 +17,7 @@ def createRestaurant(request):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
+            return redirect('/restaurants/new')
 
         #Create and add new restaurant to database
         newRestaurant = Restaurant(
@@ -27,7 +28,7 @@ def createRestaurant(request):
         newRestaurant.save()
 
     #redirect to restaurant dashboard
-    request.session["restaurants"] = newRestaurant.id
+    request.session["restaurant"] = newRestaurant.id
     return redirect("/restaurants/dashboard")
 
 def loginPage(request):
@@ -43,6 +44,7 @@ def restaurantLogin(request):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
+            return redirect('/restaurants')
 
         #Log in restaurant
         restaurant = Restaurant.objects.get(email = request.POST["email"])

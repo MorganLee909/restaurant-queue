@@ -1,0 +1,55 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+    text-align: center;
+    box-align: center;
+    
+
+}
+.container{
+    /* background-image: linear-gradient(to bottom, #004680, #256791, #54889f, #87a6ae, #bcc4c4); */
+    background: url('../images/createUser.jpg') no-repeat;
+    height: 821px;
+    width: auto;
+    background-size: cover;
+}
+
+h4{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.logo{
+    height: 150px;
+    width: 150px;
+    margin-top: 10px;
+}
+
+.password{
+    margin-right: 62px;
+}
+
+.email{
+    margin-right: 94px;
+}
+
+.last{
+    margin-right: 56px;
+}
+
+.first{
+    margin-right: 55px;
+}
+
+.button{
+    margin-top: 30px;
+}
+
+.registration{
+    background-color: white;
+    width: 300px;
+    margin-left: 550px;
+    border: 2px solid black;
+}
