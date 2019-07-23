@@ -131,23 +131,34 @@ def displayTables(request):
     }
     
     return render(request, "restaurants/showTables")
-    
-def newTable(request):
-    #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    if "restaurant" not in request.session:
-        messages.error(request, "Must be logged in to view this page")
-        return redirect("/restaurant")
-
-    #Display form to create a new table
-    return render(request, "restaurants/newTable.html")
 
 def createTables(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if "restaurant" not in request.session:
+        messages.error(request, "You must be logged in to do that")
+        return redirect(f"/restaurants")
     #POST
-    #Validate data
-    #Create new table
+    if request.method == "POST":
+
+        #Validate data
+        errors = Table.objects.validateTable(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect(f"restaurants/{request.session['restaurant']}/edit")
+
+        #Create new table
+        newTable = Table(
+            name = request.POST["tableName"],
+            size = int(request.POST["tableSize"]),
+            restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+        )
+
+        newTable.save()
+        messages.success(request, f"Table of {newTable.size} successfully added")
+
     #redirect to restaurant dashboard
-    pass
+    return redirect(f"/restaurants/{request.session['restaurant']}/edit")
 
 def editTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?

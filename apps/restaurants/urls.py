@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'^(?P<restaurantId>\d+)/destroy$', views.destroyRestaurant),
     #Tables
     url(r'^tables$', views.displayTables),
-    url(r'^tables/new$', views.newTable),
     url(r'^tables/create$', views.createTables),
     url(r'^tables/(?P<tableId>\d+)/edit$', views.editTables),
     url(r'^tables/(?P<tableId>\d+)/update$', views.updateTables),

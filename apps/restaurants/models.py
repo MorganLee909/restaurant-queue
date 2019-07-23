@@ -52,12 +52,12 @@ class RestaurantManager(models.Manager):
         errors = {}
 
         #Name
-        if len(tableData["name"]) > 49:
+        if len(tableData["tableName"]) > 49:
             errors["nameLength"] = "Name must be less than 50 characters"
         
         #Size
         try:
-            size = int(tableData["size"])
+            size = int(tableData["tableSize"])
         except ValueError:
             errors["sizeNotInt"] = "Must enter an integer for size"
         
