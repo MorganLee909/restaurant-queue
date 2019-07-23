@@ -21,6 +21,8 @@ class DataManager(models.Manager):
         #Email
         if len(userData["email"]) > 99:
             errors["emailLength"] = "All emails must be less than 100 characters"
+        if User.objects.filter(email = userData['email']):
+            errors['emailInUse'] = 'Email address already in use.'
 
         #Password
         if len(userData["password"]) < 8:
