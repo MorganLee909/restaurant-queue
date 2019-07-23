@@ -67,6 +67,19 @@ class RestaurantManager(models.Manager):
     def validateLineMember(self, lineMemberData):
         errors = {}
 
+        #Email
+        try:
+            user = User.objects.get(email = lineMemberData["partyEmail"])
+        except:
+            errors["noUser"] = f"User does not exist for {lineMemberData['partyEmail']}"
+            return errors
+
+        #Party size
+        try:
+            int(lineMemberData["partySize"])
+        except ValueError:
+            errors["notNumber"] = "Must enter an integer"
+
         return errors
 
 class Restaurant(models.Model):
@@ -89,3 +102,4 @@ class LineMember(models.Model):
     restaurant = models.ManyToManyField(Restaurant, related_name = "line")
     joined = models.DateTimeField(auto_now_add = True)
     partySize = models.IntegerField()
+    objects = RestaurantManager()

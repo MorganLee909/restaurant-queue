@@ -232,7 +232,19 @@ def restaurantDashboard(request):
 
 def addParty(request):
     if request.method == "POST":
+        
+        errors = LineMember.objects.validateLineMember(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+                return redirect("/restaurants/dashboard")
+
         newParty = LineMember(
+            member = User.objects.get(email = request.POST["partyEmail"]),
             restaurant = Restaurant.objects.get(id = request.session["restaurant"]),
             partySize = int(request.POST["partySize"])
         )
+
+        newParty.save()
+
+    return redirect("/restaurants/dashboard")

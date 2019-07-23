@@ -119,8 +119,9 @@ def userDashboard(request):
 
 def deleteLine(request, userId):
     if request.session['user'] != int(userId):
+        messages.error(request, "You do not have authorization to do that")
         return redirect('/users/dashboard')
 
-    delLine = LineMember.objects.get(members = userId)
+    delLine = LineMember.objects.get(member = userId)
     delLine.delete()
     return redirect('/users/dashboard')
