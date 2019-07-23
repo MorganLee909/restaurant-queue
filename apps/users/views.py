@@ -32,11 +32,7 @@ def createUser(request):
         user = User.objects.get(email = request.POST['email'])
         request.session['user'] = user.id
         request.session['firstName'] = user.firstName
-<<<<<<< HEAD
-        return redirect('/dashboard/user') 
-=======
         return redirect('/users/dashboard') 
->>>>>>> cody-models
 
 def editUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?

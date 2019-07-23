@@ -1,19 +1,10 @@
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
-from django.contrib import messages
-import bcrypt
-=======
->>>>>>> cody-models
 from .models import Restaurant, Table
 #Possibly need to import from users
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
-<<<<<<< HEAD
-    return render(request, "restaurants/newRestaurant.html")
-=======
     return render(request, "restaurants/index.html")
->>>>>>> cody-models
 
 def createRestaurant(request):
     #POST
