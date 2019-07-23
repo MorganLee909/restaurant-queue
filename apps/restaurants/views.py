@@ -93,16 +93,17 @@ def updateRestaurant(request, restaurantId):
     if request.method == "POST":
 
         #Validate all data
-        errors = Restaurant.objects.validateRestaurant()
+        errors = Restaurant.objects.validateRestaurant(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
 
         #Update the data
-        restaurant.name = request.POST["name"] or restaurant.name
-        restaurant.email = request.POST["email"] or restaurant.email
-        restaurant.password= bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()) or restaurant.password
-
+        restaurantUpdate = Restaurant.objects.get(id=restaurantId)
+        restaurantUpdate.name = request.POST["name"] or restaurant.name
+        restaurantUpdate.email = request.POST["email"] or restaurant.email
+        restaurantUpdate.password = bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()) or restaurant.password
+        restaurantUpdate.save()
     #Redirect to restaurant dashboard
     return redirect("/restaurants/dashboard")
 
