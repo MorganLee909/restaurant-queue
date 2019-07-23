@@ -21,24 +21,23 @@ def createUser(request):
             messages.error(request, value)
         return redirect('/users/new')
 
-    else:
-        newUser = User.objects.create(
-            firstName = request.POST['firstName'],
-            lastName = request.POST['lastName'],
-            email = request.POST['email'],
-            password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-        )
-        newUser.save()
-        user = User.objects.get(email = request.POST['email'])
-        request.session['user'] = user.id
-        request.session['firstName'] = user.firstName
-        return redirect('/users/dashboard') 
+    newUser = User.objects.create(
+        firstName = request.POST['firstName'],
+        lastName = request.POST['lastName'],
+        email = request.POST['email'],
+        password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
+    )
+    newUser.save()
+    user = User.objects.get(email = request.POST['email'])
+    request.session['user'] = user.id
+    request.session['firstName'] = user.firstName
+    return redirect('/users/dashboard') 
 
 def editUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     #Get user
     #Render the user edit page
-    if request.session['user'] != User.objects.get(id = userId):
+    if request.session['user'] != int(userId):
         return redirect('/users/dashboard')
 
     context = {
@@ -52,7 +51,7 @@ def updateUser(request, userId):
     #Validate data
     #Update the user
     #Redirect to view user
-    if request.session['user'] != User.objects.get(id = userId):
+    if request.session['user'] != int(userId):
         return redirect('/users/dashboard')
 
     errors = User.objects.validateUser(request.POST)
@@ -76,13 +75,12 @@ def deleteUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     #Delete user from database
     #Redirect to index
-    if request.session['user'] != User.objects.get(id = userId):
+    if request.session['user'] != int(userId):
         return redirect('/users/dashboard')
     
-    else:
-        delUser = User.objects.get(id = userId)
-        delUser.delete()
-        return redirect ('/')
+    delUser = User.objects.get(id = userId)
+    delUser.delete()
+    return redirect ('/')
 
 def login(request):
     #POST
@@ -118,3 +116,11 @@ def userDashboard(request):
         'user' : user
     }
     return render(request, 'users/dashboard.html', context)
+
+def deleteLine(request, userId):
+    if request.session['user'] != int(userId):
+        return redirect('/users/dashboard')
+
+    delLine = LineMember.objects.get(members = userId)
+    delLine.delete()
+    return redirect('/users/dashboard')
