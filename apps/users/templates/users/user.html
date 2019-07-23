@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login & Registration</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'users/css/create.css' %}"> 
+        <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
+    </head>
+
+
+    <body>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }} banner"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="container">
+            <img class="logo" src="{% static 'users/images/Subline_Primary_01.png' %}">
+            <div class="registration">
+                <h1>Create an account</h1>
+                <form action="/users/create" method="POST">
+                    {% csrf_token %}
+                    <h4 class="first">First Name:</h4> 
+                    <input type="text" name="firstName">
+                    <br>
+                    <h4 class="last">Last Name:</h4>
+                    <input type="text" name="lastName">
+                    <br>
+                    <h4 class="email">Email:</h4>
+                    <input type="email" name="email">
+                    <br>
+                    <h4 class="password">Password:</h4>
+                    <input type="password" name="password">
+                    <br>
+                    <h4 class="cPassword">Confirm Password:</h4>
+                    <input type="password" name="confirm">
+                    <br>
+                    <input class="button" type="submit" name="register">
+                </form>
+            </div>
+        </div>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{restaurant.name}} Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class = "header">
+        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
+        <a href="/logout">Log out</a>
+    </div>
+
+    <div class = "container">
+        <div class = "queue">
+            <h2>Party Queue</h2>
+                <!-- Code goes here to grab 'user in Users' or 'party in Parties' -->
+                <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->
+                
+                <!-- This is an example layout to be formatted after database calling -->
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>Wait Time: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>Wait Time: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+
+                <div class = "userInfo">
+                <img src="{% static 'restaurants/images/29.jpg' %}">
+                    <div class = "userText">
+                        <p>Party Name: {{user.lastName}} </p></br>
+                        <p>Party Size: {{user.partySize}}</p></br>
+                        <p>Wait Time: {{user.createdAt}}</p></br>
+                    </div>
+                </div>
+                <!-- This is an example layout to be formatted after database calling -->
+        </div>
+
+        <div class = "tableDisplays">
+            <div class = "tableLayout">
+            <!-- <h2>Table Information (Current Operations)</h2> -->
+                <div class="tableInfo">
+                    <div class="Table"><p>Table:</p></div>
+                    <div class="currentTableInfo">
+                        <p>Party Name:</p>
+                        <p>Seated Time:</p>
+                        <button action="assign" name="assign">Assign Next</button>
+                        <button action="remove" name="remove">Checkout</button>
+                    </div>
+                </div>
+                <div class="tableInfo">
+                    <div class="Table"><p>Table:</p></div>
+                    <div class="currentTableInfo">
+                        <p>Party Name:</p>
+                        <p>Seated Time:</p>
+                        <button action="assign" name="assign">Assign Next</button>
+                        <button action="remove" name="remove">Checkout</button>
+                    </div>
+                </div>
+                <div class="tableInfo">
+                    <div class="Table"><p>Table:</p></div>
+                    <div class="currentTableInfo">
+                        <p>Party Name:</p>
+                        <p>Seated Time:</p>
+                        <button action="assign" name="assign">Assign Next</button>
+                        <button action="remove" name="remove">Checkout</button>
+                    </div>
+                </div>
+                <div class="tableInfo">
+                    <div class="Table"><p>Table:</p></div>
+                    <div class="currentTableInfo">
+                        <p>Party Name:</p>
+                        <p>Seated Time:</p>
+                        <button action="assign" name="assign">Assign Next</button>
+                        <button action="remove" name="remove">Checkout</button>
+                    </div>
+                </div>
+                <div class="tableInfo">
+                        <div class="Table"><p>Table:</p></div>
+                        <div class="currentTableInfo">
+                            <p>Party Name:</p>
+                            <p>Seated Time:</p>
+                            <button action="assign" name="assign">Assign Next</button>
+                            <button action="remove" name="remove">Checkout</button>
+                        </div>
+                    </div>
+                    <div class="tableInfo">
+                        <div class="Table"><p>Table:</p></div>
+                        <div class="currentTableInfo">
+                            <p>Party Name:</p>
+                            <p>Seated Time:</p>
+                            <button action="assign" name="assign">Assign Next</button>
+                            <button action="remove" name="remove">Checkout</button>
+                        </div>
+                    </div>
+                    <div class="tableInfo">
+                        <div class="Table"><p>Table:</p></div>
+                        <div class="currentTableInfo">
+                            <p>Party Name:</p>
+                            <p>Seated Time:</p>
+                            <button action="assign" name="assign">Assign Next</button>
+                            <button action="remove" name="remove">Checkout</button>
+                        </div>
+                    </div>
+                    <div class="tableInfo">
+                        <div class="Table"><p>Table:</p></div>
+                        <div class="currentTableInfo">
+                            <p>Party Name:</p>
+                            <p>Seated Time:</p>
+                            <button action="assign" name="assign">Assign Next</button>
+                            <button action="remove" name="remove">Checkout</button>
+                        </div>
+                    </div>
+                    <div class="tableInfo">
+                            <div class="Table"><p>Table:</p></div>
+                            <div class="currentTableInfo">
+                                <p>Party Name:</p>
+                                <p>Seated Time:</p>
+                                <button action="assign" name="assign">Assign Next</button>
+                                <button action="remove" name="remove">Checkout</button>
+                            </div>
+                        </div>
+            </div>
+            
+            
+            <div class = "tableQueue">
+                <h2>Table Queue (Next Three Parties Per Table Size)</h2>
+                <div class ="tableSplit">
+                    <h3>Party: 1+ <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class ="tableSplit">
+                    <h3>Party: 2 <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class ="tableSplit">
+                    <h3>Party: 3 - 4 <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class ="tableSplitEnd">
+                    <h3>Party: 5+ <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userInfoTable">
+                        <img src="{% static 'restaurants/images/29.jpg' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{user.lastName}}</p></br>
+                            <p>Wait Time: {{user.createdAt}}</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+    
+            </div>
+        </div>
+        
+    </div>
+
+
+  
+</body>
+</html>

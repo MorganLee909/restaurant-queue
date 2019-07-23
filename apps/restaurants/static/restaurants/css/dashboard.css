@@ -1,0 +1,181 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+}
+.header {
+    display: inline-block;
+    height: 100px;
+    width: 100%;
+}
+.header img {
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+}
+.header h1 {
+    display: inline-block;
+    line-height: 40px;
+    width: 60%;
+    text-align: center;
+    margin: 20px;
+}
+.header a {
+    display: inline-block;
+    line-height: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rbg (255,99,107);
+}
+.container {
+    width: 100%;
+    display: inline-block;
+}
+.queue {
+    padding-top: 10px;
+    border-right: 3px solid rgb(255,99,107);
+    width: 20%;
+    height: 1000px;
+    display: inline-block;
+}
+.queue h2 {
+    text-align: center;
+}
+.queue .userInfo {
+    margin-left: 15px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid rgb(0,27,45);
+    width: 85%;
+    padding: 8px;
+}
+.queue img {
+    height: 75px;
+    border-radius: 50%;
+    border: 2px solid rgb(255,99,107);
+}
+.queue .userText {
+    display: inline-block;
+    vertical-align: top;
+}
+.queue .userInfo p {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+}
+.tableDisplays {
+    width: 79%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tableQueue {
+    width: 99%;
+    height: 400px;
+    display: inline-block;
+    border-top: 3px solid rgb(255,99,107);
+    vertical-align: top;
+}
+
+.tableQueue h2 {
+    text-align: center;
+}
+
+.tableQueue .tableSplit {
+    margin-top: 15px;
+    width: 24.5%;
+    border-right: 3px solid rgb(255,99,107);
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 50px;
+}
+
+.tableQueue .tableSplit h3 {
+    text-align: center;
+}
+
+.tableQueue .tableSplitEnd h3 {
+    text-align: center;
+}
+
+.tableQueue .tableSplitEnd {
+    margin-top: 15px;
+    width: 24.5%;
+    display: inline-block;
+}
+
+.userInfoTable {
+    margin-left: 8px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid rgb(0,27,45);
+    width: 88%;
+    padding: 8px;
+}
+.userInfoTable img {
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid rgb(255,99,107);
+    display: inline-block;
+    vertical-align: top;
+}
+.userInfoTable .userText {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px;
+    padding: 0px;
+}
+.userInfoTable .userText p {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.userInfoTable .tableButtons {
+    align-content: center;
+    padding-left: 15px;
+}
+
+.tableLayout {
+    width: 99%;
+    height: 400px;
+    background-color: rgb(201,201,201);
+    vertical-align: top;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tableLayout h2 {
+    text-align: center;
+}
+
+.tableInfo {
+    border: 2px solid rgb(255,99,107);
+    width: 30%;
+    margin-top: 25px;
+    margin-left: 25px;
+    max-height: 90px;
+}
+
+.tableInfo .Table{
+    height: 75px;
+    width: 75px;
+    border: 3px solid rgb(0,27,45);
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+.tableInfo .currentTableInfo {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tableInfo .currentTableInfo button{
+    margin: 7px;
+}
+
