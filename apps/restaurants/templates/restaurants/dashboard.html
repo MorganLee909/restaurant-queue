@@ -62,7 +62,7 @@
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
                 <div class="tableInfo">
-                    <div class="Table"><p>Table:</p></div>
+                    <div class="Table"><p>{{table.name}}</br>Size:{{table.size}}</p></div>
                     <div class="currentTableInfo">
                         <p>Party Name:</p>
                         <p>Seated Time:</p>
