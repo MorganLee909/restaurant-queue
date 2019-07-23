@@ -230,8 +230,9 @@ def restaurantDashboard(request):
 
     waitTimes = []
     for party in parties:
-        difference = party.joined - datetime.datetime.now()
+        difference = party.joined.replace(tzinfo = None) - datetime.datetime.now()
         waitTime = difference.total_seconds()
+        waitTimes.append(waitTime)
 
     context = {
         "restaurant" : restaurant,
@@ -251,12 +252,19 @@ def addParty(request):
                 messages.error(request, value)
                 return redirect("/restaurants/dashboard")
 
+        ##################################remove
+        print("%" * 100)
+        print(request.POST["partyEmail"])
+        something = User.objects.get(email = request.POST["partyEmail"])
+        print(type(something))
+        print(request.session["restaurant"])
+
         newParty = LineMember(
-            member = User.objects.get(email = request.POST["partyEmail"]),
-            restaurant = Restaurant.objects.get(id = request.session["restaurant"]),
-            partySize = int(request.POST["partySize"])
+            partySize = request.POST["partySize"]
         )
 
         newParty.save()
+        newParty.member.add(User.objects.get(email = request.POST["partyEmail"]))
+        newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")
