@@ -70,6 +70,9 @@ class RestaurantManager(models.Manager):
         errors = {}
 
         #Email
+        print("%" * 100)
+        print(lineMemberData["partyEmail"])
+
         try:
             user = User.objects.get(email = lineMemberData["partyEmail"])
         except:
