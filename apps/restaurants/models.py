@@ -64,6 +64,11 @@ class RestaurantManager(models.Manager):
 
         return errors
 
+    def validateLineMember(self, lineMemberData):
+        errors = {}
+
+        return errors
+
 class Restaurant(models.Model):
     name = models.CharField(max_length = 255)
     email = models.CharField(max_length = 100)

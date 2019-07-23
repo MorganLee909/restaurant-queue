@@ -40,9 +40,6 @@ class DataManager(models.Manager):
 
         return errors
 
-
-
-
     def validateLogin(self, postData):
         errors = {}
         try: 
@@ -61,7 +58,7 @@ class User(models.Model):
     lastName = models.CharField(max_length = 50)
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
-    line = models.ForeignKey(LineMember, related_name='members', null=True)
+    line = models.ForeignKey(LineMember, related_name='member', null=True)
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()

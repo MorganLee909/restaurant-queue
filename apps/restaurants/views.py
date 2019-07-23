@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
-from .models import Restaurant, Table
-#Possibly need to import from users
+import datetime
+from .models import Restaurant, Table, LineMember
+from apps.users.models import User
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
@@ -212,8 +213,26 @@ def restaurantDashboard(request):
         return redirect("/restaurants")
 
     #Renders the main page for the restaurant
+    restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+    parties = LineMember.objects.filter(restaurant = restaurant)
+
+    waitTimes = []
+    for party in parties:
+        difference = party.joined - datetime.datetime.now()
+        waitTime = difference.total_seconds()
+
     context = {
-        "restaurant" : Restaurant.objects.get(id = request.session["restaurant"])
+        "restaurant" : restaurant,
+        "tables" : Table.objects.filter(restaurant = restaurant),
+        "parties" : parties,
+        "waitTimes" : waitTimes
     }
 
-    return render(request, "restaurants/dashboard.html", context)  ## add in context when complete
+    return render(request, "restaurants/dashboard.html", context)
+
+def addParty(request):
+    if request.method == "POST":
+        newParty = LineMember(
+            restaurant = Restaurant.objects.get(id = request.session["restaurant"]),
+            partySize = int(request.POST["partySize"])
+        )
