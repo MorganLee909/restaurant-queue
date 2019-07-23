@@ -28,6 +28,9 @@ class RestaurantManager(models.Manager):
         if not any(char in specChars for char in restaurantData["password"]):
             errors["passwordNums"] = "Password must contain at least one number and one extra character"
 
+        if restaurantData['password'] != restaurantData['confirm']:
+            errors['notPassword'] = 'Password does not match.'
+
         return errors
 
     def validateLogin(self, restaurantData):

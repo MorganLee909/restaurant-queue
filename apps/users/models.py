@@ -1,4 +1,5 @@
 from django.db import models
+from restaurants.models import LineMember
 import bcrypt
 
 class DataManager(models.Manager):
@@ -34,6 +35,9 @@ class DataManager(models.Manager):
         if not any(char in specChars for char in userData["password"]):
             errors["passwordNums"] = "Password must contain at least one number and one extra character"
 
+        if userData['password'] != userData['confirm']:
+            errors['notPassword'] = 'Password does not match.'
+
         return errors
 
 
@@ -57,6 +61,7 @@ class User(models.Model):
     lastName = models.CharField(max_length = 50)
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
+    line = models.ForeignKey(LineMember, related_name='members')
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()
