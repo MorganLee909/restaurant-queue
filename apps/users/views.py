@@ -38,6 +38,7 @@ def editUser(request, userId):
     #Get user
     #Render the user edit page
     if request.session['user'] != int(userId):
+        messages.error(request, 'You can not edit someone else\'s page.')
         return redirect('/users/dashboard')
 
     context = {
@@ -52,6 +53,7 @@ def updateUser(request, userId):
     #Update the user
     #Redirect to view user
     if request.session['user'] != int(userId):
+        messages.error(request, 'You can not edit someone else\'s page.')
         return redirect('/users/dashboard')
     if request.method == "POST":
 
@@ -77,6 +79,7 @@ def deleteUser(request, userId):
     #Delete user from database
     #Redirect to index
     if request.session['user'] != int(userId):
+        messages.error(request, 'You can not delete someone else\'s page.')
         return redirect('/users/dashboard')
     
     delUser = User.objects.get(id = userId)
@@ -111,6 +114,7 @@ def userDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     #Renders the main page for the user
     if 'user' not in request.session:
+        messages.error(request, 'You must be logged in.')
         return redirect('/')
     user = User.objects.get(id = request.session['user'])
     context = {
@@ -120,8 +124,9 @@ def userDashboard(request):
 
 def deleteLine(request, userId):
     if request.session['user'] != int(userId):
+        messages.error(request, "You do not have authorization to do that")
         return redirect('/users/dashboard')
 
-    delLine = LineMember.objects.get(members = userId)
+    delLine = LineMember.objects.get(member = userId)
     delLine.delete()
     return redirect('/users/dashboard')

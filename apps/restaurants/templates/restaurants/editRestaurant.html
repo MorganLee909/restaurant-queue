@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{restaurant.name}} Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'restaurants/css/edit.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class = "header">
+        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
+        <a href="/restaurants/dashboard">DASHBOARD</a> <span>|||</span>
+        <a href="/logout">LOGOUT</a>
+    </div>
+
+    <div class = "container">
+        <div class = "editBox">
+            <h2>Edit Restaurant Information</h2>
+                <form action="/restaurants/{{restaurant.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <p>
+                    <label>Restaurant Name:</label>
+                    <input type="text" name="name">
+                    </p>
+                    <p>
+                    <label>Restaurant Email:</label>
+                    <input type="email" name="email">
+                    </p>
+                    <input type="submit" value="Update Restaurant Info">
+                </form>
+        </div>
+
+        <div class = "editBox">
+            <h2>Add Table To Restaurant Floor</h2>
+                <form action="/restaurants/tables/create" method="POST">
+                {% csrf_token %}
+                <p>
+                    <label>Table Name:</label>
+                    <input type="text" name="tableName">
+                </p>  
+                <p>
+                    <label>Table Size:</label>
+                    <input type="text" name="tableSize">
+                </p>  
+                <input type="submit" value="Add Table To Floor">
+                </form>
+        </div>
+    </div>
+</body>
+</html>

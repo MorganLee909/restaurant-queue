@@ -1,0 +1,67 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Saira', sans-serif;
+    color: rgb(0,27,45);
+}
+.header {
+    display: inline-block;
+    height: 100px;
+    width: 100%;
+}
+.header img {
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+}
+.header h1 {
+    display: inline-block;
+    line-height: 40px;
+    width: 80%;
+    text-align: center;
+    margin: 20px;
+}
+.header a {
+    display: inline-block;
+    line-height: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rbg (255,99,107);
+}
+
+span {
+    color: rgb(255,99,107);
+    font-weight: bold;
+}
+.container {
+    width: 80%;
+    display: inline-block;
+    align-content: center;
+}
+
+.editBox {
+    width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    border: 2px solid rgb(0,27,45);
+}
+
+form { 
+    display: table;
+    border: 1 px solid rgb(0,27,45);
+}
+
+.editBox form p {
+    display: table-row;
+}
+
+.editBox label {
+    display: table-cell;
+    margin: 10px auto;
+    
+}
+
+.editBox input {
+    display: table-cell;
+    margin: 10px auto;
+}
