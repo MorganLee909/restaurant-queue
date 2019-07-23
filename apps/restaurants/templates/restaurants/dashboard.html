@@ -12,7 +12,8 @@
 <body>
     <div class = "header">
         <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
-        <a href="/logout">Log out</a>
+        <a href="/restaurants/{{restaurant.id}}/edit">EDIT RESTAURANT</a> <span>|||</span>
+        <a href="/logout">LOGOUT</a>
     </div>
 
     <div class = "container">
@@ -23,11 +24,12 @@
                 
                 <!-- This is an example layout to be formatted after database calling -->
                 <div class = "userInfo">
-                <img src="{% static 'restaurants/images/29.jpg' %}">
                     <div class = "userText">
-                        <p>Party Name: {{user.lastName}} </p></br>
-                        <p>Party Size: {{user.partySize}}</p></br>
-                        <p>Wait Time: {{user.createdAt}}</p></br>
+                        <form action="/restaurants/addParty" method="POST">
+                            <p>Party Email: <input type="email" name="partyEmail" style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
+                            <p>Party Size: <input type="text" name="partySize" style="font-size:8pt; width: 50px; height: 1em;"></p></br>
+                            <input type="submit" value="Add Party to Queue">
+                        </form>
                     </div>
                 </div>
 
