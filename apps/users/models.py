@@ -72,6 +72,11 @@ class DataManager(models.Manager):
 
         return errors
 
+class LineMember(models.Model):
+    joined = models.DateTimeField(auto_now_add = True)
+    partySize = models.IntegerField()
+    objects = DataManager()
+
 class User(models.Model):
     firstName = models.CharField(max_length = 50)
     lastName = models.CharField(max_length = 50)
@@ -81,9 +86,3 @@ class User(models.Model):
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()
-
-class LineMember(models.Model):
-    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
-    joined = models.DateTimeField(auto_now_add = True)
-    partySize = models.IntegerField()
-    objects = RestaurantManager()

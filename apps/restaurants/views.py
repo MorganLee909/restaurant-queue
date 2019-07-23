@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 import datetime
-from .models import Restaurant, Table, LineMember
-from apps.users.models import User
+from .models import Restaurant, Table
+from apps.users.models import LineMember, User
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
