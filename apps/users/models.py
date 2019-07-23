@@ -1,5 +1,4 @@
 from django.db import models
-from apps.restaurants.models import LineMember
 import bcrypt
 
 class DataManager(models.Manager):
@@ -55,6 +54,24 @@ class DataManager(models.Manager):
 
         return errors
 
+    def validateLineMember(self, lineMemberData):
+        errors = {}
+
+        #Email
+        try:
+            user = User.objects.get(email = lineMemberData["partyEmail"])
+        except:
+            errors["noUser"] = f"User does not exist for {lineMemberData['partyEmail']}"
+            return errors
+
+        #Party size
+        try:
+            int(lineMemberData["partySize"])
+        except ValueError:
+            errors["notNumber"] = "Must enter an integer"
+
+        return errors
+
 class User(models.Model):
     firstName = models.CharField(max_length = 50)
     lastName = models.CharField(max_length = 50)
@@ -64,3 +81,9 @@ class User(models.Model):
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()
+
+class LineMember(models.Model):
+    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
+    joined = models.DateTimeField(auto_now_add = True)
+    partySize = models.IntegerField()
+    objects = RestaurantManager()

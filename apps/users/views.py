@@ -54,7 +54,7 @@ def updateUser(request, userId):
     #Redirect to view user
     if request.session['user'] != int(userId):
         messages.error(request, 'You can not edit someone else\'s page.')
-        return redirect('/users/dashboard')
+        return redirect(f'/users/dashboard')
     if request.method == "POST":
 
         errors = User.objects.validateUser(request.POST)
@@ -62,7 +62,7 @@ def updateUser(request, userId):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            return redirect(f'/users/{ userId }/update')
+            return redirect(f'/users/{ userId }/edit')
 
         else:
             user = User.objects.get(id = userId)
