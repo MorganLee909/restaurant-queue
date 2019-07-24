@@ -38,7 +38,7 @@ def editUser(request, userId):
     #Get user
     #Render the user edit page
     if request.session['user'] != int(userId):
-        messages.error(request, 'You can not edit someone else\'s page.')
+        messages.error(request, 'You cannot edit someone else\'s page.')
         return redirect('/users/dashboard')
 
     context = {
@@ -54,7 +54,7 @@ def updateUser(request, userId):
     #Redirect to view user
     if request.session['user'] != int(userId):
         messages.error(request, 'You can not edit someone else\'s page.')
-        return redirect('/users/dashboard')
+        return redirect(f'/users/dashboard')
     if request.method == "POST":
 
         errors = User.objects.validateUser(request.POST)
@@ -62,7 +62,7 @@ def updateUser(request, userId):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            return redirect(f'/users/{ userId }/update')
+            return redirect(f'/users/{ userId }/edit')
 
         else:
             user = User.objects.get(id = userId)
@@ -102,7 +102,6 @@ def login(request):
         request.session['user'] = user.id
         request.session['firstName'] = user.firstName
         return redirect('/users/dashboard')
-
 
 def logout(request):
     #Remove user from session

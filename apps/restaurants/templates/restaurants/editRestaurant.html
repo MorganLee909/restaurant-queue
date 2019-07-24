@@ -17,6 +17,16 @@
     </div>
 
     <div class = "container">
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
         <div class = "editBox">
             <h2>Edit Restaurant Information</h2>
                 <form action="/restaurants/{{restaurant.id}}/update" method="POST">
@@ -29,9 +39,19 @@
                     <label>Restaurant Email:</label>
                     <input type="email" name="email">
                     </p>
+                    <p>
+                    <label>New Password:</label>
+                    <input type="password" name="password">
+                    </p>
+                    <p>
+                    <label>Confirm Password:</label>
+                    <input type="password" name="passwordConfirm">
+                    </p>
                     <input type="submit" value="Update Restaurant Info">
                 </form>
         </div>
+
+    
 
         <div class = "editBox">
             <h2>Add Table To Restaurant Floor</h2>
@@ -48,6 +68,20 @@
                 <input type="submit" value="Add Table To Floor">
                 </form>
         </div>
+
+        <div class = "editBox">
+            <h2>Current Tables on Floor:</h2>
+                {% for table in tables%}
+                <p>One (1) Seat: </p>
+                <p>Two (2) Seats: </p>
+                <p>Three (3) or Four (4) Seats: </p>
+                <p>Five(5)+ Seats: </p>
+                {% endfor %}
+                
+        </div>
+
+
+
     </div>
 </body>
 </html>

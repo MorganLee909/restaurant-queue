@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 import datetime
-from .models import Restaurant, Table, LineMember
-from apps.users.models import User
+from .models import Restaurant, Table
+from apps.users.models import LineMember, User
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
@@ -93,16 +93,17 @@ def updateRestaurant(request, restaurantId):
     if request.method == "POST":
 
         #Validate all data
-        errors = Restaurant.objects.validateRestaurant()
+        errors = Restaurant.objects.validateRestaurant(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
 
         #Update the data
-        restaurant.name = request.POST["name"] or restaurant.name
-        restaurant.email = request.POST["email"] or restaurant.email
-        restaurant.password= bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()) or restaurant.password
-
+        restaurantUpdate = Restaurant.objects.get(id=restaurantId)
+        restaurantUpdate.name = request.POST["name"] or restaurant.name
+        restaurantUpdate.email = request.POST["email"] or restaurant.email
+        restaurantUpdate.password = bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()) or restaurant.password
+        restaurantUpdate.save()
     #Redirect to restaurant dashboard
     return redirect("/restaurants/dashboard")
 
@@ -229,8 +230,9 @@ def restaurantDashboard(request):
 
     waitTimes = []
     for party in parties:
-        difference = party.joined - datetime.datetime.now()
+        difference = party.joined.replace(tzinfo = None) - datetime.datetime.now()
         waitTime = difference.total_seconds()
+        waitTimes.append(waitTime)
 
     context = {
         "restaurant" : restaurant,
@@ -251,11 +253,12 @@ def addParty(request):
                 return redirect("/restaurants/dashboard")
 
         newParty = LineMember(
-            member = User.objects.get(email = request.POST["partyEmail"]),
-            restaurant = Restaurant.objects.get(id = request.session["restaurant"]),
-            partySize = int(request.POST["partySize"])
+            partySize = request.POST["partySize"],
+            member = User.objects.get(email = request.POST["partyEmail"])
         )
 
         newParty.save()
+        # newParty.member.add(User.objects.get(email = request.POST["partyEmail"]))
+        newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")

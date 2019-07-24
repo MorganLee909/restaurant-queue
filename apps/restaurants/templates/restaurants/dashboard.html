@@ -16,8 +16,15 @@
         <a href="/logout">LOGOUT</a>
     </div>
 
-    
-    <div class = "container"> 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class = "container">
 
 <!--------------------- THIS SECTION IS FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD -------------------------------->
         <div class = "queue"> <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->
@@ -62,7 +69,7 @@
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
                 <div class="tableInfo">
-                    <div class="Table"><p>Table:</p></div>
+                    <div class="Table"><p>{{table.name}}</br>Size:{{table.size}}</p></div>
                     <div class="currentTableInfo">
                         <p>Party Name:</p>
                         <p>Seated Time:</p>

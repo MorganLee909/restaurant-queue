@@ -1,5 +1,6 @@
 from django.db import models
 import bcrypt
+from apps.users.models import User, LineMember
 
 class RestaurantManager(models.Manager):
     def validateRestaurant(self, restaurantData):
@@ -66,31 +67,11 @@ class RestaurantManager(models.Manager):
 
         return errors
 
-    def validateLineMember(self, lineMemberData):
-        errors = {}
-
-        #Email
-        print("%" * 100)
-        print(lineMemberData["partyEmail"])
-
-        try:
-            user = User.objects.get(email = lineMemberData["partyEmail"])
-        except:
-            errors["noUser"] = f"User does not exist for {lineMemberData['partyEmail']}"
-            return errors
-
-        #Party size
-        try:
-            int(lineMemberData["partySize"])
-        except ValueError:
-            errors["notNumber"] = "Must enter an integer"
-
-        return errors
-
 class Restaurant(models.Model):
     name = models.CharField(max_length = 255)
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
+    line = models.ManyToManyField(LineMember, related_name = "restaurant")
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()
@@ -101,10 +82,4 @@ class Table(models.Model):
     restaurant = models.ForeignKey(Restaurant, related_name = "tables")
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
-    objects = RestaurantManager()
-
-class LineMember(models.Model):
-    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
-    joined = models.DateTimeField(auto_now_add = True)
-    partySize = models.IntegerField()
     objects = RestaurantManager()
