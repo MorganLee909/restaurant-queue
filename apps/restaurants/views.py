@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 import datetime
-from .models import Restaurant, Table, LineMember
+from .models import Restaurant, Table, Linemember
 from apps.users.models import User
 
 def newRestaurant(request):

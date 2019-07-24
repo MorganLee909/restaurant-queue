@@ -83,10 +83,10 @@
             <div class = "tableQueue">   
                 <h2>Table Queue (Next Three Parties Per Table Size)</h2>
                 
-                
+                {% for party in parties %}
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of one -->
                     <h3>Party: 1+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    {% for party in parties1 %}
+                    {% if party.partySize == 1%}
                     <div class = "userInfoTable">
                         <img src="{% static 'restaurants/images/userIcon.png' %}">
                         <div class = "userText">
@@ -99,14 +99,13 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
                 </div>
 
 
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of two -->
                     <h3>Party: 2 <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties2 %}
+                    {% if party.partySize == 2%}
                     <div class = "userInfoTable">
                         <img src="{% static 'restaurants/images/29.jpg' %}">
                         <div class = "userText">
@@ -119,14 +118,13 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
                 </div>
 
 
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of three or four -->
                     <h3>Party: 3 - 4 <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties34 %}
+                    {% if party.partysize == 3 or party.partysize == 4 %}
                     <div class = "userInfoTable">
                         <img src="{% static 'restaurants/images/29.jpg' %}">
                         <div class = "userText">
@@ -139,14 +137,13 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
                 </div>
 
 
                 <div class ="tableSplitEnd"> <!-- This iterates through users with a party size of five or greater -->
                     <h3>Party: 5+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties56 %}
+                    {% if party.partySize > 4%}
                     <div class = "userInfoTable">
                         <img src="{% static 'restaurants/images/29.jpg' %}">
                         <div class = "userText">
@@ -159,7 +156,8 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div> 
 <!-------------------------- THIS ENDS THE SECTION FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------->        
