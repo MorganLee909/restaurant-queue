@@ -57,7 +57,7 @@ def updateUser(request, userId):
         return redirect(f'/users/dashboard')
     if request.method == "POST":
 
-        errors = User.objects.validateUser(request.POST)
+        errors = User.objects.validateUserEdit(request.POST)
 
         if len(errors) > 0:
             for key, value in errors.items():

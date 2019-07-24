@@ -93,10 +93,11 @@ def updateRestaurant(request, restaurantId):
     if request.method == "POST":
 
         #Validate all data
-        errors = Restaurant.objects.validateRestaurant(request.POST)
+        errors = Restaurant.objects.validateRestaurantEdit(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
+            return redirect(f'/restaurants/{ restaurantId }/edit')
 
         #Update the data
         restaurantUpdate = Restaurant.objects.get(id=restaurantId)
