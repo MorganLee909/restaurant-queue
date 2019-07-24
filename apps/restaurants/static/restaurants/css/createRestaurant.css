@@ -3,7 +3,7 @@
     margin: 0px;
     font-family: 'Saira', sans-serif;
     color: rgb(0,27,45);
-    text-align: center;    
+    text-align: center; 
 }
 
 html, body{
@@ -11,9 +11,7 @@ html, body{
 }
 
 .container{
-    /* background-image: linear-gradient(to bottom, #004680, #256791, #54889f, #87a6ae, #bcc4c4); */
     background: url('../images/createUser.jpg') no-repeat;
-    /* height: 821px; */
     height: 100%;
     width: auto;
     background-size: cover;
@@ -30,20 +28,18 @@ h4{
     margin-top: 40px;
 }
 
-.password{
-    margin-right: 62px;
+.name{
+    margin-right: 88px;
+
 }
 
 .email{
-    margin-right: 94px;
+    margin-right: 91px;
+
 }
 
-.last{
-    margin-right: 56px;
-}
-
-.first{
-    margin-right: 55px;
+.password{
+    margin-right: 60px;
 }
 
 .button{

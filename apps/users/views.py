@@ -124,8 +124,10 @@ def userDashboard(request):
         return redirect('/')
 
     user = User.objects.get(id = request.session['user'])
+    users = User.objects.all()
     context = {
-        'user' : user
+        'user' : user,
+        'users': users
     }
 
     #Renders the main page for the user
