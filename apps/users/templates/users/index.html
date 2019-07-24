@@ -24,7 +24,7 @@
             <img class="logo" src="{% static 'users/images/Subline_logo.png' %}">
             <div class="login">
                 <h1>Login</h1>
-                <form action="users/login" method="POST">
+                <form action="/users/login" method="POST">
                     {% csrf_token %}
                     <h4 class="email">Email:</h4>
                     <input class="emailBox" type="email" name="email"> 

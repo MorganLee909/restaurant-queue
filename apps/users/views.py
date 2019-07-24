@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
+from apps.restaurants.models import Restaurant
 import bcrypt
 import datetime
 
@@ -119,21 +120,28 @@ def userDashboard(request):
 
     #Renders the main page for the user
     currentUser = User.objects.get(id = request.session['user'])
-    users = User.objects.filter(restaurant = currentUser.line.restaurant)
-
-    waitTime = (user.line.joined.replace(tzinfo = None) - datetime.datetime.now()).total_seconds()
-
-    position = 1
-    for user in users:
-        if user.line.joined < currentUser.line.joined:
-            position += 1
 
     context = {
-        "user" : currentUser,
-        "users" : users,
-        "waitTime" : waitTime,
-        "position" : position
+        "user" : currentUser
     }
+    
+    if hasattr(currentUser, "line"):
+        userLine = LineMember.objects.get(member = currentUser)
+        userRestaurant = Restaurant.objects.get(line = userLine)
+        users = LineMember.objects.filter(restaurant = userRestaurant)
+
+        waitTime = (datetime.datetime.now() - currentUser.line.joined.replace(tzinfo = None)).total_seconds()
+        waitTime = round(waitTime // 60)
+        
+        position = 1
+        for user in users:
+            if user.joined < currentUser.line.joined:
+                position += 1
+
+        context["members"] = users
+        context["waitTime"] = waitTime
+        context["position"] = position
+
     return render(request, 'users/dashboard.html', context)
 
 def deleteLine(request, userId):

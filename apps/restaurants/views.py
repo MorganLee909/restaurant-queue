@@ -258,7 +258,6 @@ def addParty(request):
         )
 
         newParty.save()
-        # newParty.member.add(User.objects.get(email = request.POST["partyEmail"]))
         newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")
