@@ -117,8 +117,10 @@ def userDashboard(request):
         messages.error(request, 'You must be logged in.')
         return redirect('/')
     user = User.objects.get(id = request.session['user'])
+    users = User.objects.all()
     context = {
-        'user' : user
+        'user' : user,
+        'users': users
     }
     return render(request, 'users/dashboard.html', context)
 

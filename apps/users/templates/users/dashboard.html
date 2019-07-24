@@ -13,16 +13,38 @@
 
 
     <body>
-
-        <div class="userInfo">
-            <h1>HI</h1>
-            <h3>You entered: {{user.createdAt}}</h3>
-            <h3>Your position: {{PLACEHOLDER}}</h3>
-            <a href="/deleteLine">Leave</a>
-            <br>
+        <div class="header">
+            <a href="/{{user.id}}/edit">Edit your account</a>
             <a href="/logout">Logout</a>
         </div>
-        <a href="/{{user.id}}/edit">Edit your account</a>
+        <div class="container">
+
+            <div class="queue">
+                <h3>Queue</h3>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>View</th>
+                    </tr>
+                    {% for user in users %}
+                    
+                    <tr>
+                        <td>{{user.firstName}}</td>
+                        <td><a href="{{PLACEHOLDER}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+            </div>
+            <div class="userInfo">
+                <h1>HI {{user.firstName}}</h1>
+                <h3>You entered: {{user.line.joined}}</h3>
+                <h3>Your position: {{PLACEHOLDER}}</h3>
+                <a href="/deleteLine">Leave</a>
+                <br>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
         
     </body>
 </html>
