@@ -70,6 +70,10 @@ class DataManager(models.Manager):
         except ValueError:
             errors["notNumber"] = "Must enter an integer"
 
+        #Uniqueness
+        if hasattr(user, "line"):
+            errors["inLine"] = "User is already a line"
+
         return errors
 
 class User(models.Model):
@@ -77,13 +81,12 @@ class User(models.Model):
     lastName = models.CharField(max_length = 50)
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
-    line = models.ForeignKey(LineMember, related_name='member', null=True)
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = DataManager()
 
 class LineMember(models.Model):
-    restaurant = models.ManyToManyField(Restaurant, related_name = "line")
     joined = models.DateTimeField(auto_now_add = True)
     partySize = models.IntegerField()
-    objects = RestaurantManager()
+    member = models.OneToOneField(User, related_name = "line", null = True)
+    objects = DataManager()

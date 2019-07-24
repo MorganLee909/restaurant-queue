@@ -38,7 +38,7 @@ def editUser(request, userId):
     #Get user
     #Render the user edit page
     if request.session['user'] != int(userId):
-        messages.error(request, 'You can not edit someone else\'s page.')
+        messages.error(request, 'You cannot edit someone else\'s page.')
         return redirect('/users/dashboard')
 
     context = {
@@ -102,7 +102,6 @@ def login(request):
         request.session['user'] = user.id
         request.session['firstName'] = user.firstName
         return redirect('/users/dashboard')
-
 
 def logout(request):
     #Remove user from session
