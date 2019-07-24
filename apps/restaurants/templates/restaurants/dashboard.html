@@ -16,8 +16,15 @@
         <a href="/logout">LOGOUT</a>
     </div>
 
-    
-    <div class = "container"> 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class = "container">
 
 <!--------------------- THIS SECTION IS FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD -------------------------------->
         <div class = "queue"> <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->

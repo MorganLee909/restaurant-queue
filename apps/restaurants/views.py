@@ -252,19 +252,13 @@ def addParty(request):
                 messages.error(request, value)
                 return redirect("/restaurants/dashboard")
 
-        ##################################remove
-        print("%" * 100)
-        print(request.POST["partyEmail"])
-        something = User.objects.get(email = request.POST["partyEmail"])
-        print(type(something))
-        print(request.session["restaurant"])
-
         newParty = LineMember(
-            partySize = request.POST["partySize"]
+            partySize = request.POST["partySize"],
+            member = User.objects.get(email = request.POST["partyEmail"])
         )
 
         newParty.save()
-        newParty.member.add(User.objects.get(email = request.POST["partyEmail"]))
+        # newParty.member.add(User.objects.get(email = request.POST["partyEmail"]))
         newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")

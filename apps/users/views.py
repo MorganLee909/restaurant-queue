@@ -103,7 +103,6 @@ def login(request):
         request.session['firstName'] = user.firstName
         return redirect('/users/dashboard')
 
-
 def logout(request):
     #Remove user from session
     #Return to index
