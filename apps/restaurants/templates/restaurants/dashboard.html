@@ -8,6 +8,24 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+            $('.addToLine').on(submit, function(event){
+                $.ajax({
+                    data: {
+                        member : $('#partyEmail').val(),
+                        partySize : $('#partySize').val()
+                    },
+                    type : 'POST',
+                    url : '/restaurants/addParty'
+                })
+                event.preventDefault();
+            });
+
+        });
+    </script>
 </head>
 <body>
     <div class = "header">
@@ -34,9 +52,9 @@
                     <div class = "userText">
                         <form action="/restaurants/addParty" method="POST">
                             {% csrf_token %}
-                            <p>Party Email: <input type="email" name="partyEmail" style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
-                            <p>Party Size: <input type="text" name="partySize" style="font-size:8pt; width: 50px; height: 1em;"></p></br>
-                            <input type="submit" value="Add Party to Queue">
+                            <p>Party Email: <input type="email" name="partyEmail" id='partyEmail' style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
+                            <p>Party Size: <input type="text" name="partySize" id='partySize' style="font-size:8pt; width: 50px; height: 1em;"></p></br>
+                            <input class='addToLine'type="submit" value="Add Party to Queue">
                         </form>
                     </div>
                 </div>
