@@ -95,6 +95,7 @@ span {
     display: inline-block;
     vertical-align: top;
     padding-bottom: 50px;
+    min-height: 250px;
 }
 
 .tableQueue .tableSplit h3 {
