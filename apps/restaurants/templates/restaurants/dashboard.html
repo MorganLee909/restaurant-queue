@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,90 +8,79 @@
     {% load static %}
     <title>{{restaurant.name}} Queue Dash</title>
     <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            
-            $('.addToLine').on(submit, function(event){
-                $.ajax({
-                    data: {
-                        member : $('#partyEmail').val(),
-                        partySize : $('#partySize').val()
-                    },
-                    type : 'POST',
-                    url : '/restaurants/addParty'
-                })
-                event.preventDefault();
-            });
-
-        });
-    </script>
+    <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class = "header">
-        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
+    <div class="header">
+        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard
+        </h1>
         <a href="/restaurants/{{restaurant.id}}/edit">EDIT RESTAURANT</a> <span>|||</span>
         <a href="/logout">LOGOUT</a>
     </div>
 
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
             {% endfor %}
-        </ul>
+    </ul>
     {% endif %}
 
-    <div class = "container">
+    <div class="container">
 
-<!--------------------- THIS SECTION IS FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD -------------------------------->
-        <div class = "queue"> <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->
+        <!--------------------- THIS SECTION IS FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD -------------------------------->
+        <div class="queue">
+            <!-- This is an updated display that adds/removes users as they leave the queue or are sat at a table -->
             <h2>Party Queue</h2>
-                <!-- This form is used to add user's to the queue, it should always remain at the top of the queue -->
-                <div class = "userInfo">
-                    <div class = "userText">
-                        <form action="/restaurants/addParty" method="POST">
-                            {% csrf_token %}
-                            <p>Party Email: <input type="email" name="partyEmail" id='partyEmail' style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
-                            <p>Party Size: <input type="text" name="partySize" id='partySize' style="font-size:8pt; width: 50px; height: 1em;"></p></br>
-                            <input class='addToLine'type="submit" value="Add Party to Queue">
-                        </form>
-                    </div>
+            <!-- This form is used to add user's to the queue, it should always remain at the top of the queue -->
+            <div class="userInfo">
+                <div class="userText">
+                    <form class='addToLine' action="/restaurants/addParty" method="POST">
+                        {% csrf_token %}
+                        <p>Party Email: <input type="email" name="partyEmail" id='partyEmail'
+                                style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
+                        <p>Party Size: <input type="text" name="partySize" id='partySize'
+                                style="font-size:8pt; width: 50px; height: 1em;"></p></br>
+                        <input type="submit" value="Add Party to Queue">
+                    </form>
                 </div>
-                <!-- This form is used to add user's to the queue, it should always remain at the top of the queue -->
-                
+            </div>
+            <!-- This form is used to add user's to the queue, it should always remain at the top of the queue -->
 
-                <!-- This is the iterative Django DB Call to display all users currently in the queue -->
-                {% for party in parties %}
-                <div class = "userInfo">
+
+            <!-- This is the iterative Django DB Call to display all users currently in the queue -->
+            {% for party in parties %}
+            <div class="userInfo">
                 <img src="{% static 'restaurants/images/userIcon.png' %}">
-                    <div class = "userText">
-                        <p>Party Name: {{party.member.lastName}} </p></br>
-                        <p>Party Size: {{party.partySize}}</p></br>
-                        <p>Wait Time: {{party.waitTime}} min</p></br>
-                    </div>
+                <div class="userText">
+                    <p>Party Name: {{party.member.lastName}} </p></br>
+                    <p>Party Size: {{party.partySize}}</p></br>
+                    <p>Wait Time: {{party.waitTime}} min</p></br>
                 </div>
-                {% endfor %}
-                {% for party in partiesWait%}
-                    <h1>Anything</h1>
-                {% endfor %}
-                <!-- This is the iterative Django DB Call to display all users currently in the queue -->
-        </div> 
-<!------------------ THIS ENDS THE SECTION FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD --------------------->
+            </div>
+            {% endfor %}
+            {% for party in partiesWait%}
+            <h1>Anything</h1>
+            {% endfor %}
+            <!-- This is the iterative Django DB Call to display all users currently in the queue -->
+        </div>
+        <!------------------ THIS ENDS THE SECTION FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD --------------------->
 
 
 
 
-<!------------------ THIS SECTION IS FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON THE TOP CENTER OF THE DASHBOARD ----------------->
-        <div class = "tableDisplays"> 
-            <div class = "tableLayout">  
+        <!------------------ THIS SECTION IS FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON THE TOP CENTER OF THE DASHBOARD ----------------->
+        <div class="tableDisplays">
+            <div class="tableLayout">
                 <h2>Table Information (Current Operations)</h2>
-                
+
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
                 <div class="tableInfo">
-                    <div class="Table"><p>{{table.name}}</br>Size:{{table.size}}</p></div>
+                    <div class="Table">
+                        <p>{{table.name}}</br>Size:{{table.size}}</p>
+                    </div>
                     <div class="currentTableInfo">
                         <p>Party Name:</p>
                         <p>Seated Time:</p>
@@ -100,107 +90,112 @@
                 </div>
                 {% endfor %}
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
-    
-            </div>  
-<!--------------------- THIS ENDS THE SECTION FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON TOP OF THE DASHBOARD ----------->
-            
+
+            </div>
+            <!--------------------- THIS ENDS THE SECTION FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON TOP OF THE DASHBOARD ----------->
 
 
 
-<!--------------------- THIS SECTION IS FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------------>
-            <div class = "tableQueue">   
+
+            <!--------------------- THIS SECTION IS FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------------>
+            <div class="tableQueue">
                 <h2>Table Queue (Next Three Parties Per Table Size)</h2>
-                
-                
-                <div class ="tableSplit"> <!-- This iterates through users with a party size of one -->
+
+
+                <div class="tableSplit">
+                    <!-- This iterates through users with a party size of one -->
                     <h3>Party: 1+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    {% for party in parties %}   
-                        {% if party.partySize == 1%}
-                        <div class = "userInfoTable">
-                            <img src="{% static 'restaurants/images/userIcon.png' %}">
-                            <div class = "userText">
-                                <p>Party Name: {{party.member.lastName}}</p></br>
-                                <p>Wait Time: {{party.waitTime}} min</p></br>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button action="remove" name="remove">Remove</button>
-                                </div>
+                    {% for party in parties %}
+                    {% if party.partySize == 1%}
+                    <div class="userInfoTable">
+                        <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class="userText">
+                            <p>Party Name: {{party.member.lastName}}</p></br>
+                            <p>Wait Time: {{party.waitTime}} min</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
                             </div>
                         </div>
-                        {% endif %}
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
 
 
-                <div class ="tableSplit"> <!-- This iterates through users with a party size of two -->
+                <div class="tableSplit">
+                    <!-- This iterates through users with a party size of two -->
                     <h3>Party: 2 <button action="assign" name="assign">Assign Next Party</button></h3>
                     {% for party in parties %}
-                        {% if party.partySize == 2%}
-                        <div class = "userInfoTable">
-                            <img src="{% static 'restaurants/images/userIcon.png' %}">
-                            <div class = "userText">
-                                <p>Party Name: {{party.member.lastName}}</p></br>
-                                <p>Wait Time: {{party.waitTime}} min</p></br>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button action="remove" name="remove">Remove</button>
-                                </div>
+                    {% if party.partySize == 2%}
+                    <div class="userInfoTable">
+                        <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class="userText">
+                            <p>Party Name: {{party.member.lastName}}</p></br>
+                            <p>Wait Time: {{party.waitTime}} min</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
                             </div>
                         </div>
-                        {% endif %}
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
 
 
-                <div class ="tableSplit"> <!-- This iterates through users with a party size of three or four -->
+                <div class="tableSplit">
+                    <!-- This iterates through users with a party size of three or four -->
                     <h3>Party: 3 - 4 <button action="assign" name="assign">Assign Next Party</button></h3>
-                    {% for party in parties %}    
-                        {% if party.partySize == 4 or party.partySize == 3%}
-                        <div class = "userInfoTable">
-                            <img src="{% static 'restaurants/images/userIcon.png' %}">
-                            <div class = "userText">
-                                <p>Party Name: {{party.member.lastName}}</p></br>
-                                <p>Wait Time: {{party.waitTime}} min</p></br>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button action="remove" name="remove">Remove</button>
-                                </div>
+                    {% for party in parties %}
+                    {% if party.partySize == 4 or party.partySize == 3%}
+                    <div class="userInfoTable">
+                        <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class="userText">
+                            <p>Party Name: {{party.member.lastName}}</p></br>
+                            <p>Wait Time: {{party.waitTime}} min</p></br>
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
                             </div>
                         </div>
-                        {% endif %}
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
 
 
-                <div class ="tableSplitEnd"> <!-- This iterates through users with a party size of five or greater -->
+                <div class="tableSplitEnd">
+                    <!-- This iterates through users with a party size of five or greater -->
                     <h3>Party: 5+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    {% for party in parties %}        
-                        {% if party.partySize > 4%}
-                            <div class = "userInfoTable">
-                                <img src="{% static 'restaurants/images/userIcon.png' %}">
-                                <div class = "userText">
-                                    <p>Party Name: {{party.member.lastName}}</p></br>
-                                    
-                                    <p>Wait Time: {{party.waitTime}} min</p></br>
-                                    
-                                    <div class="tableButtons">
-                                        <button action="notify" name="notify">Notify</button>
-                                        <button action="assign" name="assign">Assign</button>
-                                        <button action="remove" name="remove">Remove</button>
-                                    </div>
-                                </div>
+                    {% for party in parties %}
+                    {% if party.partySize > 4%}
+                    <div class="userInfoTable">
+                        <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class="userText">
+                            <p>Party Name: {{party.member.lastName}}</p></br>
+
+                            <p>Wait Time: {{party.waitTime}} min</p></br>
+
+                            <div class="tableButtons">
+                                <button action="notify" name="notify">Notify</button>
+                                <button action="assign" name="assign">Assign</button>
+                                <button action="remove" name="remove">Remove</button>
                             </div>
-                        {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
-            </div> 
-<!-------------------------- THIS ENDS THE SECTION FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------->        
-        
-        
+            </div>
+            <!-------------------------- THIS ENDS THE SECTION FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------->
+
+
         </div> <!-- two table-div-->
     </div><!-- container DIV-->
 </body>
+
 </html>

@@ -21,6 +21,7 @@ def createUser(request):
         return redirect('/users/new')
 
     #POST
+    print(request.POST)
     if request.method == 'POST':
 
         #Create new user
