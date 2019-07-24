@@ -7,11 +7,16 @@
 
 }
 
+html, body{
+    height: 100%;
+}
+
 .container{
     background: url('../images/dashboard.jpg') no-repeat;
     background-size: cover;
     width: auto;
-    height: 900px;
+    height: 100%;
+    
 }
 
 .queue{
@@ -31,4 +36,18 @@
     display: inline-block;
     background-color: whitesmoke;
 
+}
+
+.edit{
+    color: white;
+    top: 10px;
+    right: 120px;
+    position: fixed;
+}
+
+.logout{
+    color: white;
+    top: 10px;
+    right: 50px;
+    position: fixed;
 }
