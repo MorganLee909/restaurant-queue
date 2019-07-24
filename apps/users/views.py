@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
+import datetime
 
 def registerAndLogin(request):
     #Display register/login page
@@ -111,13 +112,27 @@ def logout(request):
 
 def userDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
-    #Renders the main page for the user
+    
     if 'user' not in request.session:
         messages.error(request, 'You must be logged in.')
         return redirect('/')
-    user = User.objects.get(id = request.session['user'])
+
+    #Renders the main page for the user
+    currentUser = User.objects.get(id = request.session['user'])
+    users = User.objects.filter(restaurant = currentUser.line.restaurant)
+
+    waitTime = (user.line.joined.replace(tzinfo = None) - datetime.datetime.now()).total_seconds()
+
+    position = 1
+    for user in users:
+        if user.line.joined < currentUser.line.joined:
+            position += 1
+
     context = {
-        'user' : user
+        "user" : currentUser,
+        "users" : users,
+        "waitTime" : waitTime,
+        "position" : position
     }
     return render(request, 'users/dashboard.html', context)
 
