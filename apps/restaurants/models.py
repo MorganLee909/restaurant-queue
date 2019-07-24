@@ -1,6 +1,6 @@
 from django.db import models
 import bcrypt
-from apps.users.models import User, LineMember
+from apps.users.models import User, LineMember, SeatedUser
 
 class RestaurantManager(models.Manager):
     def validateRestaurant(self, restaurantData):
@@ -72,6 +72,7 @@ class Restaurant(models.Model):
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
     line = models.ManyToManyField(LineMember, related_name = "restaurant")
+    seatUser = models.ManyToManyField(SeatedUser, related_name = "seatUser")
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()

@@ -232,16 +232,13 @@ def restaurantDashboard(request):
     for party in parties:
         difference = datetime.datetime.now() - party.joined.replace(tzinfo = None)
         party.waitTime = round(int(difference.total_seconds()) / 60)
-        
-        # waitTimes.append(waitTime)
 
     partiesWait = zip(parties, waitTimes)
 
     context = {
         "restaurant" : restaurant,
         "tables" : Table.objects.filter(restaurant = restaurant),
-        "parties" : parties,
-        # "waitTimes" : waitTimes
+        "parties" : parties
     }
 
     return render(request, "restaurants/dashboard.html", context)

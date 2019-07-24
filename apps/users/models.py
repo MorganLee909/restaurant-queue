@@ -90,3 +90,8 @@ class LineMember(models.Model):
     partySize = models.IntegerField()
     member = models.OneToOneField(User, related_name = "line", null = True)
     objects = DataManager()
+
+class SeatedUser(models.Model):
+    time = models.DateTimeField(auto_now_add = True)
+    member = models.OneToOneField(User, related_name = "seatUser", null = True)
+    objects = DataManager()
