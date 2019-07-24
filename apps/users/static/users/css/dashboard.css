@@ -7,10 +7,28 @@
 
 }
 
+.container{
+    background: url('../images/dashboard.jpg') no-repeat;
+    background-size: cover;
+    width: auto;
+    height: 900px;
+}
+
+.queue{
+    height: auto;
+    width: 200px;
+    border: 2px solid black;
+    display: inline-block;
+    vertical-align: top;
+    background-color: whitesmoke;
+}
+
 .userInfo{
     border: 2px solid black;
     width: 320px;
     height: 300px;
     margin: auto;
     display: inline-block;
+    background-color: whitesmoke;
+
 }
