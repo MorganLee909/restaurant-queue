@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{restaurant.name}} Dashboard</title>
     {% load static %}
+    <title>{{restaurant.name}} Queue Dash</title>
     <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -62,15 +62,18 @@
                 
 
                 <!-- This is the iterative Django DB Call to display all users currently in the queue -->
-                {% for party in parties%}
+                {% for party in parties %}
                 <div class = "userInfo">
                 <img src="{% static 'restaurants/images/userIcon.png' %}">
                     <div class = "userText">
-                        <p>Party Name: {{user.lastName}} </p></br>
-                        <p>Party Size: {{user.partySize}}</p></br>
-                        <p>Wait Time: {{user.createdAt}}</p></br>
+                        <p>Party Name: {{party.member.lastName}} </p></br>
+                        <p>Party Size: {{party.partySize}}</p></br>
+                        <p>Wait Time: {{party.waitTime}} min</p></br>
                     </div>
                 </div>
+                {% endfor %}
+                {% for party in partiesWait%}
+                    <h1>Anything</h1>
                 {% endfor %}
                 <!-- This is the iterative Django DB Call to display all users currently in the queue -->
         </div> 
@@ -111,79 +114,86 @@
                 
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of one -->
                     <h3>Party: 1+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    {% for party in parties1 %}
-                    <div class = "userInfoTable">
-                        <img src="{% static 'restaurants/images/userIcon.png' %}">
-                        <div class = "userText">
-                            <p>Party Name: {{user.lastName}}</p></br>
-                            <p>Wait Time: {{user.createdAt}}</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                    {% for party in parties %}   
+                        {% if party.partySize == 1%}
+                        <div class = "userInfoTable">
+                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                            <div class = "userText">
+                                <p>Party Name: {{party.member.lastName}}</p></br>
+                                <p>Wait Time: {{party.waitTime}} min</p></br>
+                                <div class="tableButtons">
+                                    <button action="notify" name="notify">Notify</button>
+                                    <button action="assign" name="assign">Assign</button>
+                                    <button action="remove" name="remove">Remove</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
 
 
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of two -->
                     <h3>Party: 2 <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties2 %}
-                    <div class = "userInfoTable">
-                        <img src="{% static 'restaurants/images/29.jpg' %}">
-                        <div class = "userText">
-                            <p>Party Name: {{user.lastName}}</p></br>
-                            <p>Wait Time: {{user.createdAt}}</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                    {% for party in parties %}
+                        {% if party.partySize == 2%}
+                        <div class = "userInfoTable">
+                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                            <div class = "userText">
+                                <p>Party Name: {{party.member.lastName}}</p></br>
+                                <p>Wait Time: {{party.waitTime}} min</p></br>
+                                <div class="tableButtons">
+                                    <button action="notify" name="notify">Notify</button>
+                                    <button action="assign" name="assign">Assign</button>
+                                    <button action="remove" name="remove">Remove</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
 
 
                 <div class ="tableSplit"> <!-- This iterates through users with a party size of three or four -->
                     <h3>Party: 3 - 4 <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties34 %}
-                    <div class = "userInfoTable">
-                        <img src="{% static 'restaurants/images/29.jpg' %}">
-                        <div class = "userText">
-                            <p>Party Name: {{user.lastName}}</p></br>
-                            <p>Wait Time: {{user.createdAt}}</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                    {% for party in parties %}    
+                        {% if party.partySize == 4 or party.partySize == 3%}
+                        <div class = "userInfoTable">
+                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                            <div class = "userText">
+                                <p>Party Name: {{party.member.lastName}}</p></br>
+                                <p>Wait Time: {{party.waitTime}} min</p></br>
+                                <div class="tableButtons">
+                                    <button action="notify" name="notify">Notify</button>
+                                    <button action="assign" name="assign">Assign</button>
+                                    <button action="remove" name="remove">Remove</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
 
 
                 <div class ="tableSplitEnd"> <!-- This iterates through users with a party size of five or greater -->
                     <h3>Party: 5+ <button action="assign" name="assign">Assign Next Party</button></h3>
-                    
-                    {% for party in parties56 %}
-                    <div class = "userInfoTable">
-                        <img src="{% static 'restaurants/images/29.jpg' %}">
-                        <div class = "userText">
-                            <p>Party Name: {{user.lastName}}</p></br>
-                            <p>Wait Time: {{user.createdAt}}</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                    {% for party in parties %}        
+                        {% if party.partySize > 4%}
+                            <div class = "userInfoTable">
+                                <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                <div class = "userText">
+                                    <p>Party Name: {{party.member.lastName}}</p></br>
+                                    
+                                    <p>Wait Time: {{party.waitTime}} min</p></br>
+                                    
+                                    <div class="tableButtons">
+                                        <button action="notify" name="notify">Notify</button>
+                                        <button action="assign" name="assign">Assign</button>
+                                        <button action="remove" name="remove">Remove</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div> 

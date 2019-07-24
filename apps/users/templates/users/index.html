@@ -25,7 +25,7 @@
             <a class="restaurant" href="/restaurants">Restaurant owner? Register here!</a>
             <div class="login">
                 <h1>Login</h1>
-                <form action="users/login" method="POST">
+                <form action="/users/login" method="POST">
                     {% csrf_token %}
                     <h4 class="email">Email:</h4>
                     <input class="emailBox" type="email" name="email"> 

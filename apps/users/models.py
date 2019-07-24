@@ -111,7 +111,7 @@ class DataManager(models.Manager):
 
         #Uniqueness
         if hasattr(user, "line"):
-            errors["inLine"] = "User is already a line"
+            errors["inLine"] = "User is already in a line"
 
         return errors
 
