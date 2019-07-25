@@ -240,9 +240,6 @@ def restaurantDashboard(request):
         "tables" : Table.objects.filter(restaurant = restaurant),
         "parties" : parties
     }
-    # print("$" * 100)
-    # for table in tables:
-    #     print(table.party.member.lastName)
 
     return render(request, "restaurants/dashboard.html", context)
 
@@ -280,14 +277,11 @@ def assignTable(request, tableId):
     )
     seatedUser.save()
     seatedUser.restaurant.add(Restaurant.objects.get(line = lineMember))
-    print("*" * 100)
-    print(myTable.party)
-    seatedUser.table.add(myTable)
-    print("!" * 100)
-    print(myTable.party)
+    myTable.party = seatedUser
+    myTable.save()
     lineMember.delete()
 
-    messages.success(request, f"{seatedUser.member.lastName} assigned to table {table.name}")
+    messages.success(request, f"{seatedUser.member.lastName} assigned to table {myTable.name}")
     return redirect("/restaurants/dashboard")
     
 def findCorrectUser(lineMembers, tableSize):
