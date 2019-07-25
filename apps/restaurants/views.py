@@ -3,7 +3,7 @@ from django.contrib import messages
 import bcrypt
 import datetime
 from .models import Restaurant, Table
-from apps.users.models import LineMember, User
+from apps.users.models import LineMember, User, SeatedUser
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
@@ -229,20 +229,14 @@ def restaurantDashboard(request):
     restaurant = Restaurant.objects.get(id = request.session["restaurant"])
     parties = LineMember.objects.filter(restaurant = restaurant)
 
-    waitTimes = []
     for party in parties:
         difference = datetime.datetime.now() - party.joined.replace(tzinfo = None)
         party.waitTime = round(int(difference.total_seconds()) / 60)
-        
-        # waitTimes.append(waitTime)
-
-    partiesWait = zip(parties, waitTimes)
 
     context = {
         "restaurant" : restaurant,
         "tables" : Table.objects.filter(restaurant = restaurant),
-        "parties" : parties,
-        # "waitTimes" : waitTimes
+        "parties" : parties
     }
 
     return render(request, "restaurants/dashboard.html", context)
@@ -266,11 +260,40 @@ def addParty(request):
 
     return redirect("/restaurants/dashboard")
 
-def removeParty(request, partyId):
-    print("test test test test")
+def assignTable(request, tableId):
+    myTable = Table.objects.get(id = tableId)
+
+    lineMembers = LineMember.objects.filter(restaurant = Restaurant.objects.get(id = request.session["restaurant"]))
+
+    lineMember = findCorrectUser(lineMembers, myTable.size)
+    if lineMember == None:
+        messages.success(request, "No parties to assign to this table")
+        return redirect("/restaurants/dashboard")
     
+    seatedUser = SeatedUser(
+        member = lineMember.member
+    )
+    seatedUser.save()
+    seatedUser.restaurant.add(Restaurant.objects.get(line = lineMember))
+    myTable.party = seatedUser
+    myTable.save()
+    lineMember.delete()
+
+    messages.success(request, f"{seatedUser.member.lastName} assigned to table {myTable.name}")
+    return redirect("/restaurants/dashboard")
+    
+def findCorrectUser(lineMembers, tableSize):
+    correctMember = None
+    for obj in lineMembers:
+        if obj.partySize <= tableSize:
+            if correctMember == None:
+                correctMember = obj
+            elif obj.joined < correctMember.joined:
+                correctMember = obj
+
+    return correctMember
+
+def removeParty(request, partyId):
     removeParty = LineMember.objects.get(member=partyId)
-    print("****************restaurant deleted Party:", removeParty.member.lastName)
     removeParty.delete()
     return redirect("/restaurants/dashboard")
-    # return redirect("/restaurants/login")

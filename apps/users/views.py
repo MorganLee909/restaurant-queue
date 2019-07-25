@@ -39,6 +39,9 @@ def createUser(request):
         #Redirect to user dashboard
         return redirect('/users/dashboard') 
 
+def businessCard(request):
+    return render(request, 'users/businessCard.html')
+
 def editUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
     if request.session['user'] != int(userId):
