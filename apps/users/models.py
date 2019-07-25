@@ -132,5 +132,5 @@ class LineMember(models.Model):
 
 class SeatedUser(models.Model):
     time = models.DateTimeField(auto_now_add = True)
-    member = models.OneToOneField(User, related_name = "seatUser", null = True)
+    member = models.OneToOneField(User, related_name = "seatUser", null = True, on_delete = models.SET_NULL)
     objects = DataManager()

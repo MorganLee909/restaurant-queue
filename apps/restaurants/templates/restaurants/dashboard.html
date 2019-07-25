@@ -8,24 +8,25 @@
     {% load static %}
     <title>{{restaurant.name}} Queue Dash</title>
     <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurants/css/messages.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="header">
-        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard
-        </h1>
-        <a href="/restaurants/{{restaurant.id}}/edit">EDIT RESTAURANT</a> <span>|||</span>
-        <a href="/logout">LOGOUT</a>
+        <h1> <img src="{% static 'restaurants/images/Subline Primary_02.png' %}"> {{restaurant.name}} Queue Dashboard</h1>
+        <a href="/restaurants/{{restaurant.id}}/edit">EDIT RESTAURANT</a> <span>|||</span> <a href="/logout">LOGOUT</a>
     </div>
 
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    <div class = "messageBlock">
+        {% if messages %}
+        <ol>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
-    </ul>
-    {% endif %}
+        </ol>
+        {% endif %}
+    </div>
 
     <div class="container">
 
@@ -38,11 +39,9 @@
                 <div class="userText">
                     <form class='addToLine' action="/restaurants/addParty" method="POST">
                         {% csrf_token %}
-                        <p>Party Email: <input type="email" name="partyEmail" id='partyEmail'
-                                style="font-size:8pt; width: 150px; height: 1em;"> </p></br>
-                        <p>Party Size: <input type="text" name="partySize" id='partySize'
-                                style="font-size:8pt; width: 50px; height: 1em;"></p></br>
-                        <input type="submit" value="Add Party to Queue">
+                        <label>Party Email: </label><input type="email" name="partyEmail"></br>
+                        <label>Party Size: </label><input type="text" name="partySize"> 
+                        <input class="submitButton" type="submit" value="Add Party to Queue">
                     </form>
                 </div>
             </div>
@@ -50,6 +49,7 @@
 
 
             <!-- This is the iterative Django DB Call to display all users currently in the queue -->
+            <div class="queueScroll">
             {% for party in parties %}
             <div class="userInfo">
                 <img src="{% static 'restaurants/images/userIcon.png' %}">
@@ -57,13 +57,14 @@
                     <p>Party Name: {{party.member.lastName}} </p></br>
                     <p>Party Size: {{party.partySize}}</p></br>
                     <p>Wait Time: {{party.waitTime}} min</p></br>
-                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                 </div>
+                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
             </div>
             {% endfor %}
             {% for party in partiesWait%}
             <h1>Anything</h1>
             {% endfor %}
+            </div>
             <!-- This is the iterative Django DB Call to display all users currently in the queue -->
         </div>
         <!------------------ THIS ENDS THE SECTION FOR THE SCROLLING QUEUE DIV ON THE LEFT SIDE OF THE DASHBOARD --------------------->
@@ -78,17 +79,28 @@
 
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
-                <div class="tableInfo">
-                    <div class="Table">
-                        <p>{{table.name}}</br>Size:{{table.size}}</p>
+                    {% if table.party.member.lastName == NONE%}
+                    <div class="tableInfo">
+                        <div class="TableEmpty">
+                            <p>{{table.name}}</br>Size:{{table.size}}</p>
+                        </div>
+                        <div class="currentTableInfo">
+                            <p style="text-align: center;">No Party Seated</p><br>
+                            <button><a href="/restaurants/tables/{{table.id}}/assign">Assign</a></button>
+                        </div>
                     </div>
-                    <div class="currentTableInfo">
-                        <p>Party Name: {{table.party.member.lastName}}</p>
-                        <p>Seated Time: {{table.party.time.time}}</p>
-                        <a href="/restaurants/tables/{{table.id}}/assign">Assign</a>
-                        <button action="remove" name="remove">Checkout</button>
+                    {% else %}
+                    <div class="tableInfo">
+                        <div class="Table">
+                            <p>{{table.name}}</br>Size:{{table.size}}</p>
+                        </div>
+                        <div class="currentTableInfo">
+                            <p>Party Name: {{table.party.member.lastName}}</p>
+                            <p>Seated Time: {{table.party.time.time}}</p>
+                            <button name="remove"><a href="/restaurants/checkoutParty/{{table.party.member.id}}">Checkout</a></button>
+                        </div>
                     </div>
-                </div>
+                    {% endif %}
                 {% endfor %}
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
 
@@ -105,7 +117,7 @@
 
                 <div class="tableSplit">
                     <!-- This iterates through users with a party size of one -->
-                    <h3>Party: 1+ <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <h3>Party: 1+ </h3>
                     {% for party in parties %}
                     {% if party.partySize == 1%}
                     <div class="userInfoTable">
@@ -127,7 +139,7 @@
 
                 <div class="tableSplit">
                     <!-- This iterates through users with a party size of two -->
-                    <h3>Party: 2 <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <h3>Party: 2 </h3>
                     {% for party in parties %}
                     {% if party.partySize == 2%}
                     <div class="userInfoTable">
@@ -149,7 +161,7 @@
 
                 <div class="tableSplit">
                     <!-- This iterates through users with a party size of three or four -->
-                    <h3>Party: 3 - 4 <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <h3>Party: 3 - 4 </h3>
                     {% for party in parties %}
                     {% if party.partySize == 4 or party.partySize == 3%}
                     <div class="userInfoTable">
@@ -171,7 +183,7 @@
 
                 <div class="tableSplitEnd">
                     <!-- This iterates through users with a party size of five or greater -->
-                    <h3>Party: 5+ <button action="assign" name="assign">Assign Next Party</button></h3>
+                    <h3>Party: 5+ </h3>
                     {% for party in parties %}
                     {% if party.partySize > 4%}
                     <div class="userInfoTable">

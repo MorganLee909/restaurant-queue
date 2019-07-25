@@ -14,7 +14,9 @@ def createRestaurant(request):
     if request.method == "POST":
 
         #Validate all data
-        errors = Restaurant.objects.validateRestaurant(request.POST)
+        postData = request.POST.copy()
+        postData["email"] = postData["email"].lower()
+        errors = Restaurant.objects.validateRestaurant(postData)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
@@ -22,8 +24,8 @@ def createRestaurant(request):
 
         #Create and add new restaurant to database
         newRestaurant = Restaurant(
-            name = request.POST["name"],
-            email = request.POST["email"],
+            name = postData["name"],
+            email = postData["email"],
             password = bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()),
         )
         newRestaurant.save()
@@ -41,14 +43,16 @@ def restaurantLogin(request):
     if request.method == "POST":
 
         #Validate restaurant
-        errors = Restaurant.objects.validateLogin(request.POST)
+        postData = request.POST.copy()
+        postData["email"] = postData["email"].lower()
+        errors = Restaurant.objects.validateLogin(postData)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect('/restaurants')
 
         #Log in restaurant
-        restaurant = Restaurant.objects.get(email = request.POST["email"])
+        restaurant = Restaurant.objects.get(email = postData["email"])
         request.session["restaurant"] = restaurant.id
 
     #Redirect to dashboard
@@ -77,7 +81,8 @@ def editRestaurant(request, restaurantId):
 
     #Render page with form to edit restaurant information
     context = {
-        "restaurant" : restaurant
+        "restaurant" : restaurant,
+        "tables" : Table.objects.filter(restaurant = restaurant),
     }
 
     return render(request, "restaurants/editRestaurant.html", context)
@@ -93,7 +98,9 @@ def updateRestaurant(request, restaurantId):
     if request.method == "POST":
 
         #Validate all data
-        errors = Restaurant.objects.validateRestaurantEdit(request.POST)
+        postData = request.POST.copy()
+        postData["email"] = postData["email"].lower()
+        errors = Restaurant.objects.validateRestaurantEdit(postData)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
@@ -101,9 +108,10 @@ def updateRestaurant(request, restaurantId):
 
         #Update the data
         restaurantUpdate = Restaurant.objects.get(id=restaurantId)
-        restaurantUpdate.name = request.POST["name"] or restaurant.name
-        restaurantUpdate.email = request.POST["email"] or restaurant.email
-        restaurantUpdate.password = bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt()) or restaurant.password
+        restaurantUpdate.name = postData["name"] or restaurant.name
+        restaurantUpdate.email = postData["email"] or restaurant.email
+        if request.POST["password"] != "":
+            restaurantUpdate.password = bcrypt.hashpw(request.POST["password"].encode(), bcrypt.gensalt())
         restaurantUpdate.save()
     #Redirect to restaurant dashboard
     return redirect("/restaurants/dashboard")
@@ -147,7 +155,7 @@ def createTables(request):
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
-            return redirect(f"restaurants/{request.session['restaurant']}/edit")
+            return redirect(f"/restaurants/{request.session['restaurant']}/edit")
 
         #Create new table
         newTable = Table(
@@ -157,10 +165,14 @@ def createTables(request):
         )
 
         newTable.save()
-        messages.success(request, f"Table of {newTable.size} successfully added")
+        restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+        context = {
+            "tables" : Table.objects.filter(restaurant = restaurant),
+        }
+        messages.success(request, f"Table '{newTable.name}' with Capacity of {newTable.size} successfully added to restaurant floor")
 
     #redirect to restaurant dashboard
-    return redirect(f"/restaurants/{request.session['restaurant']}/edit")
+    return redirect(f"/restaurants/{request.session['restaurant']}/edit", context)
 
 def editTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
@@ -244,15 +256,17 @@ def restaurantDashboard(request):
 def addParty(request):
     if request.method == "POST":
         
-        errors = LineMember.objects.validateLineMember(request.POST)
+        postData = request.POST.copy()
+        postData["partyEmail"] = postData["partyEmail"].lower()
+        errors = LineMember.objects.validateLineMember(postData)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect("/restaurants/dashboard")
 
         newParty = LineMember(
-            partySize = request.POST["partySize"],
-            member = User.objects.get(email = request.POST["partyEmail"])
+            partySize = postData["partySize"],
+            member = User.objects.get(email = postData["partyEmail"])
         )
 
         newParty.save()
@@ -296,4 +310,11 @@ def findCorrectUser(lineMembers, tableSize):
 def removeParty(request, partyId):
     removeParty = LineMember.objects.get(member=partyId)
     removeParty.delete()
+    return redirect("/restaurants/dashboard")
+
+def checkout(request, partyId):
+    seatedUser = SeatedUser.objects.get(member=partyId)
+    seatedUser.table = None
+    messages.success(request, f"Party '{seatedUser.member.lastName}' has been checked out of the restaurant")
+    seatedUser.delete()
     return redirect("/restaurants/dashboard")
