@@ -70,6 +70,34 @@ html, body{
 }
 
 @media screen and (max-width: 680px){
+    form{
+        margin-right: 50px;
+    }
+
+    .button{
+        margin-left: 50px;
+        margin-top: -2px;
+    }
+
+    .password{
+        margin-top: 10px;
+    }
+
+    .button{
+        margin-top: 10px;
+    }
+
+    .logo{
+        margin-left: 15px;
+    }
+
+    .restaurant{
+        font-size: 10pt;
+        right: 10px;
+        
+    }
+
+    
 
 }
 
