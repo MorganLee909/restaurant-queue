@@ -229,12 +229,9 @@ def restaurantDashboard(request):
     restaurant = Restaurant.objects.get(id = request.session["restaurant"])
     parties = LineMember.objects.filter(restaurant = restaurant)
 
-    waitTimes = []
     for party in parties:
         difference = datetime.datetime.now() - party.joined.replace(tzinfo = None)
         party.waitTime = round(int(difference.total_seconds()) / 60)
-
-    partiesWait = zip(parties, waitTimes)
 
     context = {
         "restaurant" : restaurant,
