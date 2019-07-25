@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^tables/(?P<tableId>\d+)/destroy$', views.deleteTable),
     #Dashboard
     url(r'^dashboard$', views.restaurantDashboard),
-    url(r'^addParty$', views.addParty)
+    url(r'^addParty$', views.addParty),
+    url(r'^removeParty/(?P<partyId>\d+)$', views.removeParty),
 ]

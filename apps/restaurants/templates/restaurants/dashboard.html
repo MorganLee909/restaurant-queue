@@ -57,6 +57,7 @@
                     <p>Party Name: {{party.member.lastName}} </p></br>
                     <p>Party Size: {{party.partySize}}</p></br>
                     <p>Wait Time: {{party.waitTime}} min</p></br>
+                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
                 </div>
             </div>
             {% endfor %}
@@ -115,7 +116,7 @@
                             <div class="tableButtons">
                                 <button action="notify" name="notify">Notify</button>
                                 <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                             <div class="tableButtons">
                                 <button action="notify" name="notify">Notify</button>
                                 <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -159,7 +160,7 @@
                             <div class="tableButtons">
                                 <button action="notify" name="notify">Notify</button>
                                 <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -183,7 +184,7 @@
                             <div class="tableButtons">
                                 <button action="notify" name="notify">Notify</button>
                                 <button action="assign" name="assign">Assign</button>
-                                <button action="remove" name="remove">Remove</button>
+                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
                             </div>
                         </div>
                     </div>

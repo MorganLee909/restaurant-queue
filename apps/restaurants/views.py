@@ -265,3 +265,12 @@ def addParty(request):
         newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")
+
+def removeParty(request, partyId):
+    print("test test test test")
+    
+    removeParty = LineMember.objects.get(member=partyId)
+    print("****************restaurant deleted Party:", removeParty.member.lastName)
+    removeParty.delete()
+    return redirect("/restaurants/dashboard")
+    # return redirect("/restaurants/login")
