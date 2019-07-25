@@ -7,8 +7,10 @@
 }
 
 body {
-    background: grey;
+    background: url('../images/business-stock.jpeg') no-repeat;
     background-size: cover;
+    width: auto;
+    height: 100vh;
 }
 
 .business-card{
