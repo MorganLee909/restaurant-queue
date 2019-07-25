@@ -49,6 +49,39 @@ class RestaurantManager(models.Manager):
 
         return errors
 
+    def validateRestaurantEdit(self, restaurantData):
+        errors = {}
+
+        #Name
+        if len(restaurantData["name"]) < 3 and len(restaurantData["name"]) > 0:
+            errors["nameLength"] = "Name of restaurant must contain at least 3 characters"
+        elif len(restaurantData["name"]) > 254:
+            errors["nameLength"] = "Name is too long"
+
+        #Email
+        if len(restaurantData["email"]) > 99:
+            errors["emailLength"] = "All emails must be less than 100 characters"
+        if Restaurant.objects.filter(email = restaurantData['email']):
+            errors['emailInUse'] = 'Email address already in use.'
+
+        #Password
+        if len(restaurantData["password"]) < 8 and len(restaurantData["password"]) > 0:
+            errors["passwordlength"] = "Password must contain at least 8 characters"
+        elif len(restaurantData["password"]) > 49:
+            errors["passwordlength"] = "Password too long"
+
+        if len(restaurantData["password"]) > 0 and not any(char.isdigit() for char in restaurantData["password"]):
+            errors["passwordNums"] = "Password must contain at least one number and one extra character"
+
+        specChars = "!@#$%^&*()_-=+/><;:'][}{"
+        if len(restaurantData["password"]) > 0 and not any(char in specChars for char in restaurantData["password"]):
+            errors["passwordNums"] = "Password must contain at least one number and one extra character"
+
+        if restaurantData['password'] != restaurantData['passwordConfirm']:
+            errors['notPassword'] = 'Password does not match.'
+
+        return errors
+
     def validateTable(self, tableData):
         errors = {}
 

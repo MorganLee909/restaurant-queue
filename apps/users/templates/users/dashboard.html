@@ -11,31 +11,40 @@
     </head>
     <body>
         <div class="container">
-
-            <div class="queue">
-                <h3>Queue</h3>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>View</th>
-                    </tr>
-                    {% for user in users %}
-                    
-                    <tr>
-                        <td>{{user.firstName}}</td>
-                        <td><a href="{{PLACEHOLDER}}">View</a></td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                
+            <div class="header">
+                <a class="edit" href="/{{user.id}}/edit">Edit your account</a>
+                <a class="logout" href="/logout">Logout</a>
             </div>
-            <div class="userInfo">
-                <h1>HI {{user.firstName}}</h1>
-                <h3>You entered: {{user.line.joined}}</h3>
-                <h3>Your position: {{PLACEHOLDER}}</h3>
-                <a href="/deleteLine">Leave</a>
-                <br>
-                <a href="/logout">Logout</a>
+            <div class="subContainer">
+                <div class="queue">
+                    <h3>Queue</h3>
+                    {% for member in members %}
+                    <div class = "userInfo">
+                    <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class = "userText">
+                            <p>Party Name: {{member.member.lastName}} </p></br>
+                            <p>Party Size: {{member.partySize}}</p></br>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+                {% if members %}
+                <div class="user">
+                    <h1>Hi {{user.firstName}}</h1>
+                    <h3>You entered at: {{user.line.joined}}</h3>
+                    <h3>Your position is: {{position}}</h3>
+                    <a href="/{{user.id}}/line/destroy">Leave</a>
+                    <br>
+                    <a href="/logout">Logout</a>
+                </div>
+                {% else %}
+                    <div class="user">
+                        <h1>Hi {{user.firstName}}</h1>
+                        <h3>You have not been placed in a queue. Please visit your restaurant of choice to be placed in their queue</h3>
+                    </div>
+                {% endif %}
+                
             </div>
         </div>
         
