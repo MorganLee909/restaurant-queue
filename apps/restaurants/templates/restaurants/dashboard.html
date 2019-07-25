@@ -48,7 +48,7 @@
                 <div class = "userInfo">
                 <img src="{% static 'restaurants/images/userIcon.png' %}">
                     <div class = "userText">
-                        <p>Party Name: {{party.member.lastName}} </p></br>
+                        <p>Party Name: {{party}} </p></br>
                         <p>Party Size: {{party.partySize}}</p></br>
                         <p>Wait Time: {{party.waitTime}} min</p></br>
                     </div>
@@ -74,9 +74,9 @@
                 <div class="tableInfo">
                     <div class="Table"><p>{{table.name}}</br>Size:{{table.size}}</p></div>
                     <div class="currentTableInfo">
-                        <p>Party Name:</p>
-                        <p>Seated Time:</p>
-                        <button action="assign" name="assign">Assign Next</button>
+                        <p>Party Name: {{table.party}}</p>
+                        <p>Seated Time:{{table.party}}</p>
+                        <a href="/restaurants/tables/{{table.id}}/assign">Assign</a>
                         <button action="remove" name="remove">Checkout</button>
                     </div>
                 </div>

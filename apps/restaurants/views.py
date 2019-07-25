@@ -3,7 +3,7 @@ from django.contrib import messages
 import bcrypt
 import datetime
 from .models import Restaurant, Table
-from apps.users.models import LineMember, User
+from apps.users.models import LineMember, User, SeatedUser
 
 def newRestaurant(request):
     #Render the page to show form to create new restaurant
@@ -240,6 +240,9 @@ def restaurantDashboard(request):
         "tables" : Table.objects.filter(restaurant = restaurant),
         "parties" : parties
     }
+    # print("$" * 100)
+    # for table in tables:
+    #     print(table.party.member.lastName)
 
     return render(request, "restaurants/dashboard.html", context)
 
@@ -261,3 +264,39 @@ def addParty(request):
         newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
 
     return redirect("/restaurants/dashboard")
+
+def assignTable(request, tableId):
+    myTable = Table.objects.get(id = tableId)
+
+    lineMembers = LineMember.objects.filter(restaurant = Restaurant.objects.get(id = request.session["restaurant"]))
+
+    lineMember = findCorrectUser(lineMembers, myTable.size)
+    if lineMember == None:
+        messages.success(request, "No parties to assign to this table")
+        return redirect("/restaurants/dashboard")
+    
+    seatedUser = SeatedUser(
+        member = lineMember.member
+    )
+    seatedUser.save()
+    seatedUser.restaurant.add(Restaurant.objects.get(line = lineMember))
+    print("*" * 100)
+    print(myTable.party)
+    seatedUser.table.add(myTable)
+    print("!" * 100)
+    print(myTable.party)
+    lineMember.delete()
+
+    messages.success(request, f"{seatedUser.member.lastName} assigned to table {table.name}")
+    return redirect("/restaurants/dashboard")
+    
+def findCorrectUser(lineMembers, tableSize):
+    correctMember = None
+    for obj in lineMembers:
+        if obj.partySize <= tableSize:
+            if correctMember == None:
+                correctMember = obj
+            elif obj.joined < correctMember.joined:
+                correctMember = obj
+
+    return correctMember
