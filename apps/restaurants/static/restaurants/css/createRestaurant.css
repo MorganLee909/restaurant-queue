@@ -17,46 +17,46 @@ html, body{
     background-size: cover;
 }
 
-h4{
-    display: inline-block;
-    margin-top: 10px;
-}
-
-input{
-    border: 1px solid black;
-}
-
 .logo{
     height: 150px;
     width: 150px;
     margin-top: 40px;
 }
 
-.name{
-    margin-right: 88px;
-
+.registration label {
+    /* display: table-cell; */
+    display: block;
+    position: relative;
+    margin: 5px;
 }
 
-.email{
-    margin-right: 91px;
-
+.registration label span {
+    font-weight: bold;
+    position: absolute; 
+    margin: 0px auto;
 }
 
-.password{
-    margin-right: 60px;
+.registration label input {
+    /* display: table-cell; */
+    margin-left: 35%;
+    width: 225px;
+}
+
+input.submitButton {
+    display: block;
+    margin: 10px auto;
 }
 
 .button{
-    margin-top: 30px;
-    border-radius: 5px;
-    width: 50px;
+    margin-top: 15px;
+    width: auto;
 }
 
 .registration{
     background-color: white;
-    width: 300px;
+    width: 600px;
     margin: auto;
-    border: 2px solid black;
+    border: 4px solid rgb(255,99,107);
     padding-bottom: 10px;
     opacity: .95;
 }

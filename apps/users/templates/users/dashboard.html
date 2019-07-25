@@ -16,6 +16,7 @@
                 <a class="logout" href="/logout">Logout</a>
             </div>
             <div class="subContainer">
+                {% if members %}
                 <div class="queue">
                     <h3>Queue</h3>
                     {% for member in members %}
@@ -27,10 +28,12 @@
                         </div>
                     </div>
                     {% endfor %}
-                    
+
                 </div>
+                    {% endif %}
+                    
                 {% if members %}
-                <div class="user">
+                <div class="user" style="margin-right: 150px">
                     <h1>Hi {{user.firstName}}</h1>
                     <h3>You entered at: {{user.line.joined}}</h3>
                     <h3>Your position is: {{position}}</h3>

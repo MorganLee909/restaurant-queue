@@ -47,7 +47,7 @@ html, body{
 }
 
 .button{
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 20px;
     width: 70px;
     border: 1px solid black;
@@ -60,6 +60,12 @@ html, body{
     width: 150px;
     margin-top: 15px;
     margin-bottom: 38px;
+    transition: 0.7s;
+}
+
+.logo:hover{
+    height: 175px;
+    width: 175px;
 }
 
 
@@ -92,7 +98,7 @@ html, body{
     }
 
     .restaurant{
-        font-size: 10pt;
+        font-size: 8pt;
         right: 10px;
         
     }

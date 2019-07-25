@@ -92,12 +92,11 @@ class RestaurantManager(models.Manager):
         #Size
         try:
             size = int(tableData["tableSize"])
-        except ValueError:
-            errors["sizeNotInt"] = "Must enter an integer for size"
-        
             if size < 1:
                 errors["sizeTooSmall"] = "Size of table must be 1 or greater"
-
+        except ValueError:
+            errors["sizeNotInt"] = "Must enter an integer for table size"
+        
         return errors
 
 class Restaurant(models.Model):
@@ -114,7 +113,7 @@ class Table(models.Model):
     name = models.CharField(max_length = 50)
     size = models.IntegerField()
     restaurant = models.ForeignKey(Restaurant, related_name = "tables")
-    party = models.OneToOneField(SeatedUser, related_name = "table", null = True, default = None)
+    party = models.OneToOneField(SeatedUser, related_name = "table", null = True, default = None, on_delete = models.SET_NULL)
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()

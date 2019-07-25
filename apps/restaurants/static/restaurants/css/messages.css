@@ -1,0 +1,26 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.messageBlock {
+    min-height: 25px;
+    text-align: center;
+    width: 80%;
+}
+
+.messageBlockNew {
+    width: 600px; 
+    margin: 0px auto; 
+    background-color: white;
+    opacity: 0.95; 
+    min-height: 0px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
