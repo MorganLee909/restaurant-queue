@@ -37,31 +37,46 @@ span {
     width: 80%;
     display: inline-block;
     align-content: center;
+    margin: 0px;
 }
 
 .editBox {
     width: 500px;
-    margin: 50px auto;
+    margin: 20px auto;
     text-align: center;
+    align-content: center;
     border: 2px solid rgb(0,27,45);
 }
 
 form { 
-    display: table;
-    border: 1 px solid rgb(0,27,45);
+    /* display: table; */
+    width: 100%;
 }
 
 .editBox form p {
-    display: table-row;
+    /* display: table-row; */
 }
 
 .editBox label {
-    display: table-cell;
-    margin: 10px auto;
-    
+    /* display: table-cell; */
+    display: block;
+    position: relative;
+    margin: 5px;
 }
 
-.editBox input {
-    display: table-cell;
+.editBox label span {
+    font-weight: bold;
+    position: absolute; 
+    margin: 0px auto;
+}
+
+.editBox label input {
+    /* display: table-cell; */
+    margin-left: 35%;
+    width: 225px;
+}
+
+input.submitButton {
+    display: block;
     margin: 10px auto;
 }

@@ -4,37 +4,33 @@
     	<title></title>
         <meta charset="utf-8">
         {% load static %}
-        <link rel="stylesheet" href="{% static 'restaurants/css/createRestaurant.css' %}"> 
+        <link rel="stylesheet" href="{% static 'restaurants/css/createRestaurant.css' %}">
+        <link rel="stylesheet" href="{% static 'restaurants/css/messages.css' %}">  
         <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
 
 	</head>
     <body>
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
         <div class="container">
             <img class="logo" src="{% static 'users/images/Subline_Primary_01.png' %}">
+            
             <div class="registration">
-                <h1>Create your restaurant account</h1>
+                    <div class = "messageBlockNew">
+                        {% if messages %}
+                        <ol>
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ol>
+                        {% endif %}
+                    </div>
+                <h1>Create your Restaurant Account</h1>
                 <form action="/restaurants/create" method="post">
                     {% csrf_token %}
-                    <h4 class="name">Name:</h4>
-                    <input type="text" name="name">
-                    <br>
-                    <h4 class="email">Email:</h4>
-                    <input type="email" name="email">
-                    <br>
-                    <h4 class="password">Password:</h4>
-                    <input type="password" name="password">
-                    <br>
-                    <h4>Confirm password:</h4>
-                    <input type="password" name="passwordConfirm">
-                    <br>
-                    <input class="button" type="submit" value="submit">
+                    <label><span><h4>Name:</h4></span><input type="text" name="name"></label>
+                    <label><span><h4>Email:</h4></span><input type="email" name="email"></label>
+                    <label><span><h4>Password:</h4></span><input type="password" name="password"></label>
+                    <label><span><h4>Confirm Password:</h4></span><input type="password" name="passwordConfirm"></label>
+                    <input class="button" type="submit" value="Create Account">
                 </form>
             </div>
         </div>

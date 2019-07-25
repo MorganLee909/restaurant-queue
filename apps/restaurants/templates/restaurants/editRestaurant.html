@@ -7,6 +7,7 @@
     <title>{{restaurant.name}} Dashboard</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'restaurants/css/edit.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurants/css/messages.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet"> 
 </head>
 <body>
@@ -15,73 +16,46 @@
         <a href="/restaurants/dashboard">DASHBOARD</a> <span>|||</span>
         <a href="/logout">LOGOUT</a>
     </div>
-
-    <div class = "container">
-
+    <div class = "messageBlock">
             {% if messages %}
-            <ul class="messages">
+            <ol>
                 {% for message in messages %}
                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
-            </ul>
+            </ol>
             {% endif %}
+    </div>
 
+    <div class = "container">
 
         <div class = "editBox">
             <h2>Edit Restaurant Information</h2>
                 <form action="/restaurants/{{restaurant.id}}/update" method="POST">
                     {% csrf_token %}
-                    <p>
-                    <label>Restaurant Name:</label>
-                    <input type="text" name="name">
-                    </p>
-                    <p>
-                    <label>Restaurant Email:</label>
-                    <input type="email" name="email">
-                    </p>
-                    <p>
-                    <label>New Password:</label>
-                    <input type="password" name="password">
-                    </p>
-                    <p>
-                    <label>Confirm Password:</label>
-                    <input type="password" name="passwordConfirm">
-                    </p>
-                    <input type="submit" value="Update Restaurant Info">
+                    <label><span>Restaurant Name:</span> <input type="text" name="name" placeholder="(Leave Blank if No Change Needed)"></label>
+                    <label><span>Restaurant Email:</span> <input type="email" name="email" placeholder="(Leave Blank if No Change Needed)"></label>
+                    <label><span>New Password:</span> <input type="password" name="password" placeholder="(Leave Blank if No Change Needed)"></label>
+                    <label><span>Confirm Password:</span> <input type="password" name="passwordConfirm" placeholder="(Leave Blank if No Change Needed)"></label>
+                    <input class="submitButton" type="submit" value="Update Restaurant Info">
                 </form>
         </div>
-
-    
-
         <div class = "editBox">
             <h2>Add Table To Restaurant Floor</h2>
                 <form action="/restaurants/tables/create" method="POST">
                 {% csrf_token %}
-                <p>
-                    <label>Table Name:</label>
-                    <input type="text" name="tableName">
-                </p>  
-                <p>
-                    <label>Table Size:</label>
-                    <input type="text" name="tableSize">
-                </p>  
-                <input type="submit" value="Add Table To Floor">
+                
+                    <label><span>Table Name:</span><input type="text" name="tableName"></label>
+                    <label><span>Table Size:</span><input type="text" name="tableSize"></label>
+                    <input class="submitButton" type="submit" value="Add Table To Floor">
                 </form>
         </div>
-
         <div class = "editBox">
             <h2>Current Tables on Floor:</h2>
                 {% for table in tables%}
-                <p>One (1) Seat: </p>
-                <p>Two (2) Seats: </p>
-                <p>Three (3) or Four (4) Seats: </p>
-                <p>Five(5)+ Seats: </p>
+                <p><span>Name:</span> {{table.name}} <span>Size:</span> {{table.size}}</p>
                 {% endfor %}
                 
         </div>
-
-
-
     </div>
 </body>
 </html>
