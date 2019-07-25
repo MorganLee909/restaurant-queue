@@ -17,6 +17,7 @@
             </ul>
         {% endif %}
         <div class="container">
+            <a class="goBack" href="/">Go Back</a>
                 <img class="logo" src="{% static 'restaurants/images/Subline_logo.png' %}">
 
             <div class="login">
@@ -24,7 +25,7 @@
                 <form action="/restaurants/login" method="post">
                     {% csrf_token %}
                     <h4 class="email">Email:</h4>
-                    <input class="emailBox" type="text" name="email">
+                    <input class="emailBox" type="email" name="email">
                     <br>
                     <h4 class="password">Password:</h4>
                     <input class="passwordBox" type="password" name="password"><br>
