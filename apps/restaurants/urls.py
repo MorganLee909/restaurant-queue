@@ -20,5 +20,6 @@ urlpatterns = [
     #Dashboard
     url(r'^dashboard$', views.restaurantDashboard),
     url(r'^addParty$', views.addParty),
-    url(r'^removeParty/(?P<partyId>\d+)$', views.removeParty),
+    url(r'^tables/(?P<tableId>\d+)/assign$', views.assignTable),
+    url(r'^removeParty/(?P<partyId>\d+)$', views.removeParty)
 ]

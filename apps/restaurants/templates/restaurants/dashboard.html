@@ -57,7 +57,7 @@
                     <p>Party Name: {{party.member.lastName}} </p></br>
                     <p>Party Size: {{party.partySize}}</p></br>
                     <p>Wait Time: {{party.waitTime}} min</p></br>
-                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</button>
+                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                 </div>
             </div>
             {% endfor %}
@@ -83,9 +83,9 @@
                         <p>{{table.name}}</br>Size:{{table.size}}</p>
                     </div>
                     <div class="currentTableInfo">
-                        <p>Party Name:</p>
-                        <p>Seated Time:</p>
-                        <button action="assign" name="assign">Assign Next</button>
+                        <p>Party Name: {{table.party.member.lastName}}</p>
+                        <p>Seated Time: {{table.party.time.time}}</p>
+                        <a href="/restaurants/tables/{{table.id}}/assign">Assign</a>
                         <button action="remove" name="remove">Checkout</button>
                     </div>
                 </div>
