@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', views.registerAndLogin),
     url(r'^new$', views.newUser),
     url(r'^create$', views.createUser),
+    url(r'^businessCard$', views.businessCard),
     url(r'^(?P<userId>\d+)/edit$', views.editUser),
     url(r'^(?P<userId>\d+)/update$', views.updateUser),
     url(r'^(?P<userId>\d+)/destroy$', views.deleteUser),
