@@ -57,7 +57,7 @@ html, body{
     display: inline-block;
     background-color: whitesmoke;
     opacity: .95;
-
+    margin-right: 150px;
 
 }
 
@@ -100,7 +100,7 @@ html, body{
 @media screen and (max-width: 680px){
     .user{
         display: inline-block;
-        margin: auto;
+        margin:  auto;
         opacity: .95;
         order: 1;
     }
