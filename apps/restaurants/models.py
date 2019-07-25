@@ -114,7 +114,7 @@ class Table(models.Model):
     name = models.CharField(max_length = 50)
     size = models.IntegerField()
     restaurant = models.ForeignKey(Restaurant, related_name = "tables")
-    party = models.OneToOneField(SeatedUser, related_name = "table", null = True, default = None)
+    party = models.OneToOneField(SeatedUser, related_name = "table", null = True, default = None, on_delete = models.SET_NULL)
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
     objects = RestaurantManager()

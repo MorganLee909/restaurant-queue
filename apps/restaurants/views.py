@@ -297,3 +297,9 @@ def removeParty(request, partyId):
     removeParty = LineMember.objects.get(member=partyId)
     removeParty.delete()
     return redirect("/restaurants/dashboard")
+
+def checkout(request, partyId):
+    seatedUser = SeatedUser.objects.get(member=partyId)
+    seatedUser.table = None
+    seatedUser.delete()
+    return redirect("/restaurants/dashboard")
