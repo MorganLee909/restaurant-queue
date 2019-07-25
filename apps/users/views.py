@@ -44,6 +44,9 @@ def businessCard(request):
 
 def editUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if 'user' not in request.session:
+        messages.error(request, 'You must be logged in.')
+        return redirect('/')
     if request.session['user'] != int(userId):
         messages.error(request, 'You cannot edit someone else\'s page.')
         return redirect('/users/dashboard')
@@ -58,6 +61,9 @@ def editUser(request, userId):
 
 def updateUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if 'user' not in request.session:
+        messages.error(request, 'You must be logged in.')
+        return redirect('/')
     if request.session['user'] != int(userId):
         messages.error(request, 'You can not edit someone else\'s page.')
         return redirect(f'/users/dashboard')
@@ -86,6 +92,9 @@ def updateUser(request, userId):
 
 def deleteUser(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if 'user' not in request.session:
+        messages.error(request, 'You must be logged in.')
+        return redirect('/')
     if request.session['user'] != int(userId):
         messages.error(request, 'You can not delete someone else\'s page.')
         return redirect('/users/dashboard')
@@ -158,6 +167,9 @@ def userDashboard(request):
 
 def deleteLine(request, userId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
+    if 'user' not in request.session:
+        messages.error(request, 'You must be logged in.')
+        return redirect('/')
     if request.session['user'] != int(userId):
         messages.error(request, "You do not have authorization to do that")
         return redirect('/users/dashboard')
