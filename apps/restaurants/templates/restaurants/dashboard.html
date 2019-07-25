@@ -8,6 +8,7 @@
     {% load static %}
     <title>{{restaurant.name}} Queue Dash</title>
     <link rel="stylesheet" href="{% static 'restaurants/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurants/css/messages.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
 </head>
 
@@ -17,13 +18,15 @@
         <a href="/restaurants/{{restaurant.id}}/edit">EDIT RESTAURANT</a> <span>|||</span> <a href="/logout">LOGOUT</a>
     </div>
 
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    <div class = "messageBlock">
+        {% if messages %}
+        <ol>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
-    </ul>
-    {% endif %}
+        </ol>
+        {% endif %}
+    </div>
 
     <div class="container">
 

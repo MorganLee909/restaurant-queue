@@ -81,7 +81,8 @@ def editRestaurant(request, restaurantId):
 
     #Render page with form to edit restaurant information
     context = {
-        "restaurant" : restaurant
+        "restaurant" : restaurant,
+        "tables" : Table.objects.filter(restaurant = restaurant),
     }
 
     return render(request, "restaurants/editRestaurant.html", context)
@@ -164,10 +165,14 @@ def createTables(request):
         )
 
         newTable.save()
-        messages.success(request, f"Table of {newTable.size} successfully added")
+        restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+        context = {
+            "tables" : Table.objects.filter(restaurant = restaurant),
+        }
+        messages.success(request, f"Table '{newTable.name}' with Capacity of {newTable.size} successfully added to restaurant floor")
 
     #redirect to restaurant dashboard
-    return redirect(f"/restaurants/{request.session['restaurant']}/edit")
+    return redirect(f"/restaurants/{request.session['restaurant']}/edit", context)
 
 def editTables(request, tableId):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
@@ -310,5 +315,6 @@ def removeParty(request, partyId):
 def checkout(request, partyId):
     seatedUser = SeatedUser.objects.get(member=partyId)
     seatedUser.table = None
+    messages.success(request, f"Party '{seatedUser.member.lastName}' has been checked out of the restaurant")
     seatedUser.delete()
     return redirect("/restaurants/dashboard")
