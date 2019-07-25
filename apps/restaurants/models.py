@@ -103,7 +103,7 @@ class RestaurantManager(models.Manager):
 class Restaurant(models.Model):
     name = models.CharField(max_length = 255)
     email = models.CharField(max_length = 100)
-    password = models.CharField(max_length = 50)
+    password = models.CharField(max_length = 255)
     line = models.ManyToManyField(LineMember, related_name = "restaurant")
     seatUser = models.ManyToManyField(SeatedUser, related_name = "restaurant")
     createdAt = models.DateTimeField(auto_now_add = True)
