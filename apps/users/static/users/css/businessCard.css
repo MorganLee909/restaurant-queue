@@ -29,6 +29,8 @@ body {
     overflow: hidden;
     position: absolute;
     backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     transition: transform 0.5s linear;
 }
 
@@ -74,6 +76,7 @@ body {
     display: inline-block;
     margin-bottom: 20px;
     font-size: 14px;
+    width: 180px;
 }
 
 .front-fe, .front-be {
