@@ -7,9 +7,13 @@
 
 }
 
+html, body{
+    height: 100%;
+}
+
 .container{
     background: url('../images/editUserbackground2.jpg') no-repeat;
-    height: 900px;
+    height: 100%;
     width: auto;
     background-size: cover;
 

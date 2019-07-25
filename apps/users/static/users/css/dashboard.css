@@ -7,28 +7,90 @@
 
 }
 
+html, body{
+    height: 100%;
+}
+
 .container{
     background: url('../images/dashboard.jpg') no-repeat;
     background-size: cover;
     width: auto;
-    height: 900px;
+    height: 100%;
+    
+}
+
+.header{
+    display: block;
+    width: auto;
+    height: 10%;
+}
+
+.subContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    flex-wrap: wrap;
 }
 
 .queue{
-    height: auto;
-    width: 200px;
+    height: 360px;
+    width: 30%;
     border: 2px solid black;
     display: inline-block;
     vertical-align: top;
     background-color: whitesmoke;
+    overflow: scroll;
+    margin-left: 100px;
 }
 
-.userInfo{
+.queue h3{
+    text-decoration: underline;
+}
+
+.user{
     border: 2px solid black;
-    width: 320px;
-    height: 300px;
-    margin: auto;
+    width: 350px;
+    height: 200px;
     display: inline-block;
     background-color: whitesmoke;
+    margin-right: 200px;
+    
 
+}
+
+.queue .userInfo {
+    margin-left: 15px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid rgb(0,27,45);
+    width: 55%;
+    padding: 1px;
+}
+.queue img {
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid rgb(255,99,107);
+}
+
+.queue .userInfo p {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+}
+
+
+
+.edit{
+    color: white;
+    top: 10px;
+    right: 120px;
+    position: fixed;
+}
+
+.logout{
+    color: white;
+    top: 10px;
+    right: 50px;
+    position: fixed;
 }

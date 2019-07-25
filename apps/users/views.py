@@ -129,8 +129,9 @@ def userDashboard(request):
     #Renders the main page for the user
     currentUser = User.objects.get(id = request.session['user'])
 
+
     context = {
-        "user" : currentUser
+        "user" : currentUser,
     }
     
     if hasattr(currentUser, "line"):
