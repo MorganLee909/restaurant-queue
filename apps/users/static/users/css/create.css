@@ -55,4 +55,16 @@ h4{
     width: 300px;
     margin: auto;
     border: 2px solid black;
+    opacity: .95;
+    padding-bottom: 10px;
+}
+
+@media screen and (max-width: 680px){
+    input{
+        border: 1px solid black;
+    }
+    .button{
+        border-radius: 5px;
+        width: 50px;
+    }
 }

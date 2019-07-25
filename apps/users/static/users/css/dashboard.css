@@ -42,6 +42,8 @@ html, body{
     background-color: whitesmoke;
     overflow: scroll;
     margin-left: 100px;
+    opacity: .95;
+
 }
 
 .queue h3{
@@ -55,7 +57,8 @@ html, body{
     display: inline-block;
     background-color: whitesmoke;
     margin-right: 200px;
-    
+    opacity: .95;
+
 
 }
 
@@ -93,4 +96,56 @@ html, body{
     top: 10px;
     right: 50px;
     position: fixed;
+}
+
+@media screen and (max-width: 680px){
+    .user{
+        display: inline-block;
+        margin: auto;
+        opacity: .95;
+        order: 1;
+    }
+
+    .queue{
+        margin: auto;
+        opacity: .95;
+        display: absolute;
+        bottom: 0;
+        order: 2;
+        min-width: 250px;
+    }
+
+    .user h1{
+        font-size: 14pt;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+    .user h3{
+        font-size: 10pt;
+        margin-bottom: 10px;
+    }
+
+    .queue .userInfo{
+        width: 80%;
+        margin-left: 0px;
+        padding-top: 5px;
+
+    }
+
+    .userInfo p{
+        font-size: 8pt;
+        
+    }
+
+    .edit{
+        right: 150px;
+    }
+
+    .subContainer{
+        /* display: block; */
+        flex-wrap: wrap-reverse;
+        /* justify-content: end; */
+        flex-direction: column;
+    }
 }

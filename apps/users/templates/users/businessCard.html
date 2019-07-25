@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Business Card</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'users/css/businessCard.css' %}"> 
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js'></script>
+    </head>
+    <body>
+        <div class="business-card middle">
+            <div class="front">
+                <div class="front-fe">
+                    <h4>Cody Baermann</h4>
+                    <h4>Damian Krebsbach</h4>
+                    <span>Front End Developers</span>
+                </div>
+                <div class="front-be">
+                    <h4>Lee Morgan</h4>
+                    <h4>Ryan Baermann</h4>
+                    <span>Back End Developers</span>
+                </div>
+                <ul class='contact-info'>
+                    <li>
+                        <i class='fas fa-map-marker-alt'></i>Coding Dojo, Bellevue, WA
+                    </li>
+                    <li>
+                        <i class='fab fa-github'></i>MorganLee909/restaurant-queue
+                    </li>
+                </ul>
+            </div>
+            <div class="back">
+                <img src="{% static 'users/images/Subline_logo_no_text.png' %}">
+                <span>SubLine</span>
+            </div>
+        </div>
+        <script>
+            $('.business-card').click(function() {
+                $('.business-card').toggleClass('business-card-active');
+            });
+        </script>
+    </body>
+</html>
