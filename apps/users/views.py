@@ -14,25 +14,26 @@ def newUser(request):
 
 def createUser(request):
     #Validate user data
-    errors = User.objects.validateUser(request.POST)
+    postData = request.POST.copy()
+    postData["email"] = postData["email"].lower()
+    errors = User.objects.validateUser(postData)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
         return redirect('/users/new')
 
     #POST
-    print(request.POST)
     if request.method == 'POST':
 
         #Create new user
         newUser = User.objects.create(
-            firstName = request.POST['firstName'],
-            lastName = request.POST['lastName'],
-            email = request.POST['email'],
+            firstName = postData['firstName'],
+            lastName = postData['lastName'],
+            email = postData['email'],
             password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         )
         newUser.save()
-        user = User.objects.get(email = request.POST['email'])
+        user = User.objects.get(email = postData['email'])
         request.session['user'] = user.id
         request.session['firstName'] = user.firstName
 
@@ -72,7 +73,9 @@ def updateUser(request, userId):
     if request.method == "POST":
 
         #Validate data
-        errors = User.objects.validateUserEdit(request.POST)
+        postData = request.POST.copy()
+        postData["email"] = postData["email"].lower()
+        errors = User.objects.validateUserEdit(postData)
 
         if len(errors) > 0:
             for key, value in errors.items():
@@ -81,10 +84,11 @@ def updateUser(request, userId):
 
         #Update the user
         user = User.objects.get(id = userId)
-        user.firstName = request.POST['firstName'] or user.firstName
-        user.lastName = request.POST['lastName'] or user.lastName
-        user.email = request.POST['email'] or user.email
-        user.password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()) or user.password
+        user.firstName = postData['firstName'] or user.firstName
+        user.lastName = postData['lastName'] or user.lastName
+        user.email = postData['email'] or user.email
+        if postData["password"] != "":
+            user.password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         user.save()
 
     #Redirect to view user
@@ -108,7 +112,9 @@ def deleteUser(request, userId):
 
 def login(request):
     #Validate user
-    errors = User.objects.validateLogin(request.POST)
+    postData = request.POST.copy()
+    postData["email"] = postData["email"].lower()
+    errors = User.objects.validateLogin(postData)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
@@ -118,7 +124,7 @@ def login(request):
     if request.method == 'POST':
 
         #log user in (don't forget session)
-        user = User.objects.get(email = request.POST['email'])
+        user = User.objects.get(email = postData["email"])
         request.session['user'] = user.id
         request.session['firstName'] = user.firstName
 
