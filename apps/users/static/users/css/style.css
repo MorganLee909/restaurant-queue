@@ -60,6 +60,12 @@ html, body{
     width: 150px;
     margin-top: 15px;
     margin-bottom: 38px;
+    transition: 0.7s;
+}
+
+.logo:hover{
+    height: 175px;
+    width: 175px;
 }
 
 
