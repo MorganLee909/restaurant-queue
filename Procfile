@@ -1,0 +1,1 @@
+web: gunicorn restaurantQueue.wsgi --log-file -
