@@ -26,6 +26,8 @@ html, body{
     background-color: whitesmoke;
     display: inline-block;
     margin-top: 100px;
+    padding: 0 10px;
+    opacity: .95;
 }
 
 
@@ -55,4 +57,19 @@ h3{
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+input{
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 680px){
+    .button{
+        border-radius: 5px;
+        width: 50px;
+    }
+
+
+}
+
+
 
