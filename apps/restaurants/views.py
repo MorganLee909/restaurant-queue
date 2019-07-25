@@ -248,8 +248,6 @@ def restaurantDashboard(request):
     return render(request, "restaurants/dashboard.html", context)
 
 def addParty(request):
-    print('hitting party')
-    print(request.POST)
     if request.method == "POST":
         
         errors = LineMember.objects.validateLineMember(request.POST)
