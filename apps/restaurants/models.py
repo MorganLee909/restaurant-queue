@@ -92,12 +92,11 @@ class RestaurantManager(models.Manager):
         #Size
         try:
             size = int(tableData["tableSize"])
-        except ValueError:
-            errors["sizeNotInt"] = "Must enter an integer for size"
-        
             if size < 1:
                 errors["sizeTooSmall"] = "Size of table must be 1 or greater"
-
+        except ValueError:
+            errors["sizeNotInt"] = "Must enter an integer for table size"
+        
         return errors
 
 class Restaurant(models.Model):

@@ -36,7 +36,7 @@
                 <div class="userText">
                     <form class='addToLine' action="/restaurants/addParty" method="POST">
                         {% csrf_token %}
-                        <label>Party Email: </label><input type="email" name="partyEmail">
+                        <label>Party Email: </label><input type="email" name="partyEmail"></br>
                         <label>Party Size: </label><input type="text" name="partySize"> 
                         <input class="submitButton" type="submit" value="Add Party to Queue">
                     </form>
