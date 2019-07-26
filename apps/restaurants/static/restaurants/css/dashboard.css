@@ -4,35 +4,50 @@
     font-family: 'Saira', sans-serif;
     color: rgb(0,27,45);
 }
+
+body{
+    padding: 5px;
+}
+
 .header {
     display: inline-block;
     height: 100px;
-    width: 100%;
-}
-.header img {
-    height: 40px;
-    line-height: 40px;
-    display: inline-block;
-}
-.header h1 {
-    display: inline-block;
-    line-height: 40px;
-    width: 80%;
-    text-align: center;
-    margin: 20px;
-}
-.header a {
-    display: inline-block;
-    line-height: 40px;
-    font-weight: bold;
-    text-decoration: none;
-    color: rbg (255,99,107);
+    /* width: 100%; */
+    background: rgb(58, 58, 58);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
 }
 
-span {
-    color: rgb(255,99,107);
-    font-weight: bold;
-}
+    .header img {
+        height: 40px;
+        line-height: 40px;
+        display: inline-block;
+    }
+    .header h1 {
+        display: inline-block;
+        line-height: 40px;
+        width: 80%;
+        text-align: center;
+        margin: 20px;
+        color: rgb(210, 210, 210);
+        font-size: 40px;
+    }
+    .header a {
+        display: inline-block;
+        line-height: 40px;
+        font-weight: bold;
+        text-decoration: none;
+        /* color: rbg (255,99,107); */
+        color: rgb(210, 210, 210);
+    }
+
+    .header span {
+        color: #ff636b;
+        font-weight: bold;
+    }
 .container {
     width: 100%;
     display: inline-block;
