@@ -264,9 +264,17 @@ def addParty(request):
                 messages.error(request, value)
             return redirect("/restaurants/dashboard")
 
+        user = User.objects.get(email = postData["partyEmail"])
+        if hasattr(user, "seatUser"):
+            if user.seatUser.restaurant == request.session["restaurant"]:
+                messages.error(request, "User is already seated in your restaurant")
+            else:
+                messages.error(request, "User is currently seated at another restaurant")
+            return redirect("/restaurants/dashboard")
+
         newParty = LineMember(
             partySize = postData["partySize"],
-            member = User.objects.get(email = postData["partyEmail"])
+            member = user
         )
 
         newParty.save()
