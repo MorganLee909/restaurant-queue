@@ -232,8 +232,8 @@ body{
                 border-radius: 10px;
                 margin-top: 5px;
                 padding: 5px;
-                /* flex: 1 1 75px; */
                 height: 50%;
+                overflow: hidden;
             }
 
                 .tableQueue h2 {
@@ -253,7 +253,6 @@ body{
                         border-right: 3px solid #ff636b;
                         padding-right: 3px;
                         vertical-align: top;
-                        min-height: 250px;
                         overflow-y: auto;
                         max-height: 302px;
                         flex: 1 1 100px;
@@ -279,6 +278,7 @@ body{
                             border-radius: 10px;
                             width: 88%;
                             padding: 8px;
+                            cursor: pointer;
                         }
 
                         .userInfoTable img {
@@ -293,7 +293,7 @@ body{
                             display: flex;
                             justify-content: space-around;
                             align-items: center;
-                            vertical-align: top;
+                            flex-wrap: wrap;
                             margin: 0px;
                             padding: 0px;
                         }
@@ -307,7 +307,8 @@ body{
                         }
 
                         .userInfoTable .tableButtons {
-                            text-align: center;
+                            display: flex;
+                            justify-content: space-between;
                         }
 
 button a {

@@ -40,7 +40,7 @@
                 <form class='addToLine' action="/restaurants/addParty" method="POST">
                     {% csrf_token %}
                     <p>Email: </p><input type="email" name="partyEmail"></br>
-                    <p>Party Size: </p><input type="text" name="partySize"> 
+                    <p>Size: </p><input type="text" name="partySize"> 
                     <input class="submitButton" type="submit" value="Add Party to Queue">
                 </form>
 
@@ -69,7 +69,6 @@
                 <!------------------ THIS SECTION IS FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON THE TOP CENTER OF THE DASHBOARD ----------------->
                 <div class="tableLayout">
                     <h2>Table Information (Current Operations)</h2>
-
                     <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                     {% for table in tables %}
                         {% if table.party.member.lastName == NONE%}
@@ -88,8 +87,8 @@
                                 <p>{{table.name}}</br>Size: {{table.size}}</p>
                             </div>
                             <div class="currentTableInfo">
-                                <p>Party Name: {{table.party.member.lastName}}</p>
-                                <p>Seated Time: {{table.party.time.time}}</p>
+                                <p>{{table.party.member.lastName}}</p>
+                                <p>Seated at {{table.party.time.time}}</p>
                                 <button name="remove"><a href="/restaurants/checkoutParty/{{table.party.member.id}}">Checkout</a></button>
                             </div>
                         </div>
@@ -115,11 +114,6 @@
                                     <p>{{party.member.lastName}}</p></br>
                                     <p>{{party.waitTime}} min.</p></br>
                                 </div>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
-                                </div>
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -135,11 +129,6 @@
                                     <img src="{% static 'restaurants/images/userIcon.png' %}">
                                     <p>{{party.member.lastName}}</p></br>
                                     <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                                 </div>
                             </div>
                             {% endif %}
@@ -157,11 +146,6 @@
                                     <p>{{party.member.lastName}}</p></br>
                                     <p>{{party.waitTime}} min.</p></br>
                                 </div>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
-                                </div>
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -178,11 +162,6 @@
                                     <img src="{% static 'restaurants/images/userIcon.png' %}">
                                     <p>{{party.member.lastName}}</p></br>
                                     <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                                <div class="tableButtons">
-                                    <button action="notify" name="notify">Notify</button>
-                                    <button action="assign" name="assign">Assign</button>
-                                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                                 </div>
                             </div>
                             {% endif %}

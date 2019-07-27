@@ -295,17 +295,6 @@ def assignTable(request, tableId):
 
     messages.success(request, f"{seatedUser.member.lastName} assigned to table {myTable.name}")
     return redirect("/restaurants/dashboard")
-    
-def findCorrectUser(lineMembers, tableSize):
-    correctMember = None
-    for obj in lineMembers:
-        if obj.partySize <= tableSize:
-            if correctMember == None:
-                correctMember = obj
-            elif obj.joined < correctMember.joined:
-                correctMember = obj
-
-    return correctMember
 
 def removeParty(request, partyId):
     removeParty = LineMember.objects.get(member=partyId)
@@ -318,3 +307,15 @@ def checkout(request, partyId):
     messages.success(request, f"Party '{seatedUser.member.lastName}' has been checked out of the restaurant")
     seatedUser.delete()
     return redirect("/restaurants/dashboard")
+
+#Not a route
+def findCorrectUser(lineMembers, tableSize):
+    correctMember = None
+    for obj in lineMembers:
+        if obj.partySize <= tableSize:
+            if correctMember == None:
+                correctMember = obj
+            elif obj.joined < correctMember.joined:
+                correctMember = obj
+
+    return correctMember
