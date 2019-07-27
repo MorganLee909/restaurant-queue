@@ -48,75 +48,95 @@ body{
         color: #ff636b;
         font-weight: bold;
     }
+
 .container {
-    width: 100%;
-    display: inline-block;
-}
-.queue {
-    padding-top: 10px;
-    border: 3px solid rgb(0,27,45);
-    width: 20%;
-    min-height: 800px;
-    max-height: 800px;
-    display: inline-block;  
+    display: flex;
+    justify-content: space-around;
 }
 
-.queueScroll {
-    overflow-y: scroll;
-    margin-top: 4px;
-}
-.queue h2 {
-    text-align: center;
-}
+    .queue {
+        padding: 10px;
+        border: 3px solid black;
+        height: 800px;
+        display: inline-block;
+        flex: 1 0 300px;
+        margin: 5px;
+        border-radius: 10px;
+        background: rgb(58, 58, 58)
+    }
 
-.addToLine label {
-    display: inline-block;
-    width: 100px;
-}
+        .queueScroll {
+            overflow-y: scroll;
+            max-height: 600px;
+            margin-top: 4px;
+            border-radius: 10px;
+        }
 
-.addToLine input {
-    margin: 5px 5px;
-    width: 100px;
-}
+        .queue h2 {
+            text-align: center;
+            color: rgb(210, 210, 210);
+        }
 
-.addToLine .submitButton {
-    display: block;
-    margin: 0px auto;
-    width: auto;
-}
-.queue .userInfo {
-    margin-left: 2px;
-    margin-top: 5px;
-    display: inline-block;
-    border: 1px solid rgb(0,27,45);
-    width: 92%;
-    padding: 8px;
-}
-.queue img {
-    height: 75px;
-    border-radius: 50%;
-    border: 2px solid rgb(255,99,107);
-}
-.queue .userText {
-    display: inline-block;
-    vertical-align: top;
-}
+        .addToLine{
+            background: rgb(210, 210, 210);
+            border-radius: 10px;
+            padding: 15px;
+        }
 
-.userInfo button {
-    display: block;
-    margin: 0px auto;
-    padding: 0px;
-    width: auto;
-}
-.queue .userInfo p {
-    display: inline-block;
-    vertical-align: top;
-    padding: 0px;
-}
+            .addToLine p{
+                display: inline-block;
+                width: 35%;
+                margin-bottom: 5px;
+            }
+
+            .addToLine input {
+                display: inline-block;
+                width: 55%;
+                margin-bottom: 5px;
+            }
+
+            .addToLine .submitButton {
+                display: block;
+                margin: 0px auto;
+                width: auto;
+            }
+
+        .border{
+            margin: 10px auto 0 auto;
+            background: #ff636b;
+            height: 3px;
+            width: 85%;
+        }
+
+        .queue .userInfo {
+            margin-top: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgb(210, 210, 210);
+            border-radius: 10px;
+            padding: 8px;
+            cursor: pointer;
+        }
+        .queue img {
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgb(255,99,107);
+        }
+
+        .userInfo button {
+        }
+        .queue .userInfo p {
+            display: inline-block;
+            vertical-align: top;
+            padding: 0px;
+            color: rgb(58, 58, 58);
+        }
+
 .tableDisplays {
-    width: 79%;
-    display: inline-block;
-    vertical-align: top;
+    flex: 15 2 200px;
+    margin: 5px;
+    border: 3px solid black;
 }
 
 .tableQueue {
