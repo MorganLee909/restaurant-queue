@@ -5,281 +5,310 @@
     color: rgb(0,27,45);
 }
 
+html{
+    height: 100%;
+}
+
 body{
-    padding: 5px;
+    padding: 0 5px;
+    height: 100%;
 }
 
-.header {
-    display: inline-block;
-    height: 100px;
-    /* width: 100%; */
-    background: rgb(58, 58, 58);
-    border-radius: 10px;
+.outer-container{
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 25px;
+    flex-direction: column;
+    padding: 5px 0;
 }
 
-    .header img {
-        height: 40px;
-        line-height: 40px;
+    .header {
         display: inline-block;
-    }
-    .header h1 {
-        display: inline-block;
-        line-height: 40px;
-        width: 80%;
-        text-align: center;
-        margin: 20px;
-        color: rgb(210, 210, 210);
-        font-size: 40px;
-    }
-    .header a {
-        display: inline-block;
-        line-height: 40px;
-        font-weight: bold;
-        text-decoration: none;
-        /* color: rbg (255,99,107); */
-        color: rgb(210, 210, 210);
-    }
-
-    .header span {
-        color: #ff636b;
-        font-weight: bold;
-    }
-
-.container {
-    display: flex;
-    justify-content: space-around;
-}
-
-    .queue {
-        padding: 10px;
-        border: 5px solid black;
-        height: 780px;
-        display: inline-block;
-        flex: 1 0 300px;
-        margin: 5px;
+        height: 100px;
+        background: rgb(58, 58, 58);
         border-radius: 10px;
-        background: rgb(58, 58, 58)
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 25px;
+        border: 5px solid black;
     }
 
-        .queueScroll {
-            overflow-y: auto;
-            max-height: 600px;
-            margin-top: 4px;
-            border-radius: 10px;
+        .header img {
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
         }
 
-        .queue h2 {
+        .header h1 {
+            display: inline-block;
+            line-height: 40px;
+            width: 80%;
             text-align: center;
+            margin: 20px;
+            color: rgb(210, 210, 210);
+            font-size: 40px;
+        }
+
+        .header a {
+            display: inline-block;
+            line-height: 40px;
+            font-weight: bold;
+            text-decoration: none;
             color: rgb(210, 210, 210);
         }
 
-        .addToLine{
-            background: rgb(210, 210, 210);
-            border-radius: 10px;
-            padding: 15px;
+        .header span {
+            color: #ff636b;
+            font-weight: bold;
         }
 
-            .addToLine p{
-                display: inline-block;
-                width: 35%;
-                margin-bottom: 5px;
-            }
-
-            .addToLine input {
-                display: inline-block;
-                width: 55%;
-                margin-bottom: 5px;
-            }
-
-            .addToLine .submitButton {
-                display: block;
-                margin: 0px auto;
-                width: auto;
-            }
-
-        .border{
-            margin: 10px auto 0 auto;
-            background: #ff636b;
-            height: 3px;
-            width: 85%;
-        }
-
-        .queue .userInfo {
-            margin-top: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgb(210, 210, 210);
-            border-radius: 10px;
-            padding: 8px;
-            cursor: pointer;
-        }
-        .queue img {
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid rgb(255,99,107);
-        }
-
-        .queue .userInfo p {
-            display: inline-block;
-            vertical-align: top;
-            padding: 0px;
-            color: rgb(58, 58, 58);
-        }
-
-.tableLayout {
-    width: 99%;
-    min-height: 300px;
-    max-height: 400px;
-    background-color: rgb(58, 58, 58);
-    vertical-align: top;
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: auto;
-    justify-content: space-around;
-    flex: 15 2 200px;
-    margin: 5px;
-    border-radius: 10px;
-    border: 5px solid black;
-    padding: 10px;
-}
-
-    .tableLayout h2 {
-        text-align: center;
-        width: 100%;
-        height: 35px;
-        color: rgb(210, 210, 210);
-        margin-bottom: 5px;
-    }
-
-    .tableInfo {
-        border: 3px solid #ff636b;
-        max-width: 400px;
-        flex: 1 0 225px;
-        margin-top: 15px;
-        margin-left: 10px;
-        max-height: 90px;
-        background: rgb(210, 210, 210);
-        border-radius: 10px;
+    .container {
         display: flex;
-    }
-
-        .empty{
-            border: 3px solid green;
-        }
-
-        .table{
-            height: 75px;
-            flex: 0 0 75px;
-            border: 3px solid rgb(0,27,45);
-            margin: 5px 0 5px 5px;
-            display: inline-block;
-            text-align: center;
-            background-color: rgba(255,99,107,0.50);
-        }
-
-        .tableEmpty{
-            background-color: rgba(240,252,255,0.80);
-        }
-
-    .tableInfo .table p {
-        margin-top: 12px;
-    }
-
-    .tableInfo .tableEmpty p {
-        margin-top: 12px;
-    }
-
-    .tableInfo .currentTableInfo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: space-around;
         width: 100%;
+        height: 80%;
     }
 
-    .tableInfo .currentTableInfo button{
-        display: block;
-        margin: 0px auto;
-    }
+        .queue {
+            padding: 10px;
+            border: 5px solid black;
+            height: 95%;
+            flex: 1 2 200px;
+            border-radius: 10px;
+            background: rgb(58, 58, 58);
+            overflow: hidden;
+        }
 
-.tableQueue {
-    width: 99%;
-    height: 400px;
-    display: inline-block;
-    vertical-align: top;
-}
+            .queueScroll {
+                overflow-y: auto;
+                max-height: 74vh;
+                margin-top: 4px;
+                border-radius: 10px;
+            }
 
-.tableQueue h2 {
-    text-align: center;
-    width: 100%;
-}
+            .queue h2 {
+                text-align: center;
+                color: rgb(210, 210, 210);
+            }
 
-.tableQueue .tableSplit {
-    margin-top: 15px;
-    width: 24.5%;
-    border-right: 3px solid rgb(255,99,107);
-    display: inline-block;
-    vertical-align: top;
-    padding-bottom: 50px;
-    min-height: 250px;
-}
+            .addToLine{
+                background: rgb(210, 210, 210);
+                border-radius: 10px;
+                padding: 15px;
+            }
 
-.tableQueue .tableSplit h3 {
-    text-align: center;
-}
+                .addToLine p{
+                    display: inline-block;
+                    width: 35%;
+                    margin-bottom: 5px;
+                }
 
-.tableQueue .tableSplitEnd h3 {
-    text-align: center;
-}
+                .addToLine input {
+                    display: inline-block;
+                    width: 55%;
+                    margin-bottom: 5px;
+                }
 
-.tableQueue .tableSplitEnd {
-    margin-top: 15px;
-    width: 24.5%;
-    display: inline-block;
-}
+                .addToLine .submitButton {
+                    display: block;
+                    margin: 0px auto;
+                    width: auto;
+                }
 
-.userInfoTable {
-    margin-left: 8px;
-    margin-top: 5px;
-    display: inline-block;
-    border: 1px solid rgb(0,27,45);
-    width: 88%;
-    padding: 8px;
-}
+            .border{
+                margin: 10px auto 0 auto;
+                background: #ff636b;
+                height: 3px;
+                width: 85%;
+            }
 
-.userInfoTable img {
-    height: 35px;
-    border-radius: 50%;
-    border: 2px solid rgb(255,99,107);
-    display: inline-block;
-    vertical-align: top;
-}
+            .queue .userInfo {
+                margin-top: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: rgb(210, 210, 210);
+                border-radius: 10px;
+                padding: 8px;
+                cursor: pointer;
+            }
+            .queue img {
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid rgb(255,99,107);
+            }
 
-.userInfoTable .userText {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0px;
-    padding: 0px;
-}
+            .queue .userInfo p {
+                display: inline-block;
+                vertical-align: top;
+                padding: 0px;
+                color: rgb(58, 58, 58);
+            }
 
-.userInfoTable .userText p {
-    display: inline-block;
-    vertical-align: top;
-    padding: 0px;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
+        .subcontainer{
+            display: flex;
+            flex-direction: column;
+            margin-left: 5px;
+            flex: 15 2 200px;
+            height: 99%;
+        }
 
-.userInfoTable .tableButtons {
-    align-content: center;
-    padding-left: 15px;
-}
+            .tableLayout {
+                background-color: rgb(58, 58, 58);
+                display: flex; 
+                flex-wrap: wrap;
+                overflow-y: auto;
+                justify-content: space-around;
+                /* flex: 2 1 100px; */
+                height: 50%;
+                border-radius: 10px;
+                border: 5px solid black;
+                padding: 10px;
+            }
+
+                .tableLayout h2 {
+                    text-align: center;
+                    width: 100%;
+                    height: 35px;
+                    color: rgb(210, 210, 210);
+                    margin-bottom: 5px;
+                }
+
+                .tableInfo {
+                    border: 3px solid #ff636b;
+                    max-width: 400px;
+                    flex: 1 1 225px;
+                    margin-top: 15px;
+                    margin-left: 10px;
+                    max-height: 90px;
+                    background: rgb(210, 210, 210);
+                    border-radius: 10px;
+                    display: flex;
+                }
+
+                    .empty{
+                        border: 3px solid green;
+                    }
+
+                    .table{
+                        height: 75px;
+                        flex: 0 0 75px;
+                        border: 3px solid rgb(0,27,45);
+                        margin: 5px 0 5px 5px;
+                        display: inline-block;
+                        text-align: center;
+                        background-color: rgba(255,99,107,0.50);
+                    }
+
+                    .tableEmpty{
+                        background-color: rgba(240,252,255,0.80);
+                    }
+
+                .tableInfo .table p {
+                    margin-top: 12px;
+                }
+
+                .tableInfo .tableEmpty p {
+                    margin-top: 12px;
+                }
+
+                .tableInfo .currentTableInfo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-around;
+                    width: 100%;
+                }
+
+                .tableInfo .currentTableInfo button{
+                    display: block;
+                    margin: 0px auto;
+                }
+
+            .tableQueue {
+                border: 5px solid black;
+                background: rgb(58, 58, 58);
+                border-radius: 10px;
+                margin-top: 5px;
+                padding: 5px;
+                /* flex: 1 1 75px; */
+                height: 50%;
+            }
+
+                .tableQueue h2 {
+                    text-align: center;
+                    width: 100%;
+                    color: rgb(210, 210, 210);
+                }
+
+                .queue-flex{
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                }
+
+                    .tableQueue .tableSplit {
+                        margin-top: 15px;
+                        border-right: 3px solid #ff636b;
+                        padding-right: 3px;
+                        vertical-align: top;
+                        min-height: 250px;
+                        overflow-y: auto;
+                        max-height: 302px;
+                        flex: 1 1 100px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    .tableQueue .tableSplitEnd {
+                        border-right: none;
+                    }
+
+                        .tableQueue .tableSplit h3 {
+                            text-align: center;
+                            color: rgb(210, 210, 210);
+                        }
+
+                        .userInfoTable {
+                            margin-left: 8px;
+                            margin-top: 5px;
+                            display: inline-block;
+                            background: rgb(210, 210, 210);
+                            border-radius: 10px;
+                            width: 88%;
+                            padding: 8px;
+                        }
+
+                        .userInfoTable img {
+                            height: 40px;
+                            border-radius: 50%;
+                            border: 2px solid rgb(255,99,107);
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+
+                        .userInfoTable .userText {
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+                            vertical-align: top;
+                            margin: 0px;
+                            padding: 0px;
+                        }
+
+                        .userInfoTable .userText p {
+                            display: inline-block;
+                            vertical-align: top;
+                            padding: 0px;
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                        }
+
+                        .userInfoTable .tableButtons {
+                            text-align: center;
+                        }
 
 button a {
     text-decoration: none;
