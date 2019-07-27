@@ -56,8 +56,8 @@ body{
 
     .queue {
         padding: 10px;
-        border: 3px solid black;
-        height: 800px;
+        border: 5px solid black;
+        height: 780px;
         display: inline-block;
         flex: 1 0 300px;
         margin: 5px;
@@ -66,7 +66,7 @@ body{
     }
 
         .queueScroll {
-            overflow-y: scroll;
+            overflow-y: auto;
             max-height: 600px;
             margin-top: 4px;
             border-radius: 10px;
@@ -124,8 +124,6 @@ body{
             border: 2px solid rgb(255,99,107);
         }
 
-        .userInfo button {
-        }
         .queue .userInfo p {
             display: inline-block;
             vertical-align: top;
@@ -133,11 +131,82 @@ body{
             color: rgb(58, 58, 58);
         }
 
-.tableDisplays {
+.tableLayout {
+    width: 99%;
+    min-height: 300px;
+    max-height: 400px;
+    background-color: rgb(58, 58, 58);
+    vertical-align: top;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-around;
     flex: 15 2 200px;
     margin: 5px;
-    border: 3px solid black;
+    border-radius: 10px;
+    border: 5px solid black;
+    padding: 10px;
 }
+
+    .tableLayout h2 {
+        text-align: center;
+        width: 100%;
+        height: 35px;
+        color: rgb(210, 210, 210);
+        margin-bottom: 5px;
+    }
+
+    .tableInfo {
+        border: 3px solid #ff636b;
+        max-width: 400px;
+        flex: 1 0 225px;
+        margin-top: 15px;
+        margin-left: 10px;
+        max-height: 90px;
+        background: rgb(210, 210, 210);
+        border-radius: 10px;
+        display: flex;
+    }
+
+        .empty{
+            border: 3px solid green;
+        }
+
+        .table{
+            height: 75px;
+            flex: 0 0 75px;
+            border: 3px solid rgb(0,27,45);
+            margin: 5px 0 5px 5px;
+            display: inline-block;
+            text-align: center;
+            background-color: rgba(255,99,107,0.50);
+        }
+
+        .tableEmpty{
+            background-color: rgba(240,252,255,0.80);
+        }
+
+    .tableInfo .table p {
+        margin-top: 12px;
+    }
+
+    .tableInfo .tableEmpty p {
+        margin-top: 12px;
+    }
+
+    .tableInfo .currentTableInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .tableInfo .currentTableInfo button{
+        display: block;
+        margin: 0px auto;
+    }
 
 .tableQueue {
     width: 99%;
@@ -183,6 +252,7 @@ body{
     width: 88%;
     padding: 8px;
 }
+
 .userInfoTable img {
     height: 35px;
     border-radius: 50%;
@@ -190,12 +260,14 @@ body{
     display: inline-block;
     vertical-align: top;
 }
+
 .userInfoTable .userText {
     display: inline-block;
     vertical-align: top;
     margin: 0px;
     padding: 0px;
 }
+
 .userInfoTable .userText p {
     display: inline-block;
     vertical-align: top;
@@ -207,73 +279,6 @@ body{
 .userInfoTable .tableButtons {
     align-content: center;
     padding-left: 15px;
-}
-
-.tableLayout {
-    width: 99%;
-    min-height: 300px;
-    max-height: 400px;
-    background-color: rgb(201,201,201);
-    vertical-align: top;
-    margin-bottom: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    outline: 2px solid rgb(0,27,45);
-}
-
-.tableLayout h2 {
-    text-align: center;
-    width: 100%;
-    height: 35px;
-}
-
-.tableInfo {
-    outline: 1px solid rgb(255,99,107);
-    width: 24%;
-    margin-top: 15px;
-    margin-left: 10px;
-    max-height: 90px;
-}
-
-.tableInfo .Table{
-    height: 75px;
-    width: 75px;
-    border: 3px solid rgb(0,27,45);
-    margin: 5px;
-    display: inline-block;
-    text-align: center;
-    background-color: rgba(255,99,107,0.50);
-}
-
-.tableInfo .TableEmpty{
-    height: 75px;
-    width: 75px;
-    border: 3px solid rgb(0,27,45);
-    margin: 5px;
-    display: inline-block;
-    text-align: center;
-    background-color: rgba(240,252,255,0.80);
-}
-
-.tableInfo .Table p {
-    margin-top: 12px;
-}
-
-.tableInfo .TableEmpty p {
-    margin-top: 12px;
-}
-
-.tableInfo .currentTableInfo {
-    display: inline-block;
-    width: 67%;
-    height: 100%;
-    vertical-align: top;
-}
-
-.tableInfo .currentTableInfo button{
-    display: block;
-    margin: 0px auto;
 }
 
 button a {

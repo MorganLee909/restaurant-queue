@@ -47,15 +47,15 @@
 
             <!-- This is the iterative Django DB Call to display all users currently in the queue -->
             <div class="queueScroll">
-            {% for party in parties %}
-                <div class="userInfo">
-                    <img src="{% static 'restaurants/images/userIcon.png' %}">
-                    <div class="userText">
-                        <p>{{party.member.lastName}} </p></br>
+                {% for party in parties %}
+                    <div class="userInfo">
+                        <img src="{% static 'restaurants/images/userIcon.png' %}">
+                        <div class="userText">
+                            <p>{{party.member.lastName}} </p></br>
+                        </div>
+                        <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                     </div>
-                    <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
-                </div>
-            {% endfor %}
+                {% endfor %}
             </div>
             <!-- This is the iterative Django DB Call to display all users currently in the queue -->
         </div>
@@ -66,16 +66,15 @@
 
 
         <!------------------ THIS SECTION IS FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON THE TOP CENTER OF THE DASHBOARD ----------------->
-        <div class="tableDisplays">
             <div class="tableLayout">
                 <h2>Table Information (Current Operations)</h2>
 
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
                     {% if table.party.member.lastName == NONE%}
-                    <div class="tableInfo">
-                        <div class="TableEmpty">
-                            <p>{{table.name}}</br>Size:{{table.size}}</p>
+                    <div class="tableInfo empty">
+                        <div class="table tableEmpty">
+                            <p>{{table.name}}</br>Size: {{table.size}}</p>
                         </div>
                         <div class="currentTableInfo">
                             <p style="text-align: center;">No Party Seated</p><br>
@@ -84,8 +83,8 @@
                     </div>
                     {% else %}
                     <div class="tableInfo">
-                        <div class="Table">
-                            <p>{{table.name}}</br>Size:{{table.size}}</p>
+                        <div class="table">
+                            <p>{{table.name}}</br>Size: {{table.size}}</p>
                         </div>
                         <div class="currentTableInfo">
                             <p>Party Name: {{table.party.member.lastName}}</p>
@@ -98,7 +97,6 @@
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
 
             </div>
-        </div>
             <!--------------------- THIS ENDS THE SECTION FOR THE TABLE DISPLAY FOR USERS CURRENTLY SAT ON TOP OF THE DASHBOARD ----------->
     </div>
         
