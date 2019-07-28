@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
-from apps.restaurants.models import Restaurant
+from apps.restaurants.models import Restaurant, Table
 import bcrypt
 import datetime
 
@@ -143,28 +143,30 @@ def userDashboard(request):
         return redirect('/')
 
     #Renders the main page for the user
-    currentUser = User.objects.get(id = request.session['user'])
+    user = User.objects.get(id = request.session['user'])
 
     context = {
-        "user" : currentUser,
+        "user" : user,
     }
     
-    if hasattr(currentUser, "line"):
-        userLine = LineMember.objects.get(member = currentUser)
-        userRestaurant = Restaurant.objects.get(line = userLine)
-        users = LineMember.objects.filter(restaurant = userRestaurant)
+    if user.restaurant != None:
+        users = User.objects.filter(restaurant = user.restaurant)
 
-        waitTime = (datetime.datetime.now() - currentUser.line.joined.replace(tzinfo = None)).total_seconds()
+        waitTime = (datetime.datetime.now() - user.time.replace(tzinfo = None)).total_seconds()
         waitTime = round(waitTime // 60)
         
         position = 1
-        for user in users:
-            if user.joined < currentUser.line.joined:
+        for lineMember in users:
+            if lineMember.time < user.time:
                 position += 1
 
         context["members"] = users
         context["waitTime"] = waitTime
         context["position"] = position
+        context["restaurant"] = Restaurant.objects.get(user = user).name
+
+    if user.table != None:
+        context["restaurant"] = Table.objects.get(user = user).restaurant.name
 
     return render(request, 'users/dashboard.html', context)
 
@@ -177,9 +179,10 @@ def deleteLine(request, userId):
         messages.error(request, "You do not have authorization to do that")
         return redirect('/users/dashboard')
 
-    #Delete user from database
-    delLine = LineMember.objects.get(member = userId)
-    delLine.delete()
+    #Remove user from restaurant
+    user = User.objects.get(id = userId)
+    user.restaurant = None
+    user.save()
 
     #Return to dashboard
     return redirect('/users/dashboard')

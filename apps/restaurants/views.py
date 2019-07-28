@@ -243,35 +243,6 @@ def restaurantDashboard(request):
 
     return render(request, "restaurants/dashboard.html", context)
 
-# def addParty(request):
-#     if request.method == "POST":
-        
-#         postData = request.POST.copy()
-#         postData["partyEmail"] = postData["partyEmail"].lower()
-#         errors = LineMember.objects.validateLineMember(postData)
-#         if len(errors) > 0:
-#             for key, value in errors.items():
-#                 messages.error(request, value)
-#             return redirect("/restaurants/dashboard")
-
-#         user = User.objects.get(email = postData["partyEmail"])
-#         if hasattr(user, "seatUser"):
-#             if user.seatUser.restaurant == request.session["restaurant"]:
-#                 messages.error(request, "User is already seated in your restaurant")
-#             else:
-#                 messages.error(request, "User is currently seated at another restaurant")
-#             return redirect("/restaurants/dashboard")
-
-#         newParty = LineMember(
-#             partySize = postData["partySize"],
-#             member = user
-#         )
-
-#         newParty.save()
-#         newParty.restaurant.add(Restaurant.objects.get(id = request.session["restaurant"]))
-
-#     return redirect("/restaurants/dashboard")
-
 def addParty(request):
     if request.method == "POST":
         postData = request.POST.copy()
@@ -284,28 +255,6 @@ def addParty(request):
 
     return redirect("/restaurants/dashboard")
 
-# def assignTable(request, tableId):
-#     myTable = Table.objects.get(id = tableId)
-
-#     lineMembers = LineMember.objects.filter(restaurant = Restaurant.objects.get(id = request.session["restaurant"]))
-
-#     lineMember = findCorrectUser(lineMembers, myTable.size)
-#     if lineMember == None:
-#         messages.success(request, "No parties to assign to this table")
-#         return redirect("/restaurants/dashboard")
-    
-#     seatedUser = SeatedUser(
-#         member = lineMember.member
-#     )
-#     seatedUser.save()
-#     seatedUser.restaurant.add(Restaurant.objects.get(line = lineMember))
-#     myTable.party = seatedUser
-#     myTable.save()
-#     lineMember.delete()
-
-#     messages.success(request, f"{seatedUser.member.lastName} assigned to table {myTable.name}")
-#     return redirect("/restaurants/dashboard")
-
 def assignTable(request, tableId):
     table = Table.objects.get(id = tableId)
     customers = User.objects.filter(restaurant = Restaurant.objects.get(id = request.session["restaurant"]))
@@ -315,6 +264,7 @@ def assignTable(request, tableId):
         messages.success(request, "No parties to assign to this table")
         return redirect("/restaurants/dashboard")
 
+    customer.restaurant = None
     customer.table = table
     customer.time = datetime.datetime.now()
     customer.save()
@@ -324,8 +274,8 @@ def assignTable(request, tableId):
 
 def removeParty(request, partyId):
     user = User.objects.get(id = partyId)
-    user.restaurant.remove()
-    user.table.remove()
+    user.restaurant = None
+    user.table = None
     user.save()
     return redirect("/restaurants/dashboard")
 
@@ -343,7 +293,7 @@ def findCorrectUser(lineMembers, tableSize):
         if obj.partySize <= tableSize:
             if correctMember == None:
                 correctMember = obj
-            elif obj.joined < correctMember.joined:
+            elif obj.time < correctMember.time:
                 correctMember = obj
 
     return correctMember
