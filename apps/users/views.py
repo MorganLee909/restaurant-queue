@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from datetime import datetime
+from pytz import timezone
+from tzlocal import get_localzone
+import bcrypt
+
 from .models import *
 from apps.restaurants.models import Restaurant, Table
-import bcrypt
-import datetime
+
 
 def registerAndLogin(request):
     #Display register/login page
@@ -151,8 +156,8 @@ def userDashboard(request):
     
     if user.restaurant != None:
         users = User.objects.filter(restaurant = user.restaurant)
-
-        waitTime = (datetime.datetime.now() - user.time.replace(tzinfo = None)).total_seconds()
+        
+        waitTime = (datetime.now() - user.time.replace(tzinfo = None)).total_seconds()
         waitTime = round(waitTime // 60)
         
         position = 1
@@ -164,9 +169,13 @@ def userDashboard(request):
         context["waitTime"] = waitTime
         context["position"] = position
         context["restaurant"] = Restaurant.objects.get(user = user).name
+        context["localTime"] = user.time.astimezone(get_localzone())
+        print("%" * 100)
+        print(context["localTime"])
 
     if user.table != None:
         context["restaurant"] = Table.objects.get(user = user).restaurant.name
+        context["localTime"] = user.time.astimezone(get_localzone())
 
     return render(request, 'users/dashboard.html', context)
 

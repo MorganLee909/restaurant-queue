@@ -230,8 +230,6 @@ def restaurantDashboard(request):
     print(parties)
 
     for party in parties:
-        print("%" * 100)
-        print(party.restaurant)
         difference = datetime.datetime.now() - party.time.replace(tzinfo = None)
         party.waitTime = round(int(difference.total_seconds()) / 60)
 

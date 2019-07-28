@@ -33,7 +33,7 @@
                     <div class="user">
                         <h1>Hi {{user.firstName}}</h1>
                         <h3>You are in line at {{restaurant}}</h3>
-                        <h3>You entered at: {{user.time.time}}</h3>
+                        <h3>You entered at: {{localTime.time}}</h3>
                         <h3>Your position is: {{position}}</h3>
                         <a href="/{{user.id}}/line/destroy">Leave</a>
     
@@ -43,7 +43,7 @@
                         <div class="user">
                             <h1>Hi {{user.firstName}}</h1>
                             <h3>You are currently dining at {{restaurant}}</h3>
-                            <h3>You were seated at {{user.time.time}}</h3>
+                            <h3>You were seated at {{localTime}}</h3>
                         </div>
                     {% else %}
                         <div class="user">
