@@ -54,15 +54,12 @@
             <div class="userInfo">
                 <img src="{% static 'restaurants/images/userIcon.png' %}">
                 <div class="userText">
-                    <p>Party Name: {{party.member.lastName}} </p></br>
+                    <p>Party Name: {{party.lastName}} </p></br>
                     <p>Party Size: {{party.partySize}}</p></br>
                     <p>Wait Time: {{party.waitTime}} min</p></br>
                 </div>
                 <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
             </div>
-            {% endfor %}
-            {% for party in partiesWait%}
-            <h1>Anything</h1>
             {% endfor %}
             </div>
             <!-- This is the iterative Django DB Call to display all users currently in the queue -->
@@ -79,7 +76,7 @@
 
                 <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                 {% for table in tables %}
-                    {% if table.party.member.lastName == NONE%}
+                    {% if not table.user %}
                     <div class="tableInfo">
                         <div class="TableEmpty">
                             <p>{{table.name}}</br>Size:{{table.size}}</p>
@@ -95,9 +92,9 @@
                             <p>{{table.name}}</br>Size:{{table.size}}</p>
                         </div>
                         <div class="currentTableInfo">
-                            <p>Party Name: {{table.party.member.lastName}}</p>
-                            <p>Seated Time: {{table.party.time.time}}</p>
-                            <button name="remove"><a href="/restaurants/checkoutParty/{{table.party.member.id}}">Checkout</a></button>
+                            <p>Party Name: {{table.user.lastName}}</p>
+                            <p>Seated Time: {{table.user.time.time}}</p>
+                            <button name="remove"><a href="/restaurants/checkoutParty/{{table.user.id}}">Checkout</a></button>
                         </div>
                     </div>
                     {% endif %}
@@ -119,20 +116,20 @@
                     <!-- This iterates through users with a party size of one -->
                     <h3>Party: 1+ </h3>
                     {% for party in parties %}
-                    {% if party.partySize == 1%}
-                    <div class="userInfoTable">
-                        <img src="{% static 'restaurants/images/userIcon.png' %}">
-                        <div class="userText">
-                            <p>Party Name: {{party.member.lastName}}</p></br>
-                            <p>Wait Time: {{party.waitTime}} min</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                        {% if party.partySize == 1 %}
+                            <div class="userInfoTable">
+                                <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                <div class="userText">
+                                    <p>Party Name: {{party.lastName}}</p></br>
+                                    <p>Wait Time: {{party.waitTime}} min</p></br>
+                                    <div class="tableButtons">
+                                        <button action="notify" name="notify">Notify</button>
+                                        <button action="assign" name="assign">Assign</button>
+                                        <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </div>
 
@@ -141,20 +138,20 @@
                     <!-- This iterates through users with a party size of two -->
                     <h3>Party: 2 </h3>
                     {% for party in parties %}
-                    {% if party.partySize == 2%}
-                    <div class="userInfoTable">
-                        <img src="{% static 'restaurants/images/userIcon.png' %}">
-                        <div class="userText">
-                            <p>Party Name: {{party.member.lastName}}</p></br>
-                            <p>Wait Time: {{party.waitTime}} min</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                        {% if party.partySize == 2 %}
+                            <div class="userInfoTable">
+                                <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                <div class="userText">
+                                    <p>Party Name: {{party.lastName}}</p></br>
+                                    <p>Wait Time: {{party.waitTime}} min</p></br>
+                                    <div class="tableButtons">
+                                        <button action="notify" name="notify">Notify</button>
+                                        <button action="assign" name="assign">Assign</button>
+                                        <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </div>
 
@@ -163,20 +160,20 @@
                     <!-- This iterates through users with a party size of three or four -->
                     <h3>Party: 3 - 4 </h3>
                     {% for party in parties %}
-                    {% if party.partySize == 4 or party.partySize == 3%}
-                    <div class="userInfoTable">
-                        <img src="{% static 'restaurants/images/userIcon.png' %}">
-                        <div class="userText">
-                            <p>Party Name: {{party.member.lastName}}</p></br>
-                            <p>Wait Time: {{party.waitTime}} min</p></br>
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                        {% if party.partySize == 4 or party.partySize == 3 %}
+                            <div class="userInfoTable">
+                                <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                <div class="userText">
+                                    <p>Party Name: {{party.lastName}}</p></br>
+                                    <p>Wait Time: {{party.waitTime}} min</p></br>
+                                    <div class="tableButtons">
+                                        <button action="notify" name="notify">Notify</button>
+                                        <button action="assign" name="assign">Assign</button>
+                                        <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </div>
 
@@ -185,22 +182,22 @@
                     <!-- This iterates through users with a party size of five or greater -->
                     <h3>Party: 5+ </h3>
                     {% for party in parties %}
-                    {% if party.partySize > 4%}
-                    <div class="userInfoTable">
-                        <img src="{% static 'restaurants/images/userIcon.png' %}">
-                        <div class="userText">
-                            <p>Party Name: {{party.member.lastName}}</p></br>
+                        {% if party.partySize > 4%}
+                            <div class="userInfoTable">
+                                <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                <div class="userText">
+                                    <p>Party Name: {{party.lastName}}</p></br>
 
-                            <p>Wait Time: {{party.waitTime}} min</p></br>
+                                    <p>Wait Time: {{party.waitTime}} min</p></br>
 
-                            <div class="tableButtons">
-                                <button action="notify" name="notify">Notify</button>
-                                <button action="assign" name="assign">Assign</button>
-                                <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                                    <div class="tableButtons">
+                                        <button action="notify" name="notify">Notify</button>
+                                        <button action="assign" name="assign">Assign</button>
+                                        <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endif %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

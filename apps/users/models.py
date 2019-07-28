@@ -100,13 +100,14 @@ class User(models.Model):
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
     time = models.DateTimeField(null = True)
+    partySize = models.IntegerField(default = 0)
     restaurant = models.ForeignKey(
         Restaurant, 
         related_name = "user",
         null = True,
         on_delete = models.SET_NULL
     )
-    table = models.ForeignKey(
+    table = models.OneToOneField(
         Table,
         related_name = "user",
         null = True,

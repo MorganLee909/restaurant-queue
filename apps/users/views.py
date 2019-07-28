@@ -35,7 +35,6 @@ def createUser(request):
         newUser.save()
         user = User.objects.get(email = postData['email'])
         request.session['user'] = user.id
-        request.session['firstName'] = user.firstName
 
         #Redirect to user dashboard
         return redirect('/users/dashboard') 
@@ -66,7 +65,7 @@ def updateUser(request, userId):
         messages.error(request, 'You must be logged in.')
         return redirect('/')
     if request.session['user'] != int(userId):
-        messages.error(request, 'You can not edit someone else\'s page.')
+        messages.error(request, 'You cannot edit someone else\'s page.')
         return redirect(f'/users/dashboard')
 
     #POST
@@ -126,7 +125,6 @@ def login(request):
         #log user in (don't forget session)
         user = User.objects.get(email = postData["email"])
         request.session['user'] = user.id
-        request.session['firstName'] = user.firstName
 
         #Redirect to dashboard
         return redirect('/users/dashboard')
@@ -146,7 +144,6 @@ def userDashboard(request):
 
     #Renders the main page for the user
     currentUser = User.objects.get(id = request.session['user'])
-
 
     context = {
         "user" : currentUser,
