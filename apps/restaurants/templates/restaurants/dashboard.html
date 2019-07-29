@@ -50,11 +50,12 @@
                 <div class="queueScroll">
                     {% for party in parties %}
                         <div class="userInfo">
-                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                            <div class="modal-btn">{{party.id}}</div>
+                            <img user="{{party}}" src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
                                 <p>{{party.lastName}} </p></br>
                             </div>
-                            <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
+                            <button name="remove"><a href="/restaurants/removeParty/{{party.id}}">Remove</a></button>
                         </div>
                     {% endfor %}
                 </div>
@@ -173,5 +174,33 @@
             <!-------------------------- THIS ENDS THE SECTION FOR THE BY SIZE TABLE QUEUE AT THE BOTTOM OF THE DASHBOARD ------------------->
         </div>
     </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <h1 class="name"></h1>
+            <h2 class="wait"></h2>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var users = "{{parties}}";
+        console.log(users);
+        var userBtns = document.querySelectorAll(".modal-btn");
+        var modal = document.querySelector(".modal");
+
+        usersBtns.forEach(function(button){
+            var id = Number(button.textContent);
+            console.log(typeof(id));
+
+            button.addEventListener("click", function(){
+
+                modal.style.visibility = "visible";
+            });
+        });
+
+        modal.addEventListener("click", function(){
+            modal.style.visibility = "hidden";
+        });
+    </script>
 </body>
 </html>

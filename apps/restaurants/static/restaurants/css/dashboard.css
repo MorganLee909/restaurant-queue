@@ -131,8 +131,9 @@ body{
                 background: rgb(210, 210, 210);
                 border-radius: 10px;
                 padding: 8px;
-                cursor: pointer;
+                position: relative;
             }
+
             .queue img {
                 height: 40px;
                 border-radius: 50%;
@@ -160,7 +161,6 @@ body{
                 flex-wrap: wrap;
                 overflow-y: auto;
                 justify-content: space-around;
-                /* flex: 2 1 100px; */
                 height: 50%;
                 border-radius: 10px;
                 border: 5px solid black;
@@ -314,3 +314,41 @@ body{
 button a {
     text-decoration: none;
 }
+
+/* Modal */
+.modal-btn{
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    width: 65%;
+}
+
+.modal{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(11, 20, 8, 0.79);
+  opacity: 1;
+  visibility: hidden;
+  transform: scale(1.1);
+}
+
+    .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0a7238;
+    font-family: "PT Sans", sans-serif;
+    width: 32%;
+    height: 18%;
+    display: flex;
+    align-items: center;
+    padding: 70px;
+    background-size: cover;
+    }
