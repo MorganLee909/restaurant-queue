@@ -22,11 +22,11 @@
 
         <div class = "messageBlock">
             {% if messages %}
-            <ul>
+            <ol>
                 {% for message in messages %}
                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
-            </ul>
+            </ol>
             {% endif %}
         </div>
 
