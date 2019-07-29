@@ -50,7 +50,7 @@
                 <div class="queueScroll">
                     {% for party in parties %}
                         <div class="userInfo">
-                            <div class="modal-btn" data-first-name="{{party.firstName}}" data-last-name="{{party.lastName}}"></div>
+                            <div class="modal-btn" data-firstName="{{party.first-name}}" data-lastName="{{party.last-name}}"></div>
                             <img user="{{party}}" src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
                                 <p>{{party.lastName}} </p></br>
@@ -189,11 +189,13 @@
 
         userBtns.forEach(function(button){
 
-            button.addEventListener("click", () =>{
+            button.addEventListener("click", function(){
                 var userData = {
                     firstName: this.dataset.first-name,
-                    lastName: this.dataset.last-name
+                    lastName: typeof(this.dataset.last-name)
                 }
+                console.log(userData.firstName);
+                console.log(userData.lastName);
                 
                 modalName.innerText = userData.firstName + " " + userData.lastName
                 modal.style.visibility = "visible";
