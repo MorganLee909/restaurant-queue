@@ -50,7 +50,7 @@
                 <div class="queueScroll">
                     {% for party in parties %}
                         <div class="userInfo">
-                            <div class="modal-btn">{{party.id}}</div>
+                            <div class="modal-btn" data-first-name="{{party.firstName}}" data-last-name="{{party.lastName}}"></div>
                             <img user="{{party}}" src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
                                 <p>{{party.lastName}} </p></br>
@@ -183,17 +183,19 @@
     </div>
 
     <script type="text/javascript">
-        var users = "{{parties}}";
-        console.log(users);
         var userBtns = document.querySelectorAll(".modal-btn");
         var modal = document.querySelector(".modal");
+        var modalName = document.querySelector(".name");
 
-        usersBtns.forEach(function(button){
-            var id = Number(button.textContent);
-            console.log(typeof(id));
+        userBtns.forEach(function(button){
 
-            button.addEventListener("click", function(){
-
+            button.addEventListener("click", () =>{
+                var userData = {
+                    firstName: this.dataset.first-name,
+                    lastName: this.dataset.last-name
+                }
+                
+                modalName.innerText = userData.firstName + " " + userData.lastName
                 modal.style.visibility = "visible";
             });
         });
