@@ -1,5 +1,6 @@
 from django.db import models
 import bcrypt
+from apps.restaurants.models import Restaurant, Table
 
 class DataManager(models.Manager):
     def validateUser(self, userData):
@@ -93,44 +94,25 @@ class DataManager(models.Manager):
         
         return errors
 
-    def validateLineMember(self, lineMemberData):
-        errors = {}
-
-        #Email
-        try:
-            user = User.objects.get(email = lineMemberData["partyEmail"])
-        except:
-            errors["noUser"] = f"User does not exist for {lineMemberData['partyEmail']}"
-            return errors
-
-        #Party size
-        try:
-            int(lineMemberData["partySize"])
-        except ValueError:
-            errors["notNumber"] = "Must enter an integer"
-
-        #Uniqueness
-        if hasattr(user, "line"):
-            errors["inLine"] = "User is already in a line"
-
-        return errors
-
 class User(models.Model):
     firstName = models.CharField(max_length = 50)
     lastName = models.CharField(max_length = 50)
     email = models.CharField(max_length = 100)
     password = models.CharField(max_length = 50)
+    time = models.DateTimeField(null = True)
+    partySize = models.IntegerField(default = 0)
+    restaurant = models.ForeignKey(
+        Restaurant, 
+        related_name = "user",
+        null = True,
+        on_delete = models.SET_NULL
+    )
+    table = models.OneToOneField(
+        Table,
+        related_name = "user",
+        null = True,
+        on_delete = models.SET_NULL
+    )
     createdAt = models.DateTimeField(auto_now_add = True)
     updatedAt = models.DateTimeField(auto_now = True)
-    objects = DataManager()
-
-class LineMember(models.Model):
-    joined = models.DateTimeField(auto_now_add = True)
-    partySize = models.IntegerField()
-    member = models.OneToOneField(User, related_name = "line", null = True)
-    objects = DataManager()
-
-class SeatedUser(models.Model):
-    time = models.DateTimeField(auto_now_add = True)
-    member = models.OneToOneField(User, related_name = "seatUser", null = True, on_delete = models.SET_NULL)
     objects = DataManager()

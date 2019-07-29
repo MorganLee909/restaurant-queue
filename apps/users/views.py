@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import *
-from apps.restaurants.models import Restaurant
+
+from datetime import datetime
+from pytz import timezone
+from tzlocal import get_localzone
 import bcrypt
-import datetime
+
+from .models import *
+from apps.restaurants.models import Restaurant, Table
+
 
 def registerAndLogin(request):
     #Display register/login page
@@ -35,7 +40,6 @@ def createUser(request):
         newUser.save()
         user = User.objects.get(email = postData['email'])
         request.session['user'] = user.id
-        request.session['firstName'] = user.firstName
 
         #Redirect to user dashboard
         return redirect('/users/dashboard') 
@@ -66,7 +70,7 @@ def updateUser(request, userId):
         messages.error(request, 'You must be logged in.')
         return redirect('/')
     if request.session['user'] != int(userId):
-        messages.error(request, 'You can not edit someone else\'s page.')
+        messages.error(request, 'You cannot edit someone else\'s page.')
         return redirect(f'/users/dashboard')
 
     #POST
@@ -126,7 +130,6 @@ def login(request):
         #log user in (don't forget session)
         user = User.objects.get(email = postData["email"])
         request.session['user'] = user.id
-        request.session['firstName'] = user.firstName
 
         #Redirect to dashboard
         return redirect('/users/dashboard')
@@ -145,29 +148,34 @@ def userDashboard(request):
         return redirect('/')
 
     #Renders the main page for the user
-    currentUser = User.objects.get(id = request.session['user'])
-
+    user = User.objects.get(id = request.session['user'])
 
     context = {
-        "user" : currentUser,
+        "user" : user,
     }
     
-    if hasattr(currentUser, "line"):
-        userLine = LineMember.objects.get(member = currentUser)
-        userRestaurant = Restaurant.objects.get(line = userLine)
-        users = LineMember.objects.filter(restaurant = userRestaurant)
-
-        waitTime = (datetime.datetime.now() - currentUser.line.joined.replace(tzinfo = None)).total_seconds()
+    if user.restaurant != None:
+        users = User.objects.filter(restaurant = user.restaurant)
+        
+        waitTime = (datetime.now() - user.time.replace(tzinfo = None)).total_seconds()
         waitTime = round(waitTime // 60)
         
         position = 1
-        for user in users:
-            if user.joined < currentUser.line.joined:
+        for lineMember in users:
+            if lineMember.time < user.time:
                 position += 1
 
         context["members"] = users
         context["waitTime"] = waitTime
         context["position"] = position
+        context["restaurant"] = Restaurant.objects.get(user = user).name
+        context["localTime"] = user.time.astimezone(get_localzone())
+        print("%" * 100)
+        print(context["localTime"])
+
+    if user.table != None:
+        context["restaurant"] = Table.objects.get(user = user).restaurant.name
+        context["localTime"] = user.time.astimezone(get_localzone())
 
     return render(request, 'users/dashboard.html', context)
 
@@ -180,9 +188,10 @@ def deleteLine(request, userId):
         messages.error(request, "You do not have authorization to do that")
         return redirect('/users/dashboard')
 
-    #Delete user from database
-    delLine = LineMember.objects.get(member = userId)
-    delLine.delete()
+    #Remove user from restaurant
+    user = User.objects.get(id = userId)
+    user.restaurant = None
+    user.save()
 
     #Return to dashboard
     return redirect('/users/dashboard')
