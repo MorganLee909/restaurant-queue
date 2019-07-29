@@ -43,7 +43,6 @@
             <h2>Add Table To Restaurant Floor</h2>
                 <form action="/restaurants/tables/create" method="POST">
                 {% csrf_token %}
-                
                     <label><span>Table Name:</span><input type="text" name="tableName"></label>
                     <label><span>Table Size:</span><input type="text" name="tableSize"></label>
                     <input class="submitButton" type="submit" value="Add Table To Floor">
@@ -52,9 +51,9 @@
         <div class = "editBox">
             <h2>Current Tables on Floor:</h2>
                 {% for table in tables%}
-                <p><span>Name:</span> {{table.name}} <span>Size:</span> {{table.size}}</p>
+                    <p><span>Name:</span> {{table.name}} <span>Size:</span> {{table.size}}</p>
+                    <a href="/restaurants/tables/{{table.id}}/destroy">Remove</a>
                 {% endfor %}
-                
         </div>
     </div>
 </body>
