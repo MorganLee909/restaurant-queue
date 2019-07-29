@@ -52,7 +52,7 @@
                         <div class="userInfo">
                             <img src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
-                                <p>{{party.member.lastName}} </p></br>
+                                <p>{{party.lastName}} </p></br>
                             </div>
                             <button name="remove"><a href="/restaurants/removeParty/{{party.member.id}}">Remove</a></button>
                         </div>
@@ -71,7 +71,7 @@
                     <h2>Table Information (Current Operations)</h2>
                     <!-- This is the iterative Django DB Call to display all tables the host has added to the database-->
                     {% for table in tables %}
-                        {% if table.party.member.lastName == NONE%}
+                        {% if not table.user%}
                         <div class="tableInfo empty">
                             <div class="table tableEmpty">
                                 <p>{{table.name}}</br>Size: {{table.size}}</p>
@@ -87,9 +87,9 @@
                                 <p>{{table.name}}</br>Size: {{table.size}}</p>
                             </div>
                             <div class="currentTableInfo">
-                                <p>{{table.party.member.lastName}}</p>
-                                <p>Seated at {{table.party.time.time}}</p>
-                                <button name="remove"><a href="/restaurants/checkoutParty/{{table.party.member.id}}">Checkout</a></button>
+                                <p>{{table.user.lastName}}</p>
+                                <p>Seated at {{table.user.time.time}}</p>
+                                <button name="remove"><a href="/restaurants/checkoutParty/{{table.user.id}}">Checkout</a></button>
                             </div>
                         </div>
                         {% endif %}
@@ -107,15 +107,15 @@
                             <!-- This iterates through users with a party size of one -->
                             <h3>Party: 1 </h3>
                             {% for party in parties %}
-                            {% if party.partySize == 1%}
-                            <div class="userInfoTable">
-                                <div class="userText">
-                                    <img src="{% static 'restaurants/images/userIcon.png' %}">
-                                    <p>{{party.member.lastName}}</p></br>
-                                    <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if party.partySize == 1%}
+                                    <div class="userInfoTable">
+                                        <div class="userText">
+                                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                            <p>{{party.lastName}}</p></br>
+                                            <p>{{party.waitTime}} min.</p></br>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
 
@@ -123,15 +123,15 @@
                             <!-- This iterates through users with a party size of two -->
                             <h3>Party: 2 </h3>
                             {% for party in parties %}
-                            {% if party.partySize == 2%}
-                            <div class="userInfoTable">
-                                <div class="userText">
-                                    <img src="{% static 'restaurants/images/userIcon.png' %}">
-                                    <p>{{party.member.lastName}}</p></br>
-                                    <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if party.partySize == 2%}
+                                    <div class="userInfoTable">
+                                        <div class="userText">
+                                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                            <p>{{party.lastName}}</p></br>
+                                            <p>{{party.waitTime}} min.</p></br>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
 
@@ -139,15 +139,15 @@
                             <!-- This iterates through users with a party size of three or four -->
                             <h3>Party: 3 - 4 </h3>
                             {% for party in parties %}
-                            {% if party.partySize == 4 or party.partySize == 3%}
-                            <div class="userInfoTable">
-                                <div class="userText">
-                                    <img src="{% static 'restaurants/images/userIcon.png' %}">
-                                    <p>{{party.member.lastName}}</p></br>
-                                    <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if party.partySize == 4 or party.partySize == 3%}
+                                    <div class="userInfoTable">
+                                        <div class="userText">
+                                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                            <p>{{party.lastName}}</p></br>
+                                            <p>{{party.waitTime}} min.</p></br>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
 
@@ -156,15 +156,15 @@
                             <!-- This iterates through users with a party size of five or greater -->
                             <h3>Party: 5+ </h3>
                             {% for party in parties %}
-                            {% if party.partySize > 4%}
-                            <div class="userInfoTable">
-                                <div class="userText">
-                                    <img src="{% static 'restaurants/images/userIcon.png' %}">
-                                    <p>{{party.member.lastName}}</p></br>
-                                    <p>{{party.waitTime}} min.</p></br>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if party.partySize > 4%}
+                                    <div class="userInfoTable">
+                                        <div class="userText">
+                                            <img src="{% static 'restaurants/images/userIcon.png' %}">
+                                            <p>{{party.lastName}}</p></br>
+                                            <p>{{party.waitTime}} min.</p></br>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
