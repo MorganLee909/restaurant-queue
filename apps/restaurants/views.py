@@ -210,13 +210,13 @@ def deleteTable(request, tableId):
     table = Table.objects.get(id = tableId)
     if table.restaurant.id != restaurant.id:
         messages.error(request, "You do not have authorization to do that")
-        return redirect("/restaurants/dashboard")
+        return redirect(f"/restaurants/dashboard")
 
     #Remove table from database
     table.delete()
 
     #Redirect to restaurant dashboard
-    return redirect("/restaurants/dashboard")
+    return redirect(f"/restaurants/{restaurant.id}/edit")
 
 def restaurantDashboard(request):
     #USER VALIDATION, WHO DO I WANT TO ALLOW ON THIS ROUTE?
