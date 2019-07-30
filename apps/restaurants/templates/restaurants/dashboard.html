@@ -50,7 +50,13 @@
                 <div class="queueScroll">
                     {% for party in parties %}
                         <div class="userInfo">
-                            <div class="modal-btn" data-firstName="{{party.first-name}}" data-lastName="{{party.last-name}}"></div>
+                            <div class="modal-btn" 
+                                data-firstName="{{party.firstName}}" 
+                                data-lastName="{{party.lastName}}"
+                                data-email="{{party.email}}"
+                                data-time="{{party.time}}"
+                                data-partySize="{{party.partySize}}">
+                            </div>
                             <img user="{{party}}" src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
                                 <p>{{party.lastName}} </p></br>
@@ -177,27 +183,35 @@
 
     <div class="modal">
         <div class="modal-content">
-            <h1 class="name"></h1>
-            <h2 class="wait"></h2>
+            <h1 id="name"></h1>
+            <h3 id="email"></h3>
+            <h1 id="time"></h1>
+            <h1 id="partySize"></h1>
         </div>
     </div>
 
     <script type="text/javascript">
         var userBtns = document.querySelectorAll(".modal-btn");
         var modal = document.querySelector(".modal");
-        var modalName = document.querySelector(".name");
+        var modalName = document.querySelector("#name");
+        var modalEmail = document.querySelector("#email");
+        var modalTime = document.querySelector("#time");
+        var modalPartySize = document.querySelector("#partySize");
 
         userBtns.forEach(function(button){
-
             button.addEventListener("click", function(){
                 var userData = {
-                    firstName: this.dataset.first-name,
-                    lastName: typeof(this.dataset.last-name)
-                }
-                console.log(userData.firstName);
-                console.log(userData.lastName);
+                    firstName: this.getAttribute("data-firstName"),
+                    lastName: this.getAttribute("data-lastName"),
+                    email: this.getAttribute("data-email"),
+                    time: this.getAttribute("data-time"),
+                    partySize: this.getAttribute("data-partySize")
+                };
                 
-                modalName.innerText = userData.firstName + " " + userData.lastName
+                modalName.innerHTML = userData.firstName + " " + userData.lastName;
+                modalEmail.innerHTML = userData.email;
+                modalTime.innerHTML = userData.time;
+                modalPartySize.innerHTML = userData.partySize;
                 modal.style.visibility = "visible";
             });
         });
