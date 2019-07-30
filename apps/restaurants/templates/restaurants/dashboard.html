@@ -22,11 +22,11 @@
 
         <div class = "messageBlock">
             {% if messages %}
-            <ol>
+            <ul>
                 {% for message in messages %}
                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
-            </ol>
+            </ul>
             {% endif %}
         </div>
 
@@ -39,7 +39,7 @@
                 <!-- This form is used to add user's to the queue, it should always remain at the top of the queue -->
                 <form class='addToLine' action="/restaurants/addParty" method="POST">
                     {% csrf_token %}
-                    <p>Email: </p><input type="email" name="partyEmail"></br>
+                    <p>Email: </p><input type="email" name="partyEmail" required></br>
                     <p>Size: </p><input type="text" name="partySize"> 
                     <input class="submitButton btn" type="submit" value="Add Party to Queue">
                 </form>
