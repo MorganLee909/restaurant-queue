@@ -95,12 +95,13 @@ class DataManager(models.Manager):
         return errors
 
 class User(models.Model):
-    firstName = models.CharField(max_length = 50)
+    firstName = models.CharField(max_length = 50, null = True)
     lastName = models.CharField(max_length = 50)
-    email = models.CharField(max_length = 100)
-    password = models.CharField(max_length = 50)
+    email = models.CharField(max_length = 100, null = True)
+    password = models.CharField(max_length = 50, null = True)
     time = models.DateTimeField(null = True)
     partySize = models.IntegerField(default = 0)
+    isTemp = models.BooleanField()
     restaurant = models.ForeignKey(
         Restaurant, 
         related_name = "user",

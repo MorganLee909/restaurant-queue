@@ -147,6 +147,22 @@ body{
                 color: rgb(58, 58, 58);
             }
 
+        .register{
+            border: 3px solid white;
+            color: white;
+            padding: 5px;
+            margin-top: 20px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: background-color 0.75s;
+        }
+
+            .register:hover{
+                background-color: rgb(100, 100, 100); 
+            }
+
+
         .subcontainer{
             display: flex;
             flex-direction: column;

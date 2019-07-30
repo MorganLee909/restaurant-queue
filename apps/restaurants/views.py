@@ -278,10 +278,44 @@ def removeParty(request, partyId):
     return redirect("/restaurants/dashboard")
 
 def checkout(request, partyId):
+    #Needs validation
     user = User.objects.get(id = partyId)
-    user.restaurant = None
-    user.table = None
-    user.save()
+
+    if user.isTemp:
+        user.delete()
+    else:
+        user.restaurant = None
+        user.table = None
+        user.save()
+
+    return redirect("/restaurants/dashboard")
+
+def addTempUser(request):
+    if "restaurant" not in request.session:
+        messages.error(request, "You do not have authorization to do that")
+        return redirect("/")
+
+    return render(request, "restaurants/tempUser.html")
+
+def createTempUser(request):
+    if "restaurant" not in request.session:
+        messages.error(request, "You do not have authorization to do that")
+        return redirect("/")
+
+    if request.method == "POST":
+        newUser = User(
+            lastName = request.POST["name"],
+            time = datetime.datetime.now(),
+            partySize = request.POST["partySize"],
+            isTemp = True,
+            restaurant = Restaurant.objects.get(id = request.session["restaurant"])
+        )
+
+        if len(request.POST["email"]) > 0:
+            newUser.email = request.POST["email"]
+
+        newUser.save()
+
     return redirect("/restaurants/dashboard")
 
 #Not a route

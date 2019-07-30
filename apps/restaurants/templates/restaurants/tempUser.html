@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title></title>
+        <meta charset="utf-8">
+	</head>
+    <body>
+        <form action="/restaurants/createuser" method="post">
+            {% csrf_token %}
+            <h4>Name:</h4>
+            <input type="text" name="name">
+            <h4>Email:</h4>
+            <input type="email" name="email">
+            <h4>Party Size:</h4>
+            <input type="text" name="partySize">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
