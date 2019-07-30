@@ -399,3 +399,36 @@ button a {
     visibility: hidden;
     transform: scale(1.1);
 }
+
+    .new-cust-contents{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(210, 210, 210);
+        border: 4px solid rgb(255,99,107);
+        border-radius: 25px;
+        font-family: "PT Sans", sans-serif;
+        width: 35%;
+        height: 35%;
+        align-items: center;
+        background-size: cover;
+        padding-top: 35px;
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+        .new-cust-contents form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .new-customer form input{
+            margin-bottom: 10px;
+        }
