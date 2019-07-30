@@ -226,8 +226,7 @@ def restaurantDashboard(request):
 
     #Renders the main page for the restaurant
     restaurant = Restaurant.objects.get(id = request.session["restaurant"])
-    parties = User.objects.filter(restaurant = restaurant)
-    print(parties)
+    parties = User.objects.filter(restaurant = restaurant).order_by("time")
 
     for party in parties:
         difference = datetime.datetime.now() - party.time.replace(tzinfo = None)
