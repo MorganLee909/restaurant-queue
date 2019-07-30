@@ -348,7 +348,7 @@ button a {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(11, 20, 8, 0.79);
+    background-color: rgba(0,27,45,0.9);
     opacity: 1;
     visibility: hidden;
     transform: scale(1.1);
@@ -359,12 +359,30 @@ button a {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #72160a;
+        background-color: rgb(210, 210, 210);
+        border: 4px solid rgb(255,99,107);
+        border-radius: 25px;
         font-family: "PT Sans", sans-serif;
-        width: 32%;
-        height: 18%;
-        display: flex;
+        width: 35%;
+        height: 35%;
+        display: inline-block;
         align-items: center;
-        padding: 70px;
         background-size: cover;
+        padding-top: 35px;
+        padding-left: 45px;
+        padding-right: 45px;
     }
+
+        .modal-content h1 {
+            color: rgb(0,27,45);
+            display: inline-block;
+            font-weight: normal;
+        }
+
+        .modal-content span {
+            font-weight: bold;
+        }
+
+        .modal-content button {
+            margin-left: 40%;
+        }
