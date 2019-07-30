@@ -148,7 +148,7 @@ body{
             }
 
         .register{
-            border: 3px solid white;
+            border: 3px solid #ff636b;
             color: white;
             padding: 5px;
             margin-top: 20px;
@@ -157,6 +157,8 @@ body{
             text-align: center;
             transition: background-color 0.75s;
             cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 3px 3px 3px black;
         }
 
             .register:hover{
@@ -330,6 +332,17 @@ body{
 
 button a {
     text-decoration: none;
+}
+
+.btn{
+    background: rgba(0, 0, 0, 0.45);
+    border: 3px solid #ff636b;
+    padding: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
 }
 
 /* Modals */

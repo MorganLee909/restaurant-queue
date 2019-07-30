@@ -41,7 +41,7 @@
                     {% csrf_token %}
                     <p>Email: </p><input type="email" name="partyEmail"></br>
                     <p>Size: </p><input type="text" name="partySize"> 
-                    <input class="submitButton" type="submit" value="Add Party to Queue">
+                    <input class="submitButton btn" type="submit" value="Add Party to Queue">
                 </form>
                 <p class="register">Unregistered Customer</p>
 
@@ -57,15 +57,13 @@
                                 data-email="{{party.email}}"
                                 data-time="{{party.time}}"
                                 data-partySize="{{party.partySize}}"
-                                data-id="{{party.id}}"
-                                >
-
+                                data-id="{{party.id}}">
                             </div>
                             <img user="{{party}}" src="{% static 'restaurants/images/userIcon.png' %}">
                             <div class="userText">
                                 <p>{{party.lastName}} </p></br>
                             </div>
-                            <button name="remove"><a href="/restaurants/removeParty/{{party.id}}">Remove</a></button>
+                            <a class="btn" href="/restaurants/removeParty/{{party.id}}">Remove</a>
                         </div>
                     {% endfor %}
                 </div>
@@ -89,7 +87,7 @@
                             </div>
                             <div class="currentTableInfo">
                                 <p style="text-align: center;">No Party Seated</p><br>
-                                <button><a href="/restaurants/tables/{{table.id}}/assign">Assign</a></button>
+                                <a class="btn" href="/restaurants/tables/{{table.id}}/assign">Assign</a>
                             </div>
                         </div>
                         {% else %}
@@ -100,7 +98,7 @@
                             <div class="currentTableInfo">
                                 <p>{{table.user.lastName}}</p>
                                 <p>Seated at {{table.user.time.time}}</p>
-                                <button name="remove"><a href="/restaurants/checkoutParty/{{table.user.id}}">Checkout</a></button>
+                                <a class="btn" href="/restaurants/checkoutParty/{{table.user.id}}">Checkout</a>
                             </div>
                         </div>
                         {% endif %}
@@ -185,7 +183,6 @@
         </div>
     </div>
 
-
     <!------------------------------------------ THIS SECTION IS FOR THE QUEUE MODAL --------------------------------------------------------->
     <div class="modal">
         <div class="modal-content">
@@ -193,7 +190,7 @@
             <h1><span>Email:&nbsp&nbsp </span></h1><h1 id="email"></h1></br>
             <h1><span>In Queue:&nbsp&nbsp </span></h1><h1 id="time"></h1></br>
             <h1><span>Party Size:&nbsp&nbsp</span></h1><h1 id="partySize"></h1></br>
-            <button id="remove" name="remove"></button>
+            <button class="btn" id="remove"></button>
         </div>
     </div>
 
@@ -207,9 +204,9 @@
                 <input type="email" name="email">
                 <h4>Party Size:</h4>
                 <input type="text" name="partySize"><br/>
-                <input type="submit" value="Submit">
+                <input class="btn" type="submit" value="Submit">
             </form>
-            <button id="cancel">Cancel</button>
+            <button class="btn" id="cancel">Cancel</button>
         </div>
     </div>
 
