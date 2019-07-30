@@ -43,7 +43,7 @@
                     <p>Size: </p><input type="text" name="partySize"> 
                     <input class="submitButton" type="submit" value="Add Party to Queue">
                 </form>
-                <a class="register" href="/restaurants/adduser">Unregistered Customer</a>
+                <p class="register">Unregistered Customer</p>
 
             <div class="border"></div>
 
@@ -195,10 +195,26 @@
             <h1><span>Party Size:&nbsp&nbsp</span></h1><h1 id="partySize"></h1></br>
             <button id="remove" name="remove"></button>
         </div>
-        
+    </div>
+
+    <div class="new-customer">
+        <div class="modal-content">
+            <form action="/restaurants/createuser" method="post">
+                {% csrf_token %}
+                <h4>Name:</h4>
+                <input type="text" name="name">
+                <h4>Email:</h4>
+                <input type="email" name="email">
+                <h4>Party Size:</h4>
+                <input type="text" name="partySize"><br/>
+                <input type="submit" value="Submit">
+            </form>
+            <button id="cancel">Cancel</button>
+        </div>
     </div>
 
     <script type="text/javascript">
+        // User information modal
         var userBtns = document.querySelectorAll(".modal-btn");
         var modal = document.querySelector(".modal");
         var modalName = document.querySelector("#name");
@@ -230,6 +246,19 @@
 
         modal.addEventListener("click", function(){
             modal.style.visibility = "hidden";
+        });
+
+        //New Customer Modal
+        var custModal = document.querySelector(".new-customer");
+        var newCustBtn = document.querySelector(".register");
+        var cancelBtn = document.querySelector("#cancel");
+
+        newCustBtn.addEventListener("click", () => {
+            custModal.style.visibility = "visible";
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            custModal.style.visibility = "hidden";
         });
     </script>
 </body>
